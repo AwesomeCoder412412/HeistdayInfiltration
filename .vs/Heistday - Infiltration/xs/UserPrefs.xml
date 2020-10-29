@@ -1,7 +1,7 @@
-﻿<Properties>
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/SimonSaysRipoff.cs">
+﻿<Properties StartupConfiguration="{D0DA94B4-F05B-33A0-D399-CC84D949F134}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Low Poly FPS Pack - Free (Sample)/Components/Scripts/FPSController/FpsControllerLPFP.cs">
     <Files>
-      <File FileName="Assets/Scripts/OpenPuzzle.cs" />
+      <File FileName="Assets/Scripts/OpenPuzzle.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/NumberPuzzle.cs" />
       <File FileName="Assets/Scripts/SimonSaysRipoff.cs" Line="52" Column="58" />
       <File FileName="Assets/Scripts/GenerateRooms.cs" />
@@ -10,35 +10,23 @@
       <File FileName="Assets/Scripts/PlayerController.cs" />
       <File FileName="Assets/Scripts/LadderScript.cs" />
       <File FileName="Assets/Standard Assets/Characters/FirstPersonCharacter/Scripts/FirstPersonController.cs" />
-      <File FileName="Assets/Low Poly FPS Pack - Free (Sample)/Components/Scripts/FPSController/FpsControllerLPFP.cs" />
+      <File FileName="Assets/Low Poly FPS Pack - Free (Sample)/Components/Scripts/FPSController/FpsControllerLPFP.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="Heistday - Infiltration" expanded="True">
-            <Node name="Assembly-CSharp" expanded="True">
-              <Node name="Assets" expanded="True">
-                <Node name="Low Poly FPS Pack - Free (Sample)" expanded="True">
-                  <Node name="Components" expanded="True">
-                    <Node name="Scripts" expanded="True">
-                      <Node name="FPSController" expanded="True" />
+            <Node name="Assets" expanded="True">
+              <Node name="Low Poly FPS Pack - Free (Sample)" expanded="True">
+                <Node name="Components" expanded="True">
+                  <Node name="Scripts" expanded="True">
+                    <Node name="FPSController" expanded="True">
+                      <Node name="FpsControllerLPFP.cs" selected="True" />
                     </Node>
                   </Node>
                 </Node>
-                <Node name="Scripts" expanded="True" selected="True" />
               </Node>
-            </Node>
-            <Node name="Assembly-CSharp-firstpass" expanded="True">
-              <Node name="Assets" expanded="True">
-                <Node name="Standard Assets" expanded="True">
-                  <Node name="Characters" expanded="True">
-                    <Node name="FirstPersonCharacter" expanded="True">
-                      <Node name="Scripts" expanded="True" />
-                    </Node>
-                  </Node>
-                  <Node name="Utility" expanded="True" />
-                </Node>
-              </Node>
+              <Node name="Scripts" expanded="True" />
             </Node>
           </Node>
         </State>
@@ -47,6 +35,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="60d09ac2-3611-463a-b011-27794385694e" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
