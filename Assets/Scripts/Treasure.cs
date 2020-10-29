@@ -17,6 +17,7 @@ public class Treasure : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             Destroy(treasure);
+            ScoreManager.score += 100;
             LadderScript.instance.hasTreasure = true;
         }
     }

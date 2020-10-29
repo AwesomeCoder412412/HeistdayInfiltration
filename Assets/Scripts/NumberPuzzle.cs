@@ -54,6 +54,8 @@ public class NumberPuzzle : MonoBehaviour
         {
             gameObject.SetActive(false);
             solved = true;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
         else
         {

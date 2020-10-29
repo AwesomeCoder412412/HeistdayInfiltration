@@ -4,5 +4,23 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Networking.unity
+    guid: 958d06faf7dd446d99a4eebe27d18169
+  - enabled: 0
+    path: Assets/Easy Weapons/Demo/newdemo.unity
+    guid: 29a95fb3f098c9e4bbc7cb1eb4d2bc77
+  - enabled: 0
+    path: Assets/Scenes/StartScreen.unity
+    guid: ccd169a0a425041778cb8a376ea3d369
+  - enabled: 0
+    path: Assets/Scenes/MainGame.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 0
+    path: Assets/Scenes/DeathScreen.unity
+    guid: 432ef68bdba37431c860851f14b272fe
+  - enabled: 0
+    path: Assets/Scenes/VictoryScreen.unity
+    guid: 6aebe9f4a0f9c4c5f8f189efa487a9a6
   m_configObjects: {}

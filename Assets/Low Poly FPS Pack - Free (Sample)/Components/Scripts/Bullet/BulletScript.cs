@@ -26,6 +26,7 @@ public class BulletScript : MonoBehaviour {
 	//If the bullet collides with anything
 	private void OnCollisionEnter (Collision collision) 
 	{
+		Debug.Log(collision.gameObject.name);
 		//If destroy on impact is false, start 
 		//coroutine with random destroy timer
 		if (!destroyOnImpact) 
@@ -67,6 +68,16 @@ public class BulletScript : MonoBehaviour {
 				<ExplosiveBarrelScript>().explode = true;
 			//Destroy bullet object
 			Destroy(gameObject);
+		}
+		if (collision.transform.tag == "Enemy")
+        {
+			Debug.Log("Collided");
+			Destroy(collision.transform.gameObject);
+			Destroy(gameObject);
+		}
+		if (collision.transform.tag == "Ground")
+		{
+			Debug.Log("Collided");
 		}
 	}
 

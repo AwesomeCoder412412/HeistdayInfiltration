@@ -32,12 +32,14 @@ public class HealthManager : MonoBehaviour
             GameObject lastHeart = hearts[hearts.Count - 1];
             Destroy(lastHeart);
             hearts.Remove(lastHeart);
+            ScoreManager.score += 50;
 
             if (hearts.Count == 0)
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                Cursor.lockState = CursorLockMode.None;
+                SceneManager.LoadScene("DeathScreen");
             }
         }
-        
+
     }
 }

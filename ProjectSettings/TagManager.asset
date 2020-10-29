@@ -4,9 +4,25 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Triggerer
+  - Grass
+  - Stone
+  - Enemy
+  - Team2
+  - Ground
   - Laser
-  - Ladder
   - Helicopter
+  - Ladder
+  - Bullet
+  - SafeBullet
+  - Metal
+  - ExplosiveBarrel
+  - Target
+  - Teammate
+  - Knife
+  - Fire
+  - EnemyGun
+  - Tank
   layers:
   - Default
   - TransparentFX
@@ -16,6 +32,9 @@ TagManager:
   - UI
   - 
   - 
+  - Tank
+  - Teammate
+  - Tank1
   - 
   - 
   - 
@@ -26,20 +45,17 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - MovableObject
+  - Ragdoll
+  - RemotePlayer
+  - IgnoreBullets
+  - Enemy
+  - Pickup
+  - Trigger
+  - MovingPlatform
+  - Debris
+  - LocalPlayer
+  - Weapon
   m_SortingLayers:
   - name: Default
     uniqueID: 0

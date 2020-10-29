@@ -1,15 +1,16 @@
-﻿<Properties StartupConfiguration="{7811F899-CF63-E040-7E40-279D47B77781}|Unit Tests">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/LadderScript.cs">
+﻿<Properties>
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/SimonSaysRipoff.cs">
     <Files>
-      <File FileName="Assets/Standard Assets/Utility/SimpleActivatorMenu.cs" Line="5" Column="28" />
       <File FileName="Assets/Scripts/OpenPuzzle.cs" />
       <File FileName="Assets/Scripts/NumberPuzzle.cs" />
-      <File FileName="Assets/Scripts/SimonSaysRipoff.cs" />
-      <File FileName="Assets/Scripts/GenerateRooms.cs" Line="17" Column="56" />
-      <File FileName="Assets/Scripts/Treasure.cs" Line="13" Column="6" />
-      <File FileName="Assets/Scripts/HealthManager.cs" Line="18" Column="10" />
-      <File FileName="Assets/Scripts/PlayerController.cs" Line="15" Column="51" />
-      <File FileName="Assets/Scripts/LadderScript.cs" Line="10" Column="9" />
+      <File FileName="Assets/Scripts/SimonSaysRipoff.cs" Line="52" Column="58" />
+      <File FileName="Assets/Scripts/GenerateRooms.cs" />
+      <File FileName="Assets/Scripts/Treasure.cs" />
+      <File FileName="Assets/Scripts/HealthManager.cs" />
+      <File FileName="Assets/Scripts/PlayerController.cs" />
+      <File FileName="Assets/Scripts/LadderScript.cs" />
+      <File FileName="Assets/Standard Assets/Characters/FirstPersonCharacter/Scripts/FirstPersonController.cs" />
+      <File FileName="Assets/Low Poly FPS Pack - Free (Sample)/Components/Scripts/FPSController/FpsControllerLPFP.cs" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -17,14 +18,24 @@
           <Node name="Heistday - Infiltration" expanded="True">
             <Node name="Assembly-CSharp" expanded="True">
               <Node name="Assets" expanded="True">
-                <Node name="Scripts" expanded="True">
-                  <Node name="LadderScript.cs" selected="True" />
+                <Node name="Low Poly FPS Pack - Free (Sample)" expanded="True">
+                  <Node name="Components" expanded="True">
+                    <Node name="Scripts" expanded="True">
+                      <Node name="FPSController" expanded="True" />
+                    </Node>
+                  </Node>
                 </Node>
+                <Node name="Scripts" expanded="True" selected="True" />
               </Node>
             </Node>
             <Node name="Assembly-CSharp-firstpass" expanded="True">
               <Node name="Assets" expanded="True">
                 <Node name="Standard Assets" expanded="True">
+                  <Node name="Characters" expanded="True">
+                    <Node name="FirstPersonCharacter" expanded="True">
+                      <Node name="Scripts" expanded="True" />
+                    </Node>
+                  </Node>
                   <Node name="Utility" expanded="True" />
                 </Node>
               </Node>

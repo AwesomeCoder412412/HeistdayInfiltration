@@ -4,6 +4,8 @@ using System.Collections;
 // ----- Low Poly FPS Pack Free Version -----
 public class GrenadeScript : MonoBehaviour {
 
+	public float cooldown = 10f;
+	private float cooldownTimer = 0f;
 	[Header("Timer")]
 	//Time before the grenade explodes
 	[Tooltip("Time before the grenade explodes")]
@@ -101,6 +103,11 @@ public class GrenadeScript : MonoBehaviour {
 			{
 				//Toggle "explode" on explosive barrel object
 				hit.gameObject.GetComponent<ExplosiveBarrelScript> ().explode = true;
+			}
+			if (hit.GetComponent<Collider>().tag == "Enemy")
+			{
+				//Toggle "explode" on explosive barrel object
+				Destroy(hit.gameObject);
 			}
 		}
 

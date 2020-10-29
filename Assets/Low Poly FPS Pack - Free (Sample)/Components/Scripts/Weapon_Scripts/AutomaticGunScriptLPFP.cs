@@ -7,6 +7,10 @@ public class AutomaticGunScriptLPFP : MonoBehaviour {
 
 	//Animator component attached to weapon
 	Animator anim;
+	public float knifeTime = 2f;
+	public bool isKnifing = false;
+	public float cooldown = 10f;
+	private float cooldownTimer = 0f;
 
 	[Header("Gun Camera")]
 	//Main gun camera
@@ -169,7 +173,7 @@ public class AutomaticGunScriptLPFP : MonoBehaviour {
 	}
 
 	private void Start () {
-		
+		inputManager = GameObject.FindObjectOfType<InputManager>();
 		//Save the weapon name
 		storedWeaponName = weaponName;
 		//Get weapon name from string to text
@@ -183,6 +187,7 @@ public class AutomaticGunScriptLPFP : MonoBehaviour {
 		//Set the shoot sound to audio source
 		shootAudioSource.clip = SoundClips.shootSound;
 	}
+	InputManager inputManager;
 
 	private void LateUpdate () {
 		
@@ -288,22 +293,26 @@ public class AutomaticGunScriptLPFP : MonoBehaviour {
 		AnimationCheck ();
 
 		//Play knife attack 1 animation when Q key is pressed
-		if (Input.GetKeyDown (KeyCode.Q) && !isInspecting) 
+		if (inputManager.GetButtonDown("Knife 1") && !isInspecting) 
 		{
 			anim.Play ("Knife Attack 1", 0, 0f);
+			StartCoroutine(SetIsKnifing());
 		}
 		//Play knife attack 2 animation when F key is pressed
-		if (Input.GetKeyDown (KeyCode.F) && !isInspecting) 
+		if (inputManager.GetButtonDown("Knife 2") && !isInspecting) 
 		{
 			anim.Play ("Knife Attack 2", 0, 0f);
+			StartCoroutine(SetIsKnifing());
 		}
 			
 		//Throw grenade when pressing G key
-		if (Input.GetKeyDown (KeyCode.G) && !isInspecting) 
+		if (inputManager.GetButtonDown("Grenade") && !isInspecting && cooldownTimer <= 0) 
 		{
 			StartCoroutine (GrenadeSpawnDelay ());
-			//Play grenade throw animation
+			//Play grenade throw animation]
+
 			anim.Play("GrenadeThrow", 0, 0.0f);
+			cooldownTimer = cooldown;
 		}
 
 		//If out of ammo
@@ -421,13 +430,13 @@ public class AutomaticGunScriptLPFP : MonoBehaviour {
 		}
 
 		//Inspect weapon when T key is pressed
-		if (Input.GetKeyDown (KeyCode.T)) 
+		if (inputManager.GetButtonDown("Inspect")) 
 		{
 			anim.SetTrigger ("Inspect");
 		}
 
 		//Toggle weapon holster when E key is pressed
-		if (Input.GetKeyDown (KeyCode.E) && !hasBeenHolstered) 
+		if (inputManager.GetButtonDown("Holster") && !hasBeenHolstered) 
 		{
 			holstered = true;
 
@@ -436,7 +445,7 @@ public class AutomaticGunScriptLPFP : MonoBehaviour {
 
 			hasBeenHolstered = true;
 		} 
-		else if (Input.GetKeyDown (KeyCode.E) && hasBeenHolstered) 
+		else if (inputManager.GetButtonDown("Holster") && hasBeenHolstered) 
 		{
 			holstered = false;
 
@@ -490,8 +499,14 @@ public class AutomaticGunScriptLPFP : MonoBehaviour {
 		{
 			anim.SetBool ("Run", false);
 		}
+		cooldownTimer -= Time.deltaTime;
 	}
-
+	private IEnumerator SetIsKnifing()
+    {
+		isKnifing = true;
+		yield return new WaitForSeconds(knifeTime);
+		isKnifing = false;
+    }
 	private IEnumerator GrenadeSpawnDelay () {
 		
 		//Wait for set amount of time before spawning grenade

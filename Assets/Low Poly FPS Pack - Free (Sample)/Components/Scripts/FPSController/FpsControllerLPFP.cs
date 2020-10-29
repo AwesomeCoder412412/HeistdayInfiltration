@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using UnityEngine;
+using Mirror;
 
 namespace FPSControllerLPFP
 {
@@ -8,7 +9,7 @@ namespace FPSControllerLPFP
     [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(CapsuleCollider))]
     [RequireComponent(typeof(AudioSource))]
-    public class FpsControllerLPFP : MonoBehaviour
+    public class FpsControllerLPFP : NetworkBehaviour
     {
 #pragma warning disable 649
 		[Header("Arms")]
@@ -65,6 +66,7 @@ namespace FPSControllerLPFP
         private SmoothVelocity _velocityX;
         private SmoothVelocity _velocityZ;
         private bool _isGrounded;
+        public Camera camera;
 
         private readonly RaycastHit[] _groundCastResults = new RaycastHit[8];
         private readonly RaycastHit[] _wallCastResults = new RaycastHit[8];
@@ -72,19 +74,26 @@ namespace FPSControllerLPFP
         /// Initializes the FpsController on start.
         private void Start()
         {
-            _rigidbody = GetComponent<Rigidbody>();
-            _rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
-            _collider = GetComponent<CapsuleCollider>();
-            _audioSource = GetComponent<AudioSource>();
-			arms = AssignCharactersCamera();
-            _audioSource.clip = walkingSound;
-            _audioSource.loop = true;
             _rotationX = new SmoothRotation(RotationXRaw);
             _rotationY = new SmoothRotation(RotationYRaw);
             _velocityX = new SmoothVelocity();
             _velocityZ = new SmoothVelocity();
+            _rigidbody = GetComponent<Rigidbody>();
+            _rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+            _collider = GetComponent<CapsuleCollider>();
+            _audioSource = GetComponent<AudioSource>();
+            if (!isLocalPlayer)
+            {
+                return;
+            }
+            
+           
+			arms = AssignCharactersCamera();
+            _audioSource.clip = walkingSound;
+            _audioSource.loop = true;
             Cursor.lockState = CursorLockMode.Locked;
             ValidateRotationRestriction();
+            camera.gameObject.SetActive(true);
         }
 			
         private Transform AssignCharactersCamera()
@@ -135,24 +144,73 @@ namespace FPSControllerLPFP
         /// Processes the character movement and the camera rotation every fixed framerate frame.
         private void FixedUpdate()
         {
+            if (!isLocalPlayer)
+            {
+                return;
+            }
+            ClientInput clientInput = new ClientInput(input);
             // FixedUpdate is used instead of Update because this code is dealing with physics and smoothing.
-            RotateCameraAndCharacter();
-            MoveCharacter();
-            _isGrounded = false;
+            if (isServer)
+            {
+                FixedUpdateFunction(false, clientInput);
+            }
+            else
+            {
+                CmdFixedUpdate(clientInput);
+            }
         }
-			
+        [Command]
+        private void CmdFixedUpdate(ClientInput clientInput)
+        {
+            FixedUpdateFunction(true, clientInput);
+        }
+		private void FixedUpdateFunction(bool callingFromClient, ClientInput clientInput)
+        {
+            MoveCharacter(callingFromClient, clientInput);
+            _isGrounded = false;
+            RotateCameraAndCharacter(callingFromClient, clientInput);
+            
+        }
         /// Moves the camera to the character, processes jumping and plays sounds every frame.
         private void Update()
         {
-			arms.position = transform.position + transform.TransformVector(armPosition);
-            Jump();
-            PlayFootstepSounds();
+            /*if (!isLocalPlayer)
+            {
+                gameObject.GetComponent<Camera>().enabled = false;
+                gameObject.GetComponent<AudioListener>().enabled = false;
+            }*/
+            if (!isLocalPlayer)
+            {
+                return;
+            }
+            ClientInput clientInput = new ClientInput(input);
+            if (isServer)
+            {
+                UpdateFunction(false, clientInput);
+            }
+            else
+            {
+                CmdUpdate(clientInput);
+            }
+        }
+        [Command]
+        private void CmdUpdate(ClientInput clientInput)
+        {
+            UpdateFunction(true, clientInput);
+        }
+        private void UpdateFunction(bool callingFromClient, ClientInput clientInput)
+        {
+            arms.position = transform.position + transform.TransformVector(armPosition);
+            Jump(callingFromClient, clientInput);
+            PlayFootstepSounds(callingFromClient, clientInput);
         }
 
-        private void RotateCameraAndCharacter()
+        private void RotateCameraAndCharacter(bool callingFromClient, ClientInput clientInput)
         {
-            var rotationX = _rotationX.Update(RotationXRaw, rotationSmoothness);
-            var rotationY = _rotationY.Update(RotationYRaw, rotationSmoothness);
+            float rotXCurrent = _rotationX._current;
+            float rotYCurrent = _rotationY._current;
+            var rotationX = _rotationX.Update(clientInput.rotateX * mouseSensitivity, rotationSmoothness);
+            var rotationY = _rotationY.Update(clientInput.rotateY * mouseSensitivity, rotationSmoothness);
             var clampedY = RestrictVerticalRotation(rotationY);
             _rotationY.Current = clampedY;
 			var worldUp = arms.InverseTransformDirection(Vector3.up);
@@ -161,6 +219,22 @@ namespace FPSControllerLPFP
                            Quaternion.AngleAxis(clampedY, Vector3.left);
             transform.eulerAngles = new Vector3(0f, rotation.eulerAngles.y, 0f);
 			arms.rotation = rotation;
+            if (callingFromClient)
+            {
+                Debug.Log("rotXCurrent " + rotXCurrent);
+                Debug.Log("rotYCurrent " + rotYCurrent);
+                Debug.Log("rotXTarget " + clientInput.rotateX * mouseSensitivity);
+                Debug.Log("rotYTarget " + clientInput.rotateY * mouseSensitivity);
+                Debug.Log("rotationX " + rotationX);
+                Debug.Log("rotationY " + rotationY);
+                Debug.Log("clampedY " + clampedY);
+                Debug.Log("worldUp " + worldUp);
+                Debug.Log("rotation.eulerAngles " + rotation.eulerAngles);
+                Debug.Log("armRot " + arms.rotation.eulerAngles);
+                Debug.Log("Rot1 " + arms.rotation * Quaternion.AngleAxis(rotationX, worldUp));
+                Debug.Log("Rot2 " + new Vector3(0f, rotation.eulerAngles.y, 0f));
+                Debug.Log("Transform.Eulerangles " + transform.eulerAngles);
+            }
         }
 			
         /// Returns the target rotation of the camera around the y axis with no smoothing.
@@ -203,11 +277,11 @@ namespace FPSControllerLPFP
             return angleDegrees;
         }
 
-        private void MoveCharacter()
+        private void MoveCharacter(bool callingFromClient, ClientInput clientInput)
         {
-            var direction = new Vector3(input.Move, 0f, input.Strafe).normalized;
+            var direction = new Vector3(clientInput.move, 0f, clientInput.strafe).normalized;
             var worldDirection = transform.TransformDirection(direction);
-            var velocity = worldDirection * (input.Run ? runningSpeed : walkingSpeed);
+            var velocity = worldDirection * (clientInput.run ? runningSpeed : walkingSpeed);
             //Checks for collisions so that the character does not stuck when jumping against walls.
             var intersectsWall = CheckCollisionsWithWalls(velocity);
             if (intersectsWall)
@@ -215,14 +289,33 @@ namespace FPSControllerLPFP
                 _velocityX.Current = _velocityZ.Current = 0f;
                 return;
             }
-
+            var rigidbodyVelocity = _rigidbody.velocity;
+            _velocityX.Current = rigidbodyVelocity.x;
+            _velocityZ.Current = rigidbodyVelocity.z;
+            Vector2 current = new Vector2(_velocityX._current, _velocityZ._current);
             var smoothX = _velocityX.Update(velocity.x, movementSmoothness);
             var smoothZ = _velocityZ.Update(velocity.z, movementSmoothness);
-            var rigidbodyVelocity = _rigidbody.velocity;
-            var force = new Vector3(smoothX - rigidbodyVelocity.x, 0f, smoothZ - rigidbodyVelocity.z);
-            _rigidbody.AddForce(force, ForceMode.VelocityChange);
-        }
+            //var force = new Vector3(smoothX - rigidbodyVelocity.x, 0f, smoothZ - rigidbodyVelocity.z);
+            //var force = new Vector3(velocity.x - rigidbodyVelocity.x, 0f, velocity.z - rigidbodyVelocity.z);
+            //_rigidbody.AddForce(force, ForceMode.VelocityChange);
+            _rigidbody.velocity = velocity;
+            if (callingFromClient)
+            {
+                //Debug.Log("force " + force);
+                Debug.Log("smoothX " + smoothX);
+                Debug.Log("smoothZ " + smoothZ);
+                Debug.Log("rigidbodyvelocity " + rigidbodyVelocity);
+                Debug.Log("worlddirection " + worldDirection);
+                Debug.Log("input.Run " + clientInput.run);
+                Debug.Log("walkingspeed " + walkingSpeed);
+                Debug.Log("runningspeed " + runningSpeed);
+                Debug.Log("Velocity" + velocity);
+                Debug.Log("Current" + current + " " + new Vector2(smoothX, smoothZ));
+                Debug.Log("MovementSmoothness" + movementSmoothness);
 
+            }
+            //Debug.Log("SmoothZBear " + smoothZ);
+        }
         private bool CheckCollisionsWithWalls(Vector3 velocity)
         {
             if (_isGrounded) return false;
@@ -245,18 +338,27 @@ namespace FPSControllerLPFP
             return true;
         }
 
-        private void Jump()
+        private void Jump(bool callingFromClient, ClientInput clientInput)
         {
-            if (!_isGrounded || !input.Jump) return;
+            if (!_isGrounded || !clientInput.jump) return;
             _isGrounded = false;
             _rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            if (callingFromClient)
+            {
+                Debug.Log("JumpForce " + jumpForce);
+                Debug.Log("Vector3.up " + Vector3.up);
+                Debug.Log("rigidbodyvelocity " + _rigidbody.velocity);
+            }
+            //Debug.Log("JumpForce " + jumpForce);
+            //Debug.Log("Vector3.up " + Vector3.up);
+            //Debug.Log("rigidbodyvelocity " + _rigidbody.velocity);
         }
 
-        private void PlayFootstepSounds()
+        private void PlayFootstepSounds(bool callingFromClient, ClientInput clientInput)
         {
             if (_isGrounded && _rigidbody.velocity.sqrMagnitude > 0.1f)
             {
-                _audioSource.clip = input.Run ? runningSound : walkingSound;
+                _audioSource.clip = clientInput.run ? runningSound : walkingSound;
                 if (!_audioSource.isPlaying)
                 {
                     _audioSource.Play();
@@ -272,10 +374,10 @@ namespace FPSControllerLPFP
         }
 			
         /// A helper for assistance with smoothing the camera rotation.
-        private class SmoothRotation
+        public class SmoothRotation
         {
-            private float _current;
-            private float _currentVelocity;
+            public float _current;
+            public float _currentVelocity;
 
             public SmoothRotation(float startAngle)
             {
@@ -295,10 +397,10 @@ namespace FPSControllerLPFP
         }
 			
         /// A helper for assistance with smoothing the movement.
-        private class SmoothVelocity
+        public class SmoothVelocity
         {
-            private float _current;
-            private float _currentVelocity;
+            public float _current;
+            public float _currentVelocity;
 
             /// Returns the smoothed velocity.
             public float Update(float target, float smoothTime)
@@ -314,7 +416,7 @@ namespace FPSControllerLPFP
 			
         /// Input mappings
         [Serializable]
-        private class FpsInput
+        public class FpsInput
         {
             [Tooltip("The name of the virtual axis mapped to rotate the camera around the y axis."),
              SerializeField]
@@ -375,6 +477,29 @@ namespace FPSControllerLPFP
             {
                 get { return Input.GetButtonDown(jump); }
             }
+        }
+        public class ClientInput
+        {
+            public float rotateX, rotateY, move, strafe;
+            public bool run, jump;
+
+            public ClientInput()
+            {
+
+            }
+
+
+            public ClientInput(FpsInput input)
+            {
+                rotateX = input.RotateX;
+                rotateY = input.RotateY;
+                move = input.Move;
+                strafe = input.Strafe;
+                run = input.Run;
+                jump = input.Jump;
+        
+
+      }
         }
     }
 }

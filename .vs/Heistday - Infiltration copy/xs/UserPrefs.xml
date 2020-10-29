@@ -1,0 +1,126 @@
+﻿<Properties StartupConfiguration="{34A0CACB-4124-12AD-17EA-97291D643C94}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Low Poly FPS Pack - Free (Sample)/Components/Scripts/FPSController/FpsControllerLPFP.cs">
+    <Files>
+      <File FileName="Assets/Scripts/GenerateRooms.cs" Line="21" Column="48" IsPinned="True" />
+      <File FileName="Assets/Scripts/AchievementImage.cs" IsPinned="True" />
+      <File FileName="Assets/SimpleCharacter.cs" IsPinned="True" />
+      <File FileName="Assets/Scripts/DeathScreen.cs" />
+      <File FileName="Assets/Scripts/PlayButton.cs" />
+      <File FileName="Assets/Scripts/GuardAI.cs" />
+      <File FileName="Assets/Scripts/Volume.cs" />
+      <File FileName="Assets/Nokobot/ModernGuns_Handgun/Demo Assets/SimpleShoot.cs" />
+      <File FileName="Assets/Low Poly FPS Pack - Free (Sample)/Components/Scripts/Bullet/BulletScript.cs" />
+      <File FileName="Assets/Scripts/LookAtPlayer.cs" />
+      <File FileName="Assets/Scripts/PlayerController.cs" />
+      <File FileName="Assets/Scripts/SimonSaysRipoff.cs" />
+      <File FileName="Assets/Low Poly FPS Pack - Free (Sample)/Components/Scripts/Weapon_Scripts/HandgunScriptLPFP.cs" />
+      <File FileName="Assets/Low Poly FPS Pack - Free (Sample)/Components/Demo_Scene_Components/Scripts/ExplosiveBarrelScript.cs" />
+      <File FileName="Assets/Low Poly FPS Pack - Free (Sample)/Components/Scripts/Casings_&amp;_Projectiles/CasingScript.cs" />
+      <File FileName="Assets/Low Poly FPS Pack - Free (Sample)/Components/Scripts/Weapon_Scripts/AutomaticGunScriptLPFP.cs" />
+      <File FileName="Assets/Scripts/RoomTrigger.cs" />
+      <File FileName="Assets/Scripts/SetAudio.cs" />
+      <File FileName="Assets/Scripts/HealthManager.cs" />
+      <File FileName="Assets/Scripts/TeamateSpawner.cs" />
+      <File FileName="Assets/Scripts/GuardCreator.cs" />
+      <File FileName="Assets/Scripts/ScoreManager.cs" />
+      <File FileName="Assets/Scripts/Treasure.cs" />
+      <File FileName="Assets/Scripts/OpenPuzzle.cs" />
+      <File FileName="Assets/Scripts/LadderScript.cs" />
+      <File FileName="Assets/Scripts/DisplayDeathScore.cs" />
+      <File FileName="Assets/Low Poly FPS Pack - Free (Sample)/Components/Scripts/Casings_&amp;_Projectiles/GrenadeScript.cs" />
+      <File FileName="Assets/Scripts/PausedMenu.cs" />
+      <File FileName="Assets/Scripts/Resolution.cs" />
+      <File FileName="Assets/Standard Assets/Utility/ForcedReset.cs" />
+      <File FileName="Assets/Standard Assets/Utility/SimpleActivatorMenu.cs" />
+      <File FileName="Assets/Tank - Mark V drivable/Scripts/TankPlayerController.cs" />
+      <File FileName="Assets/Tank - Mark V drivable/Scripts/RayCastShoot.cs" />
+      <File FileName="Assets/Tank - Mark V drivable/Scripts/CameraController.cs" />
+      <File FileName="Assets/Scripts/TAAAAAAANK.cs" />
+      <File FileName="Assets/Scripts/NumberPuzzle.cs" />
+      <File FileName="Assets/Scripts/Keybinds.cs" />
+      <File FileName="Assets/Easy Weapons/Scripts/Sample/FirstPersonCharacter.cs" />
+      <File FileName="Assets/Standard Assets/ParticleSystems/Scripts/Hose.cs" />
+      <File FileName="Assets/Standard Assets/Characters/FirstPersonCharacter/Scripts/MouseLook.cs" />
+      <File FileName="Assets/Easy Weapons/Scripts/SlowMotion.cs" />
+      <File FileName="Assets/Standard Assets/Vehicles/Aircraft/Scripts/AeroplaneUserControl2Axis.cs" />
+      <File FileName="Assets/Standard Assets/Characters/RollerBall/Scripts/BallUserControl.cs" />
+      <File FileName="Assets/KeybindDialogBox.cs" />
+      <File FileName="Assets/InputManager.cs" />
+      <File FileName="Assets/SampleScenes/Menu/Scripts/PauseMenu.cs" />
+      <File FileName="Assets/Scripts/CubeMovement.cs" />
+      <File FileName="Assets/Scripts/NetworkedRigidbody.cs" />
+      <File FileName="Assets/Mirror/Editor/Weaver/CompilationFinishedHook.cs" />
+      <File FileName="Assets/Low Poly FPS Pack - Free (Sample)/Components/Scripts/FPSController/FpsControllerLPFP.cs" Line="192" Column="14" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Heistday - Infiltration copy" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="Easy Weapons" expanded="True">
+                <Node name="Editor" expanded="True" />
+                <Node name="Extra" expanded="True" />
+                <Node name="Scripts" expanded="True">
+                  <Node name="Sample" expanded="True" />
+                </Node>
+              </Node>
+              <Node name="Low Poly FPS Pack - Free (Sample)" expanded="True">
+                <Node name="Components" expanded="True">
+                  <Node name="Scripts" expanded="True">
+                    <Node name="Explosions_&amp;_Impacts" expanded="True" />
+                    <Node name="FPSController" expanded="True">
+                      <Node name="FpsControllerLPFP.cs" selected="True" />
+                    </Node>
+                    <Node name="Misc" expanded="True" />
+                    <Node name="Weapon_Scripts" expanded="True" />
+                  </Node>
+                </Node>
+              </Node>
+              <Node name="Mirror" expanded="True">
+                <Node name="Editor" expanded="True">
+                  <Node name="Weaver" expanded="True" />
+                </Node>
+              </Node>
+              <Node name="Nokobot" expanded="True" />
+              <Node name="SampleScenes" expanded="True">
+                <Node name="Menu" expanded="True">
+                  <Node name="Scripts" expanded="True" />
+                </Node>
+              </Node>
+              <Node name="Scripts" expanded="True" />
+              <Node name="Standard Assets" expanded="True">
+                <Node name="Characters" expanded="True">
+                  <Node name="FirstPersonCharacter" expanded="True">
+                    <Node name="Scripts" expanded="True" />
+                  </Node>
+                  <Node name="RollerBall" expanded="True">
+                    <Node name="Scripts" expanded="True" />
+                  </Node>
+                </Node>
+                <Node name="ParticleSystems" expanded="True">
+                  <Node name="Scripts" expanded="True" />
+                </Node>
+                <Node name="Utility" expanded="True" />
+                <Node name="Vehicles" expanded="True">
+                  <Node name="Aircraft" expanded="True">
+                    <Node name="Scripts" expanded="True" />
+                  </Node>
+                </Node>
+              </Node>
+              <Node name="Tank - Mark V drivable" expanded="True">
+                <Node name="Scripts" expanded="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="5d3ca7bf-bf98-4817-8402-7b6dc989f038" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

@@ -49,6 +49,8 @@ public class SimonSaysRipoff : MonoBehaviour
             if (clickedButtons.Count == uninteractableButtons.Count)
             {
                 gameObject.SetActive(false);
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
             }
         }
        else
