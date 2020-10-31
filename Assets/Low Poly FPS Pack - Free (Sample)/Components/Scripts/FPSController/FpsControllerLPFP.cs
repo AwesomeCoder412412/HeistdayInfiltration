@@ -200,7 +200,7 @@ namespace FPSControllerLPFP
         }
         private void UpdateFunction(bool callingFromClient, ClientInput clientInput)
         {
-            arms.position = transform.position + transform.TransformVector(armPosition);
+            arms.position = netransform.position + transform.TransformVector(armPosition);
             Jump(callingFromClient, clientInput);
             PlayFootstepSounds(callingFromClient, clientInput);
         }

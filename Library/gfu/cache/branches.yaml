@@ -13,14 +13,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cacheType: 2
-  lastUpdatedAtString: 2020-10-29T12:58:03.093-07:00
+  lastUpdatedAtString: 2020-10-29T14:02:34.161-07:00
   initializedAtString: 2020-10-29T12:39:29.360-07:00
-  localBranches: []
-  remoteBranches:
-  - name: origin/main
-    tracking: '[None]'
-  - name: origin/master
-    tracking: '[None]'
+  localBranches:
+  - name: master
+    tracking: origin/master
+  remoteBranches: []
   remotes:
   - name: origin
     url: https://github.com/AwesomeCoder412412/HeistdayInfiltration.git
@@ -30,27 +28,18 @@ MonoBehaviour:
     function: 0
     token: 
   localConfigBranches:
-    keys: []
-    values: []
-  remoteConfigBranches:
     keys:
-    - origin
-    subKeys:
-    - Values:
-      - main
-      - master
-    subKeyValues:
-    - Values:
-      - name: main
-        remote:
-          name: origin
-          url: https://github.com/AwesomeCoder412412/HeistdayInfiltration.git
-        trackingBranch: 
-      - name: master
-        remote:
-          name: origin
-          url: https://github.com/AwesomeCoder412412/HeistdayInfiltration.git
-        trackingBranch: 
+    - master
+    values:
+    - name: master
+      remote:
+        name: origin
+        url: https://github.com/AwesomeCoder412412/HeistdayInfiltration.git
+      trackingBranch: master
+  remoteConfigBranches:
+    keys: []
+    subKeys: []
+    subKeyValues: []
   configRemotes:
     keys:
     - origin
