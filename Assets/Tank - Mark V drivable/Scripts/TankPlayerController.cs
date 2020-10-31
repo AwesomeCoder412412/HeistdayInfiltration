@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using Mirror;
 
-public class TankPlayerController : MonoBehaviour {
+public class TankPlayerController : NetworkBehaviour {
 
     public Rigidbody Rigid;
     public float speedPower; // engine power
@@ -18,13 +19,17 @@ public class TankPlayerController : MonoBehaviour {
     public Vector3 tankOffset;
     public GameObject tankCamera;
     public static GameObject currentPlayer;
+    public override void OnStartServer()
+    {
+        base.OnStartServer();
+        inputManager = GameObject.FindObjectOfType<InputManager>();
+    }
     private void Awake()
     {
         Physics.IgnoreLayerCollision(9, 10);
         currentPlayer = player;
     }
     void Start () {
-        inputManager = GameObject.FindObjectOfType<InputManager>();
         // set centre of mass
         Rigid.centerOfMass = centerOfmass.localPosition;
         engineSound.pitch = 0.6f;
@@ -70,7 +75,7 @@ public class TankPlayerController : MonoBehaviour {
 
         engineSound.pitch = 0.6f + currentSpeed / 10;
 
-        if (inputManager.GetButtonDown("Exit Vehicle") && tankMode)
+        if (inputManager != null && inputManager.GetButtonDown("Exit Vehicle") && tankMode)
         {
             tankMode = false;
             player.SetActive(true);

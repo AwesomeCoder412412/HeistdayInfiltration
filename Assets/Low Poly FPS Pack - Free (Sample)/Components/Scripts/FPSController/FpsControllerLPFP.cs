@@ -200,7 +200,7 @@ namespace FPSControllerLPFP
         }
         private void UpdateFunction(bool callingFromClient, ClientInput clientInput)
         {
-            arms.position = netransform.position + transform.TransformVector(armPosition);
+            arms.position = transform.position + transform.TransformVector(armPosition);
             Jump(callingFromClient, clientInput);
             PlayFootstepSounds(callingFromClient, clientInput);
         }
@@ -298,7 +298,7 @@ namespace FPSControllerLPFP
             //var force = new Vector3(smoothX - rigidbodyVelocity.x, 0f, smoothZ - rigidbodyVelocity.z);
             //var force = new Vector3(velocity.x - rigidbodyVelocity.x, 0f, velocity.z - rigidbodyVelocity.z);
             //_rigidbody.AddForce(force, ForceMode.VelocityChange);
-            _rigidbody.velocity = velocity;
+            _rigidbody.velocity = new Vector3(velocity.x, _rigidbody.velocity.y, velocity.z);
             if (callingFromClient)
             {
                 //Debug.Log("force " + force);

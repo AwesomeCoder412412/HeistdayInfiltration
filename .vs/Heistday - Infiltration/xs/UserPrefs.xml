@@ -3,14 +3,15 @@
     <Files>
       <File FileName="Assets/Scripts/OpenPuzzle.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/NumberPuzzle.cs" />
-      <File FileName="Assets/Scripts/SimonSaysRipoff.cs" Line="52" Column="58" />
+      <File FileName="Assets/Scripts/SimonSaysRipoff.cs" />
       <File FileName="Assets/Scripts/GenerateRooms.cs" />
       <File FileName="Assets/Scripts/Treasure.cs" />
       <File FileName="Assets/Scripts/HealthManager.cs" />
       <File FileName="Assets/Scripts/PlayerController.cs" />
       <File FileName="Assets/Scripts/LadderScript.cs" />
       <File FileName="Assets/Standard Assets/Characters/FirstPersonCharacter/Scripts/FirstPersonController.cs" />
-      <File FileName="Assets/Low Poly FPS Pack - Free (Sample)/Components/Scripts/FPSController/FpsControllerLPFP.cs" Line="217" Column="34" />
+      <File FileName="Assets/Low Poly FPS Pack - Free (Sample)/Components/Scripts/FPSController/FpsControllerLPFP.cs" Line="205" Column="28" />
+      <File FileName="Assets/Tank - Mark V drivable/Scripts/TankPlayerController.cs" Line="37" Column="30" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -27,6 +28,9 @@
                 </Node>
               </Node>
               <Node name="Scripts" expanded="True" />
+              <Node name="Tank - Mark V drivable" expanded="True">
+                <Node name="Scripts" expanded="True" />
+              </Node>
             </Node>
           </Node>
         </State>
@@ -34,8 +38,8 @@
     </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="60d09ac2-3611-463a-b011-27794385694e" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="dc5cac13-27e3-4565-8d7a-6e62b6cf1cf7" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
