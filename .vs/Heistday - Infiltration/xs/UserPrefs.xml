@@ -1,5 +1,5 @@
 ﻿<Properties StartupConfiguration="{D0DA94B4-F05B-33A0-D399-CC84D949F134}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Low Poly FPS Pack - Free (Sample)/Components/Scripts/FPSController/FpsControllerLPFP.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Tank - Mark V drivable/Scripts/TankPlayerController.cs">
     <Files>
       <File FileName="Assets/Scripts/OpenPuzzle.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/NumberPuzzle.cs" />
@@ -10,8 +10,9 @@
       <File FileName="Assets/Scripts/PlayerController.cs" />
       <File FileName="Assets/Scripts/LadderScript.cs" />
       <File FileName="Assets/Standard Assets/Characters/FirstPersonCharacter/Scripts/FirstPersonController.cs" />
-      <File FileName="Assets/Low Poly FPS Pack - Free (Sample)/Components/Scripts/FPSController/FpsControllerLPFP.cs" Line="205" Column="28" />
-      <File FileName="Assets/Tank - Mark V drivable/Scripts/TankPlayerController.cs" Line="37" Column="30" />
+      <File FileName="Assets/Low Poly FPS Pack - Free (Sample)/Components/Scripts/FPSController/FpsControllerLPFP.cs" Line="198" Column="10" />
+      <File FileName="Assets/Tank - Mark V drivable/Scripts/TankPlayerController.cs" Line="79" Column="32" />
+      <File FileName="Assets/InputManager.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -21,15 +22,15 @@
               <Node name="Low Poly FPS Pack - Free (Sample)" expanded="True">
                 <Node name="Components" expanded="True">
                   <Node name="Scripts" expanded="True">
-                    <Node name="FPSController" expanded="True">
-                      <Node name="FpsControllerLPFP.cs" selected="True" />
-                    </Node>
+                    <Node name="FPSController" expanded="True" />
                   </Node>
                 </Node>
               </Node>
               <Node name="Scripts" expanded="True" />
               <Node name="Tank - Mark V drivable" expanded="True">
-                <Node name="Scripts" expanded="True" />
+                <Node name="Scripts" expanded="True">
+                  <Node name="TankPlayerController.cs" selected="True" />
+                </Node>
               </Node>
             </Node>
           </Node>
@@ -39,10 +40,9 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="dc5cac13-27e3-4565-8d7a-6e62b6cf1cf7" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="23a76964-5908-4deb-bfe4-437134df37f2" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp-Editor-firstpass PreferredExecutionTarget="MonoDevelop.Default" />
 </Properties>

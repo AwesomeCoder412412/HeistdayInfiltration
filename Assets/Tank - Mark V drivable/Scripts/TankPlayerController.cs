@@ -22,6 +22,10 @@ public class TankPlayerController : NetworkBehaviour {
     public override void OnStartServer()
     {
         base.OnStartServer();
+    }
+    public override void OnStartLocalPlayer()
+    {
+        base.OnStartLocalPlayer();
         inputManager = GameObject.FindObjectOfType<InputManager>();
     }
     private void Awake()
@@ -58,6 +62,10 @@ public class TankPlayerController : NetworkBehaviour {
 
 
     void Update () {
+        if (inputManager == null)
+        {
+            inputManager = GameObject.FindObjectOfType<InputManager>();
+        }
         if (transform.position.y < 70)
         {
             SceneManager.LoadScene("DeathScreen");
@@ -74,8 +82,9 @@ public class TankPlayerController : NetworkBehaviour {
         currentSpeed = vel.magnitude;
 
         engineSound.pitch = 0.6f + currentSpeed / 10;
-
-        if (inputManager != null && inputManager.GetButtonDown("Exit Vehicle") && tankMode)
+        Debug.Log(inputManager != null);
+        //Debug.Log((inputManager != null) + " " + inputManager.GetButtonDown("Exit Vehicle") + " " + tankMode);
+        if ((inputManager != null) && inputManager.GetButtonDown("Exit Vehicle") && tankMode)
         {
             tankMode = false;
             player.SetActive(true);
@@ -88,6 +97,7 @@ public class TankPlayerController : NetworkBehaviour {
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            player = collision.gameObject;
             tankMode = true;
             tankCamera.SetActive(true);
             player.SetActive(false);
