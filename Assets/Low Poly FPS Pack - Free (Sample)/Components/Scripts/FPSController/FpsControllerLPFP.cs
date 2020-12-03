@@ -158,6 +158,16 @@ namespace FPSControllerLPFP
             {
                 CmdFixedUpdate(clientInput);
             }
+            CmdSandwich(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), connectionToClient);
+
+        }
+        [Command]
+        private void CmdSandwich(float horizontalInput, float verticalInput, NetworkConnectionToClient playersConnection)
+        {
+            foreach(TankPlayerController tankPlayer in FindObjectsOfType<TankPlayerController>())
+            {
+                tankPlayer.FixedUpdateTheSecond(horizontalInput, verticalInput, playersConnection);
+            }
         }
         [Command]
         private void CmdFixedUpdate(ClientInput clientInput)
