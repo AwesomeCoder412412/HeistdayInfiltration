@@ -19,9 +19,14 @@ public class TankPlayerController : NetworkBehaviour {
     public Vector3 tankOffset;
     public GameObject tankCamera;
     public static GameObject currentPlayer;
+    public NetworkConnectionToClient playersConnection;
     public override void OnStartServer()
     {
         base.OnStartServer();
+    }
+    public override void OnStartLocalPlayer()
+    {
+        base.OnStartLocalPlayer();
         inputManager = GameObject.FindObjectOfType<InputManager>();
     }
     private void Awake()
@@ -39,12 +44,12 @@ public class TankPlayerController : NetworkBehaviour {
         //Cursor.lockState = CursorLockMode.Locked;
     }
     InputManager inputManager;
-    void FixedUpdate()
+    public void FixedUpdateTheSecond(float horizontalInput, float verticalInput, NetworkConnectionToClient playersConnection1)
     {
-        if (tankMode)
+        if (tankMode && playersConnection == playersConnection1)
         {
-            float turn = Input.GetAxis("Horizontal");
-            float moveVertical = Input.GetAxis("Vertical");
+            float turn = horizontalInput;
+            float moveVertical = verticalInput;
             Vector3 movement = new Vector3(0.0f, 0.0f, moveVertical);
 
             if (currentSpeed < maxSpeed)
@@ -58,6 +63,10 @@ public class TankPlayerController : NetworkBehaviour {
 
 
     void Update () {
+        if (inputManager == null)
+        {
+            inputManager = GameObject.FindObjectOfType<InputManager>();
+        }
         if (transform.position.y < 70)
         {
             SceneManager.LoadScene("DeathScreen");
@@ -74,8 +83,9 @@ public class TankPlayerController : NetworkBehaviour {
         currentSpeed = vel.magnitude;
 
         engineSound.pitch = 0.6f + currentSpeed / 10;
-
-        if (inputManager != null && inputManager.GetButtonDown("Exit Vehicle") && tankMode)
+        Debug.Log(inputManager != null);
+        //Debug.Log((inputManager != null) + " " + inputManager.GetButtonDown("Exit Vehicle") + " " + tankMode);
+        if ((inputManager != null) && inputManager.GetButtonDown("Exit Vehicle") && tankMode)
         {
             tankMode = false;
             player.SetActive(true);
@@ -86,12 +96,24 @@ public class TankPlayerController : NetworkBehaviour {
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && isServer)
         {
+            player = collision.gameObject;
             tankMode = true;
-            tankCamera.SetActive(true);
-            player.SetActive(false);
+            RpcTurnOffPlayer(player);
+            playersConnection = player.GetComponent<NetworkIdentity>().connectionToClient;
+            TargetTurnOnTankCamera(playersConnection);
             currentPlayer = gameObject;
         }
+    }
+    [TargetRpc]
+    private void TargetTurnOnTankCamera(NetworkConnectionToClient target)
+    {
+        tankCamera.SetActive(true);
+    }
+    [ClientRpc]
+    private void RpcTurnOffPlayer(GameObject player)
+    {
+        player.SetActive(false);
     }
 }

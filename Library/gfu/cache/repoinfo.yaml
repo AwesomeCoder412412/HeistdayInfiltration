@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cacheType: 1
-  lastUpdatedAtString: 2020-10-29T13:07:32.524-07:00
-  initializedAtString: 2020-10-29T12:36:48.380-07:00
+  lastUpdatedAtString: 2020-11-14T10:07:44.485-08:00
+  initializedAtString: 2020-11-14T10:07:44.485-08:00
   currentGitRemote:
     name: origin
     url: https://github.com/AwesomeCoder412412/HeistdayInfiltration.git
@@ -24,14 +24,14 @@ MonoBehaviour:
     function: 0
     token: 
   currentGitBranch:
-    name: master
-    tracking: origin/master
+    name: 
+    tracking: 
   currentConfigBranch:
-    name: master
+    name: 
     remote:
-      name: origin
-      url: https://github.com/AwesomeCoder412412/HeistdayInfiltration.git
-    trackingBranch: master
+      name: 
+      url: 
+    trackingBranch: 
   currentConfigRemote:
     name: origin
     url: https://github.com/AwesomeCoder412412/HeistdayInfiltration.git
