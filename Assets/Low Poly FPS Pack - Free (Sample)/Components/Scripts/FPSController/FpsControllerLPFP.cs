@@ -67,10 +67,26 @@ namespace FPSControllerLPFP
         private SmoothVelocity _velocityZ;
         private bool _isGrounded;
         public Camera camera;
+        [SyncVar]
+        public int playerId;
 
         private readonly RaycastHit[] _groundCastResults = new RaycastHit[8];
         private readonly RaycastHit[] _wallCastResults = new RaycastHit[8];
 
+        public override void OnStartServer()
+        {
+            base.OnStartServer();
+            int max = 0;
+            foreach (FpsControllerLPFP fPS in FindObjectsOfType<FpsControllerLPFP>())
+            {
+                if(fPS.playerId > max)
+                {
+                    max = fPS.playerId;
+                }
+            }
+            playerId = max + 1;
+            FindObjectOfType<TankPlayerController>().GetComponent<NetworkIdentity>().AssignClientAuthority(connectionToClient);
+        }
         /// Initializes the FpsController on start.
         private void Start()
         {
@@ -157,16 +173,6 @@ namespace FPSControllerLPFP
             else
             {
                 CmdFixedUpdate(clientInput);
-            }
-            CmdSandwich(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), connectionToClient);
-
-        }
-        [Command]
-        private void CmdSandwich(float horizontalInput, float verticalInput, NetworkConnectionToClient playersConnection)
-        {
-            foreach(TankPlayerController tankPlayer in FindObjectsOfType<TankPlayerController>())
-            {
-                tankPlayer.FixedUpdateTheSecond(horizontalInput, verticalInput, playersConnection);
             }
         }
         [Command]
@@ -381,6 +387,10 @@ namespace FPSControllerLPFP
                     _audioSource.Pause();
                 }
             }
+        }
+        public bool IsLocalPlayer()
+        {
+            return isLocalPlayer;
         }
 			
         /// A helper for assistance with smoothing the camera rotation.

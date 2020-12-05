@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         inputManager = GameObject.FindObjectOfType<InputManager>();
-        Physics.IgnoreCollision(GetComponent<Collider>(), knife.GetComponent<Collider>());
+        //Physics.IgnoreCollision(GetComponent<Collider>(), knife.GetComponent<Collider>());
         Physics.IgnoreCollision(GetComponent<Collider>(), bullet.GetComponent<Collider>());
         Physics.IgnoreCollision(bullet.GetComponent<Collider>(), knife.GetComponent<Collider>());
         Cursor.lockState = CursorLockMode.Locked;
@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviour
         {
             SceneManager.LoadScene("DeathScreen");
         }
-        Debug.Log(instance != null);
+        //Debug.Log(instance != null);
         instance = this;
         //Cursor.visible = false;
         //Cursor.lockState = CursorLockMode.Locked;

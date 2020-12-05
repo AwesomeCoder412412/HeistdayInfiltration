@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 using Mirror;
+using FPSControllerLPFP;
 
 public class TankPlayerController : NetworkBehaviour {
 
@@ -19,18 +20,36 @@ public class TankPlayerController : NetworkBehaviour {
     public Vector3 tankOffset;
     public GameObject tankCamera;
     public static GameObject currentPlayer;
-    public NetworkConnectionToClient playersConnection;
+    public NetworkConnection playersConnection1;
+    public int playerId;
+    public int playerId2;
     public override void OnStartServer()
     {
         base.OnStartServer();
     }
-    public override void OnStartLocalPlayer()
+    public override void OnStartClient()
     {
-        base.OnStartLocalPlayer();
+        base.OnStartClient();
         inputManager = GameObject.FindObjectOfType<InputManager>();
+        //Debug.Log("onstartlocalplayer " + OnStartLocalPlayer)
+        StartCoroutine(WaitToSetPlayerId());
+    }
+    private IEnumerator WaitToSetPlayerId()
+    {
+        yield return new WaitForSeconds(1);
+        Debug.Log("Length " + FindObjectsOfType<FpsControllerLPFP>().Length);
+        foreach (FpsControllerLPFP fPS in FindObjectsOfType<FpsControllerLPFP>())
+        {
+            Debug.Log("isLocalPlayer " + fPS.IsLocalPlayer());
+            if (fPS.IsLocalPlayer())
+            {
+                playerId = fPS.playerId;
+            }
+        }
     }
     private void Awake()
     {
+        Debug.Log("testing");
         Physics.IgnoreLayerCollision(9, 10);
         currentPlayer = player;
     }
@@ -43,11 +62,20 @@ public class TankPlayerController : NetworkBehaviour {
         //Cursor.visible = false;
         //Cursor.lockState = CursorLockMode.Locked;
     }
-    InputManager inputManager;
-    public void FixedUpdateTheSecond(float horizontalInput, float verticalInput, NetworkConnectionToClient playersConnection1)
+    public void FixedUpdate()
     {
-        if (tankMode && playersConnection == playersConnection1)
+        CmdFixedUpdateTheSecond(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), playerId);
+    }
+    InputManager inputManager;
+    [Command]
+    public void CmdFixedUpdateTheSecond(float horizontalInput, float verticalInput, int playerId1)
+    {
+        Debug.Log("playerId1 " + playerId1);
+        Debug.Log("playerId2 " + playerId2);
+        Debug.Log("tankMode " + tankMode);
+        if (tankMode && playerId2 == playerId1)
         {
+            Debug.Log("works");
             float turn = horizontalInput;
             float moveVertical = verticalInput;
             Vector3 movement = new Vector3(0.0f, 0.0f, moveVertical);
@@ -101,13 +129,14 @@ public class TankPlayerController : NetworkBehaviour {
             player = collision.gameObject;
             tankMode = true;
             RpcTurnOffPlayer(player);
-            playersConnection = player.GetComponent<NetworkIdentity>().connectionToClient;
-            TargetTurnOnTankCamera(playersConnection);
+            playerId2 = player.GetComponent<FpsControllerLPFP>().playerId;
+            playersConnection1 = player.GetComponent<NetworkIdentity>().connectionToClient;
+            TargetTurnOnTankCamera(playersConnection1);
             currentPlayer = gameObject;
         }
     }
     [TargetRpc]
-    private void TargetTurnOnTankCamera(NetworkConnectionToClient target)
+    private void TargetTurnOnTankCamera(NetworkConnection target)
     {
         tankCamera.SetActive(true);
     }

@@ -1,7 +1,5 @@
 ScriptsOnlyBuild:
   usedScripts:
-    Assembly-CSharp-Editor.dll:
-    - ReadmeEditor
     Assembly-CSharp-firstpass.dll:
     - UnityStandardAssets.Characters.FirstPerson.FirstPersonController
     - UnityStandardAssets.Effects.ExplosionPhysicsForce
@@ -29,7 +27,6 @@ ScriptsOnlyBuild:
     - OpenPuzzle
     - PlayerController
     - RayCastShoot
-    - Readme
     - RoomTrigger
     - ScoreManager
     - SetAudio
