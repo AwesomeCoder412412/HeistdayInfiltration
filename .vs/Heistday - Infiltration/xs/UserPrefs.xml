@@ -10,30 +10,20 @@
       <File FileName="Assets/Scripts/PlayerController.cs" />
       <File FileName="Assets/Scripts/LadderScript.cs" />
       <File FileName="Assets/Standard Assets/Characters/FirstPersonCharacter/Scripts/FirstPersonController.cs" />
-      <File FileName="Assets/Tank - Mark V drivable/Scripts/TankPlayerController.cs" Line="1" Column="1" />
       <File FileName="Assets/InputManager.cs" />
-      <File FileName="Assets/Low Poly FPS Pack - Free (Sample)/Components/Scripts/FPSController/FpsControllerLPFP.cs" Line="161" Column="67" />
-      <File FileName="Assets/Tank - Mark V drivable/Scripts/RayCastShoot.cs" Line="1" Column="1" />
+      <File FileName="Assets/Low Poly FPS Pack - Free (Sample)/Components/Scripts/FPSController/FpsControllerLPFP.cs" />
+      <File FileName="Assets/Tank - Mark V drivable/Scripts/RayCastShoot.cs" />
+      <File FileName="Assets/Scripts/PlayButton.cs" />
+      <File FileName="Assets/Scripts/LookAtPlayer.cs" />
+      <File FileName="Assets/Nokobot/ModernGuns_Handgun/Demo Assets/SimpleShoot.cs" Line="38" Column="1" />
+      <File FileName="Assets/Scripts/GuardAI.cs" Line="27" Column="12" />
+      <File FileName="Assets/Tank - Mark V drivable/Scripts/TankPlayerController.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="Heistday - Infiltration" expanded="True">
             <Node name="Assets" expanded="True">
-              <Node name="Low Poly FPS Pack - Free (Sample)" expanded="True">
-                <Node name="Components" expanded="True">
-                  <Node name="Scripts" expanded="True">
-                    <Node name="FPSController" expanded="True" />
-                  </Node>
-                </Node>
-              </Node>
-              <Node name="Mirror" expanded="True">
-                <Node name="Editor" expanded="True">
-                  <Node name="Weaver" expanded="True" />
-                </Node>
-                <Node name="Runtime" expanded="True" />
-              </Node>
-              <Node name="Scripts" expanded="True" />
               <Node name="Tank - Mark V drivable" expanded="True">
                 <Node name="Scripts" expanded="True">
                   <Node name="TankPlayerController.cs" selected="True" />
@@ -46,8 +36,8 @@
     </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="fae3f086-4481-4805-bb41-7a8ee7d9dda6" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="03916319-a654-4e8a-8ce6-a41186968142" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -16,7 +16,7 @@ public class TankPlayerController : NetworkBehaviour {
     public float maxSpeed = 2.5f; // maximal tank speed
     public AudioSource engineSound;
     public bool tankMode = false;
-    public GameObject player;
+    //public GameObject player;
     public Vector3 tankOffset;
     public GameObject tankCamera;
     public static GameObject currentPlayer;
@@ -51,7 +51,7 @@ public class TankPlayerController : NetworkBehaviour {
     {
         Debug.Log("testing");
         Physics.IgnoreLayerCollision(9, 10);
-        currentPlayer = player;
+        //currentPlayer = player;
     }
     void Start () {
         // set centre of mass
@@ -64,11 +64,11 @@ public class TankPlayerController : NetworkBehaviour {
     }
     public void FixedUpdate()
     {
-        CmdFixedUpdateTheSecond(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), playerId);
+        CmdFixedUpdateTheSecond(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), inputManager.GetButtonDown("Exit Vehicle"), playerId);
     }
     InputManager inputManager;
-    [Command]
-    public void CmdFixedUpdateTheSecond(float horizontalInput, float verticalInput, int playerId1)
+    [Command(ignoreAuthority = true)]
+    public void CmdFixedUpdateTheSecond(float horizontalInput, float verticalInput, bool exitVehicle, int playerId1)
     {
         Debug.Log("playerId1 " + playerId1);
         Debug.Log("playerId2 " + playerId2);
@@ -86,6 +86,14 @@ public class TankPlayerController : NetworkBehaviour {
             }
 
             Rigid.AddTorque(transform.up * torque * turn);
+            if (exitVehicle)
+            {
+                tankMode = false;
+                RpcTogglePlayer(currentPlayer, true);
+                currentPlayer.transform.position = transform.position + tankOffset;
+                TargetToggleTankCamera(playersConnection1,false);
+                currentPlayer = null;
+            }
         }
     }
 
@@ -113,36 +121,29 @@ public class TankPlayerController : NetworkBehaviour {
         engineSound.pitch = 0.6f + currentSpeed / 10;
         Debug.Log(inputManager != null);
         //Debug.Log((inputManager != null) + " " + inputManager.GetButtonDown("Exit Vehicle") + " " + tankMode);
-        if ((inputManager != null) && inputManager.GetButtonDown("Exit Vehicle") && tankMode)
-        {
-            tankMode = false;
-            player.SetActive(true);
-            player.transform.position = transform.position + tankOffset;
-            tankCamera.SetActive(false);
-            currentPlayer = player;
-        }
     }
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player") && isServer)
         {
-            player = collision.gameObject;
+            //player = collision.gameObject;
             tankMode = true;
-            RpcTurnOffPlayer(player);
-            playerId2 = player.GetComponent<FpsControllerLPFP>().playerId;
-            playersConnection1 = player.GetComponent<NetworkIdentity>().connectionToClient;
-            TargetTurnOnTankCamera(playersConnection1);
-            currentPlayer = gameObject;
+            currentPlayer = collision.gameObject;
+            RpcTogglePlayer(currentPlayer, false);
+            playerId2 = currentPlayer.GetComponent<FpsControllerLPFP>().playerId;
+            playersConnection1 = currentPlayer.GetComponent<NetworkIdentity>().connectionToClient;
+            TargetToggleTankCamera(playersConnection1, true);
+            //currentPlayer = gameObject;
         }
     }
     [TargetRpc]
-    private void TargetTurnOnTankCamera(NetworkConnection target)
+    private void TargetToggleTankCamera(NetworkConnection target, bool waterBottle)
     {
-        tankCamera.SetActive(true);
+        tankCamera.SetActive(waterBottle);
     }
     [ClientRpc]
-    private void RpcTurnOffPlayer(GameObject player)
+    private void RpcTogglePlayer(GameObject player, bool waterBottle)
     {
-        player.SetActive(false);
+        player.SetActive(waterBottle);
     }
 }
