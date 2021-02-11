@@ -23,6 +23,7 @@ TagManager:
   - Fire
   - EnemyGun
   - Tank
+  - PauseMenu
   layers:
   - Default
   - TransparentFX

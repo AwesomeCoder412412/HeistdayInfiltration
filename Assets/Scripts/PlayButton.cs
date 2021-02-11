@@ -17,6 +17,8 @@ public class PlayButton : MonoBehaviour
     public string guards = "guards";
     public string teammates = "teammates";
     public string players1 = "players";
+    public static PlayButton instance;
+    private string retry1 = "retry1";
     // Start is called before the first frame update
     void Start()
     {
@@ -30,8 +32,17 @@ public class PlayButton : MonoBehaviour
         PlayerPrefs.SetInt(teammates, int.Parse(teammate.text));
         PlayerPrefs.SetInt(players1, int.Parse(players.text));
         NetworkManager.singleton.maxConnections = int.Parse(players.text);
+        NetworkManager.singleton.StopHost();
         NetworkManager.singleton.StartHost();
     }
+
+    public void PlayExpress()
+    {
+        Debug.Log("Lemon");
+        NetworkManager.singleton.StopHost();
+        NetworkManager.singleton.StartHost();
+    }
+
     public void Quit()
     {
         Application.Quit();
@@ -39,6 +50,12 @@ public class PlayButton : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (PlayerPrefs.GetInt(retry1) == 1)
+        {
+            Debug.Log("Lemon");
+            PlayerPrefs.SetInt(retry1, 0);
+            NetworkManager.singleton.StopHost();
+            NetworkManager.singleton.StartHost();
+        }
     }
 }

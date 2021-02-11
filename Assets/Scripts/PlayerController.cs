@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Mirror;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,7 +12,9 @@ public class PlayerController : MonoBehaviour
     public static PlayerController instance;
     public GameObject knife;
     public GameObject bullet;
-    public GameObject pauseMenu;
+    public int retry;
+    public string retry1 = "retry1";
+    //public GameObject pauseMenu;
     public bool isPaused;
     private void Start()
     {
@@ -83,8 +86,9 @@ public class PlayerController : MonoBehaviour
             LadderScript.instance.roof.GetComponent<BoxCollider>().enabled = true;
         }
     }
-    private void Update()
+    public void Update()
     {
+        DontDestroyOnLoad(gameObject);
         if (transform.position.y < 70)
         {
             SceneManager.LoadScene("DeathScreen");
@@ -101,7 +105,7 @@ public class PlayerController : MonoBehaviour
         if (inputManager.GetButtonDown("Pause"))
         {
             Time.timeScale = 0f;
-            pauseMenu.SetActive(true);
+            PausedMenu.instance.pauseMenu.SetActive(true);
             isPaused = true;
         }
         if (isPaused)
@@ -109,13 +113,17 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.R))
             {
                 Time.timeScale = 1.0f;
-                pauseMenu.SetActive(false);
+                PausedMenu.instance.pauseMenu.SetActive(false);
                 isPaused = false;
             }
             if (Input.GetKeyDown(KeyCode.T))
             {
-                SceneManager.LoadScene("MainGame");
-                Time.timeScale = 1.0f;
+                retry = 1;
+                PlayerPrefs.SetInt(retry1, retry);
+                SceneManager.LoadScene("StartScreen");
+                //PlayButton.instance.PlayExpress();
+                //SceneManager.LoadScene("Networking");
+                //Time.timeScale = 1.0f;
             }
             if (Input.GetKeyDown(KeyCode.M))
             {

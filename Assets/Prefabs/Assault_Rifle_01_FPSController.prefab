@@ -12352,6 +12352,7 @@ MonoBehaviour:
     run: Fire3
     jump: Jump
   camera: {fileID: 2142600685239967937}
+  playerId: 0
 --- !u!114 &5227988468431344106
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12369,7 +12370,8 @@ MonoBehaviour:
   roomIndex: -1
   knife: {fileID: 5226505384544592657}
   bullet: {fileID: 1086664671600574, guid: 5953171a59c27394e9ad5cbb564affa8, type: 3}
-  pauseMenu: {fileID: 0}
+  pauseMenu: {fileID: 5542379616985347334, guid: aecd21790ae0045bb80590e83691661f,
+    type: 3}
   isPaused: 0
 --- !u!114 &-3976522001048359312
 MonoBehaviour:

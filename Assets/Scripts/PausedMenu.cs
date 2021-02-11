@@ -5,10 +5,20 @@ using UnityEngine.SceneManagement;
 
 public class PausedMenu : MonoBehaviour
 {
+    public static PausedMenu instance;
+    public GameObject pauseMenu;
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Debug.LogError("Already an instance of the PausedMenu class!");
+        }
+        //pauseMenu = gameObject;
     }
 
     // Update is called once per frame
