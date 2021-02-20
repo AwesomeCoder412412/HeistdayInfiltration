@@ -88,7 +88,7 @@ public class PlayerController : MonoBehaviour
     }
     public void Update()
     {
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
         if (transform.position.y < 70)
         {
             SceneManager.LoadScene("DeathScreen");

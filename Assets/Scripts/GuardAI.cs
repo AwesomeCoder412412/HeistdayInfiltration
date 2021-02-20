@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FPSControllerLPFP;
+using Mirror;
 
-public class GuardAI : MonoBehaviour
+public class GuardAI : NetworkBehaviour
 {
     private CharacterController cc;
     private float downV = 0f;
@@ -16,31 +18,59 @@ public class GuardAI : MonoBehaviour
     public float speed = 1f;
     private float defaultRotation;
     public bool isGuard = true;
+    [SyncVar]
     public GameObject player;
     public float playerRadius = 5f;
+    //public float tankRadius = 10f;
     public float walkingOffset = 55f;
     public int roomIndex;
     public bool walking = true;
     private LookAtPlayer lookAtPlayer;
     public float distanceInFrontOfPlayer = 50f;
+    public float distanceInFrontOfTank = 50f;
+    public int playerId;
+    private TankPlayerController tank;
+    public GameObject currentPlayer;
     //tell my story
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        //player = GameObject.FindGameObjectWithTag("Player");
+        tank = FindObjectOfType<TankPlayerController>();
         cc = GetComponent<CharacterController>();
         lookAtPlayer = GetComponent<LookAtPlayer>();
         anim = GetComponent<Animator>();
         startPos = transform.position;
         defaultRotation = transform.eulerAngles.y;
-        if (isGuard)
+        if (isServer)
         {
-            anim.SetBool("Walking", true);
+            if (isGuard)
+            {
+                anim.SetBool("Walking", true);
+            }
+        }
+    }
+
+    public void SetPlayerId(int playerId)
+    {
+        this.playerId = playerId;
+        foreach (FpsControllerLPFP player1 in FindObjectsOfType<FpsControllerLPFP>())
+        {
+            Debug.Log("teammate " + player1.playerId + " " + playerId);
+            if(player1.playerId == playerId)
+            {
+                player = player1.gameObject;
+                Debug.Log("setplayer " + player.gameObject.name);
+            }
         }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (!isServer)
+        {
+            return;
+        }
         if (isGuard)
         {
             if (collision.transform.tag == "Tank")
@@ -75,6 +105,16 @@ public class GuardAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (gameObject.name == "Teammate(Clone)")
+        {
+            Debug.Log("isguard " + isGuard);
+            Debug.Log("cc " + (cc == null));
+        }
+        if (!isServer)
+        {
+            Debug.Log("I'm not the server");
+            return;
+        }
         if (cc.isGrounded)
         {
             downV = 0;
@@ -104,14 +144,30 @@ public class GuardAI : MonoBehaviour
         }
         else
         {
-           
-            if (Vector3.Distance(TankPlayerController.currentPlayer.transform.position + TankPlayerController.currentPlayer.transform.forward * distanceInFrontOfPlayer, transform.position) > playerRadius)
+            Debug.Log("player1 " + (player == null));
+            Debug.Log("playerId " + playerId);
+            //GameObject currentPlayer = null;
+            if (player.activeSelf)
+            {
+                currentPlayer = player;
+            }
+            else if(tank.playerId == this.playerId)
+            {
+                currentPlayer = tank.gameObject;
+            }
+            /*Debug.Log("player " + player.gameObject.name);
+            Debug.Log("TankId " + tank.playerId);
+            Debug.Log("playerId " + this.playerId);
+            Debug.Log("currentplayer " + currentPlayer.gameObject.name);*/
+            //float radius = (currentPlayer == player) ? playerRadius : tankRadius;
+            float distanceInFront = (currentPlayer == player) ? distanceInFrontOfPlayer : distanceInFrontOfTank;
+            if (currentPlayer != null && Vector3.Distance(currentPlayer.transform.position + currentPlayer.transform.forward * distanceInFront, transform.position) > playerRadius)
             {
                 //Debug.Log("Walking");
-                cc.Move(Vector3.Normalize(TankPlayerController.currentPlayer.transform.position + TankPlayerController.currentPlayer.transform.forward * distanceInFrontOfPlayer - transform.position) * speed);
+                cc.Move(Vector3.Normalize(currentPlayer.transform.position + currentPlayer.transform.forward * distanceInFront - transform.position) * speed);
                 //transform.LookAt(player.transform);
                 //transform.eulerAngles = new Vector3(0, transform.rotation.eulerAngles.y + walkingOffset, 0);
-                transform.rotation = Quaternion.LookRotation(TankPlayerController.currentPlayer.transform.position + TankPlayerController.currentPlayer.transform.forward * distanceInFrontOfPlayer - transform.position, Vector3.up);
+                transform.rotation = Quaternion.LookRotation(currentPlayer.transform.position + currentPlayer.transform.forward * distanceInFront - transform.position, Vector3.up);
                 transform.eulerAngles = new Vector3(0, transform.rotation.eulerAngles.y, 0);
                 anim.SetBool("Walking", true);
                 walking = true;

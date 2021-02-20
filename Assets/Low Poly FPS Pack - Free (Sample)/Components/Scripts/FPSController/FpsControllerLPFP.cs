@@ -86,9 +86,11 @@ namespace FPSControllerLPFP
             }
             playerId = max + 1;
             FindObjectOfType<TankPlayerController>().GetComponent<NetworkIdentity>().AssignClientAuthority(connectionToClient);
+            Debug.Log("spawnteammates");
+            TeamateSpawner.instance.SpawnTeamates(playerId);
         }
         /// Initializes the FpsController on start.
-        private void Start()
+        public void Start()
         {
             _rotationX = new SmoothRotation(RotationXRaw);
             _rotationY = new SmoothRotation(RotationYRaw);
