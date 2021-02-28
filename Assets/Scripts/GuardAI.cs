@@ -31,6 +31,7 @@ public class GuardAI : NetworkBehaviour
     public int playerId;
     private TankPlayerController tank;
     public GameObject currentPlayer;
+    public float footLoose = 6;
     //tell my story
     // Start is called before the first frame update
     void Start()
@@ -159,9 +160,10 @@ public class GuardAI : NetworkBehaviour
             Debug.Log("TankId " + tank.playerId);
             Debug.Log("playerId " + this.playerId);
             Debug.Log("currentplayer " + currentPlayer.gameObject.name);*/
-            //float radius = (currentPlayer == player) ? playerRadius : tankRadius;
+            //float radius = (currentPlayer == player) ? playerRadius : tankRadius
             float distanceInFront = (currentPlayer == player) ? distanceInFrontOfPlayer : distanceInFrontOfTank;
-            if (currentPlayer != null && Vector3.Distance(currentPlayer.transform.position + currentPlayer.transform.forward * distanceInFront, transform.position) > playerRadius)
+            float currentRadius = Vector3.Distance(currentPlayer.transform.position + currentPlayer.transform.forward * distanceInFront, transform.position);
+            if (currentPlayer != null && ((currentRadius > playerRadius && walking) || (currentRadius > footLoose && !walking)))
             {
                 //Debug.Log("Walking");
                 cc.Move(Vector3.Normalize(currentPlayer.transform.position + currentPlayer.transform.forward * distanceInFront - transform.position) * speed);

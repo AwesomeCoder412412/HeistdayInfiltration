@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
 public class GenerateRooms : MonoBehaviour
 {
@@ -31,6 +32,7 @@ public class GenerateRooms : MonoBehaviour
             foreach (GuardAI ai in enemies)
             {
                 ai.roomIndex = i;
+                NetworkServer.Spawn(ai.gameObject);
             }
             room.GetComponentInChildren<OpenPuzzle>().puzzleCanvas = puzzle;
         }

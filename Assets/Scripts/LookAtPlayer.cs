@@ -11,17 +11,13 @@ public class LookAtPlayer : MonoBehaviour
     void Start()
     {
         guardAI = GetComponent<GuardAI>();
-        if (guardAI.isGuard)
-        {
-            target = TankPlayerController.currentPlayer.transform;
-        }
     }
     // Update is called once per frame
     void Update()
     {
         if (guardAI.isGuard)
         {
-            target = TankPlayerController.currentPlayer.transform;
+            target = FindTargets().transform;
             if (target != null && guardAI.patrolling == false)
             {
                // target = TankPlayerController.currentPlayer.transform;
@@ -37,6 +33,20 @@ public class LookAtPlayer : MonoBehaviour
                 transform.eulerAngles = new Vector3(0, transform.rotation.eulerAngles.y + rotOffset, 0);
             }
         }
+    }
+    public GameObject FindTargets()
+    {
+        float distance = Mathf.Infinity;
+        GameObject tempPlayer = null;
+        foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player"))
+        {
+            if (tempPlayer == null || Vector3.Distance(transform.position, player.transform.position) < distance)
+            {
+                tempPlayer = player;
+                distance = Vector3.Distance(transform.position, player.transform.position);
+            }
+        }
+        return tempPlayer;
     }
 }
 
