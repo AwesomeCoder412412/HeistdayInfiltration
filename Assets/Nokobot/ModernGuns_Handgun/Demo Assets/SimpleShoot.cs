@@ -14,8 +14,8 @@ public class SimpleShoot : MonoBehaviour
     private float timeToShoot = 0f;
     public float timeBetweenShots = 1f;
     public GuardAI guardAI;
-    public float maxAngle;
-    public float maxDistance;
+    public float maxAngle, maxAngleLoose;
+    public float maxDistance, maxDistanceLoose;
     public LookAtPlayer lookAtPlayer;
     public float shotPower = 100f;
   
@@ -32,13 +32,20 @@ public class SimpleShoot : MonoBehaviour
         {
             Vector3 displacement = lookAtPlayer.target.position - transform.position;
             float angle = Vector3.Angle(transform.forward, displacement);
-            if (Mathf.Abs(angle) < maxAngle && Vector3.Distance(lookAtPlayer.target.position, transform.position) < maxDistance)
+            float currentMaxAngle = (angered) ? maxAngleLoose : maxAngle;
+            float currentMaxDistance = (angered) ? maxDistanceLoose : maxDistance;
+            Debug.Log("Loggins " + " angered " + angered);
+            Debug.Log("Loggins " + " angle " + Mathf.Abs(angle) + " and currentMaxAngle " + currentMaxAngle);
+            Debug.Log("Loggins " + " distance " + Vector3.Distance(lookAtPlayer.target.position, transform.position) + " and currentMaxDistance " + currentMaxDistance);
+            if (Mathf.Abs(angle) < currentMaxAngle && Vector3.Distance(lookAtPlayer.target.position, transform.position) < currentMaxDistance)
             {
+                Debug.Log("Loggins " + " set angered to true, patrolling is false");
                 angered = true;
                 guardAI.SetPatrolling(false);
             }
             else
             {
+                Debug.Log("Loggins " + " set angered to false, patrolling is true");
                 angered = false;
                 guardAI.SetPatrolling(true);
             }

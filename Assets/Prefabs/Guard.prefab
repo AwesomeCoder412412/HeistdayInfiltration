@@ -2447,6 +2447,16 @@ PrefabInstance:
       propertyPath: lookAtPlayer
       value: 
       objectReference: {fileID: 4479745456380240528}
+    - target: {fileID: 114966803654839386, guid: fc89912481daf614d9ffef21aa6cfbac,
+        type: 3}
+      propertyPath: maxAngleLoose
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 114966803654839386, guid: fc89912481daf614d9ffef21aa6cfbac,
+        type: 3}
+      propertyPath: maxDistanceLoose
+      value: 12
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc89912481daf614d9ffef21aa6cfbac, type: 3}
 --- !u!4 &4478201944935241128 stripped

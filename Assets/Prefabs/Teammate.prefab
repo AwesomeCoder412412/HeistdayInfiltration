@@ -1133,6 +1133,7 @@ MonoBehaviour:
   distanceInFrontOfTank: 15
   playerId: 0
   currentPlayer: {fileID: 0}
+  footLoose: 5
 --- !u!114 &4479745456380240528
 MonoBehaviour:
   m_ObjectHideFlags: 0
