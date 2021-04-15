@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -961,6 +961,7 @@ GameObject:
   - component: {fileID: 1812213438}
   - component: {fileID: 1812213437}
   - component: {fileID: 1812213440}
+  - component: {fileID: 1812213441}
   m_Layer: 5
   m_Name: Button (2)
   m_TagString: Untagged
@@ -1091,6 +1092,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db6289608c1324cf2831be7cd3576ffa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+--- !u!114 &1812213441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1812213435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 4021580586
+  serverOnly: 0
+  m_AssetId: 
+  hasSpawned: 0
 --- !u!1 &2071859186
 GameObject:
   m_ObjectHideFlags: 0
@@ -1104,6 +1123,7 @@ GameObject:
   - component: {fileID: 2071859189}
   - component: {fileID: 2071859188}
   - component: {fileID: 2071859191}
+  - component: {fileID: 2071859192}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -1234,3 +1254,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db6289608c1324cf2831be7cd3576ffa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+--- !u!114 &2071859192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2071859186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 837951799
+  serverOnly: 0
+  m_AssetId: 
+  hasSpawned: 0

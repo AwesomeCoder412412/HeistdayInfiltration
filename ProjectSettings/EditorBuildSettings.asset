@@ -17,10 +17,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/MainGame.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/DeathScreen.unity
     guid: 432ef68bdba37431c860851f14b272fe
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/VictoryScreen.unity
     guid: 6aebe9f4a0f9c4c5f8f189efa487a9a6
   m_configObjects: {}

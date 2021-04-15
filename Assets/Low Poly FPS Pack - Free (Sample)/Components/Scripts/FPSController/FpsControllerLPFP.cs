@@ -85,7 +85,7 @@ namespace FPSControllerLPFP
                 }
             }
             playerId = max + 1;
-            FindObjectOfType<TankPlayerController>().GetComponent<NetworkIdentity>().AssignClientAuthority(connectionToClient);
+            //FindObjectOfType<TankPlayerController>().GetComponent<NetworkIdentity>().AssignClientAuthority(connectionToClient);
             Debug.Log("spawnteammates");
             TeamateSpawner.instance.SpawnTeamates(playerId);
         }
@@ -112,6 +112,11 @@ namespace FPSControllerLPFP
             Cursor.lockState = CursorLockMode.Locked;
             ValidateRotationRestriction();
             camera.gameObject.SetActive(true);
+            if (!isLocalPlayer)
+            {
+                return;
+            }
+            MirrorVariables.instance.conn = connectionToServer;
         }
 			
         private Transform AssignCharactersCamera()

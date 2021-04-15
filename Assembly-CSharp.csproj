@@ -47,7 +47,7 @@
   <PropertyGroup>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <UnityProjectGenerator>Unity/VSTU</UnityProjectGenerator>
-    <UnityProjectGeneratorVersion>2.8.4.0</UnityProjectGeneratorVersion>
+    <UnityProjectGeneratorVersion>2.9.4.0</UnityProjectGeneratorVersion>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneOSX:2</UnityBuildTarget>
     <UnityVersion>2019.4.20f1</UnityVersion>
@@ -117,6 +117,7 @@
     <Compile Include="Assets\Scripts\Keybinds.cs" />
     <Compile Include="Assets\Scripts\LadderScript.cs" />
     <Compile Include="Assets\Scripts\LookAtPlayer.cs" />
+    <Compile Include="Assets\Scripts\MirrorVariables.cs" />
     <Compile Include="Assets\Scripts\NetworkedRigidbody.cs" />
     <Compile Include="Assets\Scripts\NumberPuzzle.cs" />
     <Compile Include="Assets\Scripts\OpenPuzzle.cs" />

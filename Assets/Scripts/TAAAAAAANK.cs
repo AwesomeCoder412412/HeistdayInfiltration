@@ -12,10 +12,16 @@ public class TAAAAAAANK : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+     GameObject tank = GameObject.FindGameObjectWithTag("Tank");
      if (tankOrNoTank)
         {
             tankBarrier.SetActive(false);
-        }   
+            
+        }
+     else
+        {
+            tank.SetActive(false);
+        }
     }
 
     // Update is called once per frame

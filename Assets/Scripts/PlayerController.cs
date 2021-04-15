@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
         inputManager = GameObject.FindObjectOfType<InputManager>();
         //Physics.IgnoreCollision(GetComponent<Collider>(), knife.GetComponent<Collider>());
         Physics.IgnoreCollision(GetComponent<Collider>(), bullet.GetComponent<Collider>());
-        Physics.IgnoreCollision(bullet.GetComponent<Collider>(), knife.GetComponent<Collider>());
+        //Physics.IgnoreCollision(bullet.GetComponent<Collider>(), knife.GetComponent<Collider>());
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         if (instance == null)
@@ -118,12 +118,15 @@ public class PlayerController : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.T))
             {
-                retry = 1;
+                MirrorVariables.instance.spawnNewPlayer = true;
+                MirrorVariables.instance.playersPain = NetworkManager.singleton.numPlayers;
+                SceneManager.LoadScene("Networking");
+                /*retry = 1;
                 PlayerPrefs.SetInt(retry1, retry);
-                SceneManager.LoadScene("StartScreen");
+                SceneManager.LoadScene("StartScreen");*/
                 //PlayButton.instance.PlayExpress();
                 //SceneManager.LoadScene("Networking");
-                //Time.timeScale = 1.0f;
+                Time.timeScale = 1.0f;
             }
             if (Input.GetKeyDown(KeyCode.M))
             {

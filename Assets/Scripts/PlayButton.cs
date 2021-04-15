@@ -50,6 +50,11 @@ public class PlayButton : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*if (MirrorVariables.instance.retry)
+        {
+            NetworkManager.singleton.StartClient();
+            MirrorVariables.instance.retry = false;
+        }*/
         if (PlayerPrefs.GetInt(retry1) == 1)
         {
             Debug.Log("Lemon");
