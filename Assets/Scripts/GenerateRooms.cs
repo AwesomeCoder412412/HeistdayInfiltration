@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-public class GenerateRooms : MonoBehaviour
+public class GenerateRooms : NetworkBehaviour
 {
     private string minRoom = "minRoom";
     private string maxRoom = "maxRoom";
@@ -16,27 +16,45 @@ public class GenerateRooms : MonoBehaviour
     public float roomWidth;
     
 
-    private void Start()
+    public void SpawnRoomAndPuzzle(int i, int roomPrefabIndex, int puzzlePrefabIndex)
     {
-        minRooms = PlayerPrefs.GetInt(minRoom);
-        maxRooms = PlayerPrefs.GetInt(maxRoom);
-        int randomRooms = Random.Range(minRooms, maxRooms);
-        int i = 0;
-        for (i = 0; i < randomRooms; i++)
+        Debug.Log("spawn room " + i);
+        GameObject room = Instantiate(puzzleRooms[roomPrefabIndex], Vector3.forward * roomWidth * i, puzzleRooms[roomPrefabIndex].transform.rotation);
+        GameObject puzzle = Instantiate(puzzles[puzzlePrefabIndex], Vector3.forward * roomWidth * i, puzzles[puzzlePrefabIndex].transform.rotation);
+        room.GetComponentInChildren<OpenPuzzle>().puzzleCanvas = puzzle;
+        if (isServer)
         {
-            GameObject roomPrefab = puzzleRooms[Random.Range(0, puzzleRooms.Length)];
-            GameObject puzzlePrefab = puzzles[Random.Range(0, puzzles.Length)];
-            GameObject room = Instantiate(roomPrefab, Vector3.forward * roomWidth * i, roomPrefab.transform.rotation);
             GuardAI[] enemies = room.GetComponentsInChildren<GuardAI>();
-            GameObject puzzle = Instantiate(puzzlePrefab, Vector3.forward * roomWidth * i, puzzlePrefab.transform.rotation);
             foreach (GuardAI ai in enemies)
             {
                 ai.roomIndex = i;
                 NetworkServer.Spawn(ai.gameObject);
             }
-            room.GetComponentInChildren<OpenPuzzle>().puzzleCanvas = puzzle;
         }
+    }
+    [ClientRpc]
+    public void RpcTreasureRoom(int i)
+    {
         GameObject treasureRoomInstance = Instantiate(treasureRoom, Vector3.forward * roomWidth * i, treasureRoom.transform.rotation);
+    }
+
+    private void Start()
+    {
+        if (!isServer)
+        {
+            return;
+        }
+        Debug.Log("Calling Start");
+        minRooms = PlayerPrefs.GetInt(minRoom);
+        maxRooms = PlayerPrefs.GetInt(maxRoom);
+        int randomRooms = Random.Range(minRooms, maxRooms);
+        int i = 0;
+        Debug.Log(randomRooms + " random rooms");
+        for (i = 0; i < randomRooms; i++)
+        {
+            SpawnRoomAndPuzzle(i, Random.Range(0, puzzleRooms.Length), Random.Range(0, puzzles.Length));
+        }
+        RpcTreasureRoom(i);
     }
 
 

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using Mirror;
 
 // ----- Low Poly FPS Pack Free Version -----
 public class AutomaticGunScriptLPFP : MonoBehaviour {
@@ -432,6 +433,7 @@ public class AutomaticGunScriptLPFP : MonoBehaviour {
 		//Inspect weapon when T key is pressed
 		if (inputManager.GetButtonDown("Inspect")) 
 		{
+			Debug.Log("ok then");
 			anim.SetTrigger ("Inspect");
 		}
 

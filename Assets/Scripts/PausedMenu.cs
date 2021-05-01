@@ -10,7 +10,7 @@ public class PausedMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        MirrorVariables.instance.SpawnPlayer();
+        //MirrorVariables.instance.SpawnPlayer();
         if (instance == null)
         {
             instance = this;

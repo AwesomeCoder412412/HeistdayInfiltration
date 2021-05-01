@@ -1,30 +1,29 @@
 ﻿<Properties StartupConfiguration="{D0DA94B4-F05B-33A0-D399-CC84D949F134}|">
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/MirrorVariables.cs">
     <Files>
-      <File FileName="Assets/Scripts/PausedMenu.cs" Line="13" Column="9" IsPinned="True" />
-      <File FileName="Assets/Low Poly FPS Pack - Free (Sample)/Components/Scripts/FPSController/FpsControllerLPFP.cs" Line="105" Column="24" IsPinned="True" />
+      <File FileName="Assets/Scripts/PausedMenu.cs" Line="13" Column="11" IsPinned="True" />
+      <File FileName="Assets/Low Poly FPS Pack - Free (Sample)/Components/Scripts/FPSController/FpsControllerLPFP.cs" IsPinned="True" />
       <File FileName="Assets/Scripts/GenerateRooms.cs" />
       <File FileName="Assets/Scripts/Treasure.cs" />
       <File FileName="Assets/Scripts/SimonSaysRipoff.cs" />
       <File FileName="Assets/Scripts/HealthManager.cs" />
-      <File FileName="Assets/Scripts/PlayerController.cs" Line="123" Column="17" />
+      <File FileName="Assets/Scripts/PlayerController.cs" />
       <File FileName="Assets/Scripts/LadderScript.cs" />
       <File FileName="Assets/Standard Assets/Characters/FirstPersonCharacter/Scripts/FirstPersonController.cs" />
       <File FileName="Assets/InputManager.cs" />
       <File FileName="Assets/Tank - Mark V drivable/Scripts/RayCastShoot.cs" />
-      <File FileName="Assets/Scripts/LookAtPlayer.cs" Line="1" Column="1" />
-      <File FileName="Assets/Nokobot/ModernGuns_Handgun/Demo Assets/SimpleShoot.cs" Line="38" Column="1" />
+      <File FileName="Assets/Scripts/LookAtPlayer.cs" />
+      <File FileName="Assets/Nokobot/ModernGuns_Handgun/Demo Assets/SimpleShoot.cs" />
       <File FileName="Assets/Scripts/GuardAI.cs" />
       <File FileName="Assets/Tank - Mark V drivable/Scripts/TankPlayerController.cs" />
       <File FileName="Assets/Mirror/Runtime/Transport/MiddlewareTransport.cs" />
       <File FileName="Assets/Scripts/JoinServer.cs" />
-      <File FileName="Assets/Scripts/PlayButton.cs" Line="35" Column="44" />
+      <File FileName="Assets/Scripts/PlayButton.cs" />
       <File FileName="Assets/Scripts/Retry.cs" />
       <File FileName="Assets/Scripts/GuardCreator.cs" />
       <File FileName="Assets/Scripts/TeamateSpawner.cs" />
       <File FileName="Assets/Scripts/TAAAAAAANK.cs" />
-      <File FileName="Assets/Scripts/DeathScreen.cs" Line="45" Column="71" />
-      <File FileName="Assets/Mirror/Runtime/NetworkManager.cs" Line="169" Column="1" />
+      <File FileName="Assets/Mirror/Runtime/NetworkManager.cs" />
       <File FileName="Assets/Scripts/RoomTrigger.cs" />
       <File FileName="Assets/Scripts/Resolution.cs" />
       <File FileName="Assets/Scripts/CubeMovement.cs" />
@@ -39,29 +38,46 @@
       <File FileName="Assets/Mirror/Examples/Chat/Scripts/ChatNetworkManager.cs" />
       <File FileName="Assets/Mirror/Runtime/NetworkServer.cs" />
       <File FileName="Assets/Mirror/Runtime/ClientScene.cs" />
-      <File FileName="Assets/Mirror/Runtime/NetworkIdentity.cs" />
       <File FileName="Assets/Mirror/Examples/MultipleMatches/Scripts/MatchNetworkManager.cs" />
-      <File FileName="Assets/Scripts/SetAudio.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/MirrorVariables.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/SetAudio.cs" />
+      <File FileName="Assets/Scripts/MirrorVariables.cs" Line="62" Column="13" />
+      <File FileName="Assets/Scripts/SwitchToStartScreen.cs" />
+      <File FileName="Assets/Scripts/NetworkedRigidbody.cs" />
+      <File FileName="Assets/Mirror/Examples/Tanks/Scripts/Tank.cs" />
+      <File FileName="Assets/Mirror/Examples/MultipleMatches/Scripts/MatchController.cs" />
+      <File FileName="Assets/Mirror/Components/NetworkAnimator.cs" />
+      <File FileName="Assets/Mirror/Runtime/CustomAttributes.cs" />
+      <File FileName="Assets/Mirror/Examples/MultipleAdditiveScenes/Scripts/PlayerScore.cs" />
+      <File FileName="Assets/Low Poly FPS Pack - Free (Sample)/Components/Scripts/Weapon_Scripts/AutomaticGunScriptLPFP.cs" />
+      <File FileName="Assets/Low Poly FPS Pack - Free (Sample)/Components/Scripts/Weapon_Scripts/HandgunScriptLPFP.cs" />
+      <File FileName="Assets/Scripts/RespawnPain.cs" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="Heistday - Infiltration" expanded="True">
-            <Node name="Assets" expanded="True">
+            <Node name="Assets" expanded="True" selected="True">
               <Node name="Low Poly FPS Pack - Free (Sample)" expanded="True">
                 <Node name="Components" expanded="True">
                   <Node name="Scripts" expanded="True">
                     <Node name="FPSController" expanded="True" />
+                    <Node name="Weapon_Scripts" expanded="True" />
                   </Node>
                 </Node>
               </Node>
               <Node name="Mirror" expanded="True">
+                <Node name="Components" expanded="True" />
                 <Node name="Examples" expanded="True">
                   <Node name="Chat" expanded="True">
                     <Node name="Scripts" expanded="True" />
                   </Node>
+                  <Node name="MultipleAdditiveScenes" expanded="True">
+                    <Node name="Scripts" expanded="True" />
+                  </Node>
                   <Node name="MultipleMatches" expanded="True">
+                    <Node name="Scripts" expanded="True" />
+                  </Node>
+                  <Node name="Tanks" expanded="True">
                     <Node name="Scripts" expanded="True" />
                   </Node>
                 </Node>
@@ -74,9 +90,7 @@
                   <Node name="Demo Assets" expanded="True" />
                 </Node>
               </Node>
-              <Node name="Scripts" expanded="True">
-                <Node name="MirrorVariables.cs" selected="True" />
-              </Node>
+              <Node name="Scripts" expanded="True" />
               <Node name="Standard Assets" expanded="True">
                 <Node name="Characters" expanded="True">
                   <Node name="FirstPersonCharacter" expanded="True">
@@ -95,7 +109,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="f21b3e90-baea-48a5-9183-f79d442faf44" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="e98162f2-5edf-4cd1-acba-2de29757e0f4" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

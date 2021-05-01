@@ -18,9 +18,9 @@ public class GuardCreator : MonoBehaviour
         int guardsLeft = guards;
         for (int i = 0; i < guardArray.Length; i++)
         {
-            if (guardsLeft <= 0)
+            if (guardsLeft > 0)
             {
-                guardArray[i].SetActive(false);
+                guardArray[i].SetActive(true);
             }
             guardsLeft--;
         }

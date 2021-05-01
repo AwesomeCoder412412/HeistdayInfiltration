@@ -125,11 +125,13 @@
     <Compile Include="Assets\Scripts\PlayButton.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Resolution.cs" />
+    <Compile Include="Assets\Scripts\RespawnPain.cs" />
     <Compile Include="Assets\Scripts\Retry.cs" />
     <Compile Include="Assets\Scripts\RoomTrigger.cs" />
     <Compile Include="Assets\Scripts\ScoreManager.cs" />
     <Compile Include="Assets\Scripts\SetAudio.cs" />
     <Compile Include="Assets\Scripts\SimonSaysRipoff.cs" />
+    <Compile Include="Assets\Scripts\SwitchToStartScreen.cs" />
     <Compile Include="Assets\Scripts\TAAAAAAANK.cs" />
     <Compile Include="Assets\Scripts\TeamateSpawner.cs" />
     <Compile Include="Assets\Scripts\Treasure.cs" />

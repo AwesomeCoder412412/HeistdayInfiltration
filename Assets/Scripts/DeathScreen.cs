@@ -24,9 +24,9 @@ public class DeathScreen : NetworkBehaviour
     }
     public void Retry()
     {
-        MirrorVariables.instance.spawnNewPlayer = true;
+       /* MirrorVariables.instance.spawnNewPlayer = true;
         SceneManager.LoadScene("Networking");
-        Time.timeScale = 1.0f;
+        Time.timeScale = 1.0f; */
     }
     public IEnumerator RetryCoroutine()
     {

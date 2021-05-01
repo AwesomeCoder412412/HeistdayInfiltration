@@ -592,6 +592,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Guard (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 3668790011915657183, guid: 598d35402af944257ac5d0f1c77e1e87,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4152874932244284773, guid: 598d35402af944257ac5d0f1c77e1e87,
         type: 3}
       propertyPath: m_RootOrder
@@ -693,6 +698,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Guard (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3668790011915657183, guid: 598d35402af944257ac5d0f1c77e1e87,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4152874932244284773, guid: 598d35402af944257ac5d0f1c77e1e87,
         type: 3}
       propertyPath: m_RootOrder
@@ -788,6 +798,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Guard (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3668790011915657183, guid: 598d35402af944257ac5d0f1c77e1e87,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4152874932244284773, guid: 598d35402af944257ac5d0f1c77e1e87,
         type: 3}
@@ -1409,6 +1424,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Guard (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 3668790011915657183, guid: 598d35402af944257ac5d0f1c77e1e87,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4152874932244284773, guid: 598d35402af944257ac5d0f1c77e1e87,
         type: 3}
       propertyPath: m_RootOrder
@@ -1504,6 +1524,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Guard
+      objectReference: {fileID: 0}
+    - target: {fileID: 3668790011915657183, guid: 598d35402af944257ac5d0f1c77e1e87,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4152874932244284773, guid: 598d35402af944257ac5d0f1c77e1e87,
         type: 3}

@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
         {
             Debug.LogError("Already an instance of the PlayerController class!");
         }
+        PausedMenu.instance.pauseMenu.SetActive(false);
     }
     InputManager inputManager;
     private void OnTriggerEnter(Collider other)
@@ -104,9 +105,13 @@ public class PlayerController : MonoBehaviour
         
         if (inputManager.GetButtonDown("Pause"))
         {
-            Time.timeScale = 0f;
+            if (NetworkManager.singleton.numPlayers < 2)
+            {
+                Time.timeScale = 0f;
+            }
             PausedMenu.instance.pauseMenu.SetActive(true);
             isPaused = true;
+            MirrorVariables.instance.SyncVarTest();
         }
         if (isPaused)
         {
@@ -118,15 +123,16 @@ public class PlayerController : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.T))
             {
-                MirrorVariables.instance.spawnNewPlayer = true;
-                MirrorVariables.instance.playersPain = NetworkManager.singleton.numPlayers;
-                SceneManager.LoadScene("Networking");
+                MirrorVariables.instance.Respawn();
+                //MirrorVariables.instance.spawnNewPlayer = true;
+                //MirrorVariables.instance.playersPain = NetworkManager.singleton.numPlayers;
+                //SceneManager.LoadScene("Networking");
                 /*retry = 1;
                 PlayerPrefs.SetInt(retry1, retry);
                 SceneManager.LoadScene("StartScreen");*/
                 //PlayButton.instance.PlayExpress();
                 //SceneManager.LoadScene("Networking");
-                Time.timeScale = 1.0f;
+                //Time.timeScale = 1.0f;
             }
             if (Input.GetKeyDown(KeyCode.M))
             {

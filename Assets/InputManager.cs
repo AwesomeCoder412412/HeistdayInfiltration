@@ -4,6 +4,8 @@ using System.Linq;
 
 public class InputManager : MonoBehaviour {
 
+    public GameObject storage;
+
     void OnEnable()
     {
         buttonKeys = new Dictionary<string, KeyCode>();
@@ -24,8 +26,11 @@ public class InputManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
     {
-        
-	}
+        /*if (!storage.activeInHierarchy)
+        {
+            storage.SetActive(true);
+        }*/
+    }
 
     Dictionary<string, KeyCode> buttonKeys;
 	
@@ -33,6 +38,7 @@ public class InputManager : MonoBehaviour {
 	void Update () 
     {
         DontDestroyOnLoad(gameObject);
+        
 	}
 
     public bool GetButtonDown( string buttonName )
