@@ -4,12 +4,13 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Mirror;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : NetworkBehaviour
 {
     public bool ladderTouched = false;
     public float ladderSpeed = 0.7f;
+    [SyncVar]
     public int roomIndex = 0;
-    public static PlayerController instance;
+    //public static PlayerController instance;
     public GameObject knife;
     public GameObject bullet;
     public int retry;
@@ -24,14 +25,6 @@ public class PlayerController : MonoBehaviour
         //Physics.IgnoreCollision(bullet.GetComponent<Collider>(), knife.GetComponent<Collider>());
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Debug.LogError("Already an instance of the PlayerController class!");
-        }
         PausedMenu.instance.pauseMenu.SetActive(false);
     }
     InputManager inputManager;
@@ -79,6 +72,13 @@ public class PlayerController : MonoBehaviour
             HealthManager.instance.RemoveHeart();
         }
     }
+
+    [Command(ignoreAuthority = true)]
+    public void CmdIncrementRoomIndex()
+    {
+        roomIndex++;
+    }
+
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.CompareTag("Ladder"))
@@ -95,7 +95,6 @@ public class PlayerController : MonoBehaviour
             SceneManager.LoadScene("DeathScreen");
         }
         //Debug.Log(instance != null);
-        instance = this;
         //Cursor.visible = false;
         //Cursor.lockState = CursorLockMode.Locked;
         if (ladderTouched == true)

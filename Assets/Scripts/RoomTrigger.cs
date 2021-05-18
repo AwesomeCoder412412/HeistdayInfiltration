@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FPSControllerLPFP;
 
 public class RoomTrigger : MonoBehaviour
 {
@@ -14,9 +15,9 @@ public class RoomTrigger : MonoBehaviour
     {
         if (!opened)
         {
-            if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Tank"))
+            if (other.gameObject.CompareTag("Player") && other.gameObject.GetComponent<FpsControllerLPFP>().isLocalPlayer || other.gameObject.CompareTag("Tank") && other.gameObject.GetComponent<FpsControllerLPFP>().isLocalPlayer)
             {
-                PlayerController.instance.roomIndex++;
+                other.gameObject.GetComponent<PlayerController>().CmdIncrementRoomIndex();
                 opened = true;
             }
         }

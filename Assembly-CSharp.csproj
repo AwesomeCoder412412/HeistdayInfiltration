@@ -154,6 +154,7 @@
     <Compile Include="Assets\Tank - Mark V drivable\Scripts\TracksControler.cs" />
     <None Include="Assets\Free Low Poly Desert Pack\Materials\Shaders\Vertex_Color_Unlit.shader" />
     <None Include="Assets\ScriptTemplates\51-Mirror__Network Authenticator-NewNetworkAuthenticator.cs.txt" />
+    <None Include="Assets\Graphy - Ultimate Stats Monitor\Changelog.txt" />
     <None Include="Assets\Free Low Poly Desert Pack\Materials\Shaders\Vertex_Color_Basic.shader" />
     <None Include="Assets\ScriptTemplates\53-Mirror__Network Observer-NewNetworkObserver.cs.txt" />
     <None Include="Assets\Sketchfab For Unity\Dependencies\Shaders\GLTFLinear2sRGB.shader" />
@@ -162,16 +163,20 @@
     <None Include="Assets\SampleScenes\Shaders\Skybox-Procedural.shader" />
     <None Include="Assets\Sketchfab For Unity\Dependencies\Shaders\GLTFBumpToNormal.shader" />
     <None Include="Assets\Sketchfab For Unity\Dependencies\Shaders\GLTFPackOccMetalRough.shader" />
+    <None Include="Assets\Graphy - Ultimate Stats Monitor\Shaders\GraphMobile.shader" />
     <None Include="Assets\Mirror\Version.txt" />
     <None Include="Assets\Mirror\Readme.txt" />
     <None Include="Assets\Rebindable Input\How To Use.txt" />
+    <None Include="Assets\Graphy - Ultimate Stats Monitor\Font\Northwest-Bold\ERIC-TIRADO-NORTHWEST-LICENSE.txt" />
     <None Include="Assets\ScriptTemplates\52-Mirror__Network Behaviour-NewNetworkBehaviour.cs.txt" />
     <None Include="Assets\Tank - Mark V drivable\Read me.txt" />
     <None Include="Assets\Mirror\Notice.txt" />
     <None Include="Assets\Sketchfab For Unity\Dependencies\Shaders\GLTFFlipTexture.shader" />
     <None Include="Assets\Sketchfab For Unity\Dependencies\Shaders\GLTFColorSpace.cginc" />
     <None Include="Assets\Mirror\Plugins\Mono.Cecil\License.txt" />
+    <None Include="Assets\Graphy - Ultimate Stats Monitor\Font\Roboto\LICENSE.txt" />
     <None Include="Assets\ScriptTemplates\55-Mirror__Network Room Player-NewNetworkRoomPlayer.cs.txt" />
+    <None Include="Assets\Graphy - Ultimate Stats Monitor\Shaders\GraphStandard.shader" />
     <None Include="Assets\Low Poly Helicopters Pack Free\Shaders\UnlitShadow.shader" />
     <None Include="Assets\ScriptTemplates\50-Mirror__Network Manager-NewNetworkManager.cs.txt" />
     <None Include="Assets\ScriptTemplates\54-Mirror__Network Room Manager-NewNetworkRoomManager.cs.txt" />
@@ -819,6 +824,10 @@
       <Project>{3C6E7AFF-9153-3A5B-C8A9-A3C96A28159D}</Project>
       <Name>Mirror.Examples.Cloud.Pong</Name>
     </ProjectReference>
+    <ProjectReference Include="Tayx.Graphy.Editor.csproj">
+      <Project>{BE6DA2B6-DF21-2B8F-BCC3-5C62F0325CA4}</Project>
+      <Name>Tayx.Graphy.Editor</Name>
+    </ProjectReference>
     <ProjectReference Include="Mirror.csproj">
       <Project>{17A9C62A-4E73-C513-1DD7-FE3CF8906365}</Project>
       <Name>Mirror</Name>
@@ -834,6 +843,10 @@
     <ProjectReference Include="Mirror.Examples.Cloud.GUI.csproj">
       <Project>{491CE233-2BBD-F629-0D43-79AEB5AA5079}</Project>
       <Name>Mirror.Examples.Cloud.GUI</Name>
+    </ProjectReference>
+    <ProjectReference Include="Tayx.Graphy.csproj">
+      <Project>{827C37BB-0780-44B7-FC1A-FC4A89F8FFD7}</Project>
+      <Name>Tayx.Graphy</Name>
     </ProjectReference>
     <ProjectReference Include="SimpleWebTransport.csproj">
       <Project>{6CC3C9F4-1703-A00B-C4EA-C72DA480E682}</Project>

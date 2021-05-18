@@ -1,9 +1,8 @@
 ﻿<Properties StartupConfiguration="{D0DA94B4-F05B-33A0-D399-CC84D949F134}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/MirrorVariables.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Low Poly FPS Pack - Free (Sample)/Components/Scripts/FPSController/FpsControllerLPFP.cs">
     <Files>
       <File FileName="Assets/Scripts/PausedMenu.cs" Line="13" Column="11" IsPinned="True" />
-      <File FileName="Assets/Low Poly FPS Pack - Free (Sample)/Components/Scripts/FPSController/FpsControllerLPFP.cs" IsPinned="True" />
-      <File FileName="Assets/Scripts/GenerateRooms.cs" />
+      <File FileName="Assets/Low Poly FPS Pack - Free (Sample)/Components/Scripts/FPSController/FpsControllerLPFP.cs" Line="182" Column="1" IsPinned="True" />
       <File FileName="Assets/Scripts/Treasure.cs" />
       <File FileName="Assets/Scripts/SimonSaysRipoff.cs" />
       <File FileName="Assets/Scripts/HealthManager.cs" />
@@ -40,7 +39,7 @@
       <File FileName="Assets/Mirror/Runtime/ClientScene.cs" />
       <File FileName="Assets/Mirror/Examples/MultipleMatches/Scripts/MatchNetworkManager.cs" />
       <File FileName="Assets/Scripts/SetAudio.cs" />
-      <File FileName="Assets/Scripts/MirrorVariables.cs" Line="62" Column="13" />
+      <File FileName="Assets/Scripts/MirrorVariables.cs" />
       <File FileName="Assets/Scripts/SwitchToStartScreen.cs" />
       <File FileName="Assets/Scripts/NetworkedRigidbody.cs" />
       <File FileName="Assets/Mirror/Examples/Tanks/Scripts/Tank.cs" />
@@ -51,6 +50,10 @@
       <File FileName="Assets/Low Poly FPS Pack - Free (Sample)/Components/Scripts/Weapon_Scripts/AutomaticGunScriptLPFP.cs" />
       <File FileName="Assets/Low Poly FPS Pack - Free (Sample)/Components/Scripts/Weapon_Scripts/HandgunScriptLPFP.cs" />
       <File FileName="Assets/Scripts/RespawnPain.cs" />
+      <File FileName="Assets/Scripts/GenerateRooms.cs" />
+      <File FileName="Assets/Mirror/Runtime/Transport/TelepathyTransport.cs" />
+      <File FileName="Assets/Scripts/DeathScreen.cs" />
+      <File FileName="Assets/Mirror/Runtime/Logging/LogFactory.cs" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -61,46 +64,16 @@
                 <Node name="Components" expanded="True">
                   <Node name="Scripts" expanded="True">
                     <Node name="FPSController" expanded="True" />
-                    <Node name="Weapon_Scripts" expanded="True" />
                   </Node>
                 </Node>
               </Node>
               <Node name="Mirror" expanded="True">
-                <Node name="Components" expanded="True" />
-                <Node name="Examples" expanded="True">
-                  <Node name="Chat" expanded="True">
-                    <Node name="Scripts" expanded="True" />
-                  </Node>
-                  <Node name="MultipleAdditiveScenes" expanded="True">
-                    <Node name="Scripts" expanded="True" />
-                  </Node>
-                  <Node name="MultipleMatches" expanded="True">
-                    <Node name="Scripts" expanded="True" />
-                  </Node>
-                  <Node name="Tanks" expanded="True">
-                    <Node name="Scripts" expanded="True" />
-                  </Node>
-                </Node>
                 <Node name="Runtime" expanded="True">
+                  <Node name="Logging" expanded="True" />
                   <Node name="Transport" expanded="True" />
                 </Node>
               </Node>
-              <Node name="Nokobot" expanded="True">
-                <Node name="ModernGuns_Handgun" expanded="True">
-                  <Node name="Demo Assets" expanded="True" />
-                </Node>
-              </Node>
               <Node name="Scripts" expanded="True" />
-              <Node name="Standard Assets" expanded="True">
-                <Node name="Characters" expanded="True">
-                  <Node name="FirstPersonCharacter" expanded="True">
-                    <Node name="Scripts" expanded="True" />
-                  </Node>
-                </Node>
-              </Node>
-              <Node name="Tank - Mark V drivable" expanded="True">
-                <Node name="Scripts" expanded="True" />
-              </Node>
             </Node>
           </Node>
         </State>
@@ -109,9 +82,11 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="e98162f2-5edf-4cd1-acba-2de29757e0f4" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="df4bccbb-0bb9-4dce-995f-72d236ac3f65" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/jacksegil/Heistday - Infiltration/Assets/Scripts/GenerateRooms.cs" relfile="Assets/Scripts/GenerateRooms.cs" line="50" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />
 </Properties>

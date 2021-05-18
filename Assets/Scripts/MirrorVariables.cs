@@ -8,10 +8,17 @@ public class MirrorVariables : NetworkBehaviour
 {
     public static MirrorVariables instance;
     public NetworkConnection conn;
+    public int minRooms = 5;
+    public int maxRooms = 10;
     public bool spawnNewPlayer = false;
     public int playersPain;
+    public BoxCollider puzzleDoor;
+    public GameObject buttonsGalore;
+    public int n;
     [SyncVar]
     public bool rpcNoWork = false;
+    private string minRoom = "minRoom";
+    private string maxRoom = "maxRoom";
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +29,22 @@ public class MirrorVariables : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Networking") && n < 2)
+        {
+            minRooms = PlayerPrefs.GetInt(minRoom);
+            maxRooms = PlayerPrefs.GetInt(maxRoom);
+            int randomRooms = Random.Range(minRooms, maxRooms);
+            int i = 0;
+            Debug.Log(randomRooms + " random rooms");
+            for (i = 0; i < randomRooms; i++)
+            {
+                Debug.Log("I'm in the loop " + i);
+                GenerateRoomsLazy(i, Random.Range(0, GenerateRooms.instance.puzzleRooms.Length), Random.Range(0, GenerateRooms.instance.puzzles.Length));
+            }
+            TreasureAhoy(i);
+            n++;
+        }
+        Debug.Log(GenerateRooms.instance.roomWidth + " pog");
        /*/ if (gameObject.scene.buildIndex != -1)
         {
             DontDestroyOnLoad(gameObject);
@@ -49,6 +72,16 @@ public class MirrorVariables : NetworkBehaviour
     {
         RpcRespawn();
     }
+    [Command(ignoreAuthority = true)]
+    public void CmdGenerateRooms(int i, int roomPrefabIndex, int puzzlePrefabIndex)
+    {
+        RpcGenerateRoomsLazy(i, roomPrefabIndex, puzzlePrefabIndex);
+    }
+    [Command(ignoreAuthority = true)]
+    public void CmdGenerateTreasure(int i)
+    {
+        RpcTreasureRoomLazy(i);
+    }
     [ClientRpc]
     public void RpcRespawn()
     {
@@ -66,7 +99,7 @@ public class MirrorVariables : NetworkBehaviour
     public IEnumerator RespawnHost()
     {
         Debug.Log("yield return bug");
-        yield return new WaitForSecondsRealtime(2);
+        yield return new WaitForSecondsRealtime(0.5f);
         //rpcNoWork = true;
         Debug.Log("not stopped");
         NetworkManager.singleton.StopHost();
@@ -90,8 +123,33 @@ public class MirrorVariables : NetworkBehaviour
         Debug.Log(NetworkManager.singleton.networkAddress + "gummies3");
     }
 
+    [ClientRpc]
+    public void RpcGenerateRoomsLazy(int i, int roomPrefabIndex, int puzzlePrefabIndex)
+    {
+        Debug.Log("spawn room " + i);
+        GameObject room = Instantiate(GenerateRooms.instance.puzzleRooms[roomPrefabIndex], Vector3.forward * GenerateRooms.instance.roomWidth * i, GenerateRooms.instance.puzzleRooms[roomPrefabIndex].transform.rotation);
+        GameObject puzzle = Instantiate(GenerateRooms.instance.puzzles[puzzlePrefabIndex], Vector3.forward * GenerateRooms.instance.roomWidth * i, GenerateRooms.instance.puzzles[puzzlePrefabIndex].transform.rotation);
+        room.GetComponentInChildren<OpenPuzzle>().puzzleCanvas = puzzle;
+        if (isServer)
+        {
+            GuardAI[] enemies = room.GetComponentsInChildren<GuardAI>();
+            foreach (GuardAI ai in enemies)
+            {
+                ai.roomIndex = i;
+                NetworkServer.Spawn(ai.gameObject);
+            }
+        }
+    }
+
+    [ClientRpc]
+    public void RpcTreasureRoomLazy(int i)
+    {
+        GameObject treasureRoomInstance = Instantiate(GenerateRooms.instance.treasureRoom, Vector3.forward * GenerateRooms.instance.roomWidth * i, GenerateRooms.instance.treasureRoom.transform.rotation);
+    }
+
     public void Respawn()
     {
+        Debug.Log("I'm being called yay");
         CmdRespawn();
     }
 
@@ -100,7 +158,39 @@ public class MirrorVariables : NetworkBehaviour
         rpcNoWork = true;
     }
 
+    public void TreasureAhoy(int i)
+    {
+        CmdGenerateTreasure(i);
+    }
 
+    public void GenerateRoomsLazy(int i, int roomPrefabIndex, int puzzlePrefabIndex)
+    {
+        CmdGenerateRooms(i, roomPrefabIndex, puzzlePrefabIndex);
+    }
+    public void UnlockDoor()
+    {
+        Debug.Log("functionfruit");
+        CmdUnlockDoor();
+    }
+    [Command(ignoreAuthority = true)]
+    public void CmdUnlockDoor()
+    {
+        Debug.Log("functioncmd");
+        buttonsGalore.GetComponent<OpenPuzzle>().didPuzzle = true;
+        foreach (PlayerController pc in GameObject.FindObjectsOfType<PlayerController>())
+        {
+            pc.roomIndex++;
+        }
+        RpcUnlockDoor();
+    }
+    [ClientRpc]
+    public void RpcUnlockDoor()
+    {
+        Debug.Log("beforeunlock");
+        puzzleDoor.enabled = false;
+        Debug.Log("after unlock");
+    }
+    
     /*public void SpawnPlayer()
     {
         if (spawnNewPlayer && isServer)

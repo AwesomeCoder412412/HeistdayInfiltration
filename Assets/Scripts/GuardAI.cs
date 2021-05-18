@@ -191,10 +191,17 @@ public class GuardAI : NetworkBehaviour
                         }
                         //Debug.Log(enemy.GetComponent<GuardAI>() != null);
                        // Debug.Log(PlayerController.instance != null);
-                        if (enemy.GetComponent<GuardAI>() != null && enemy.GetComponent<GuardAI>().roomIndex == PlayerController.instance.roomIndex)
+                       foreach (PlayerController pc in GameObject.FindObjectsOfType<PlayerController>())
                         {
-                            enemiesList.Add(enemy);
+                            if (pc.isServer)
+                            {
+                                if (enemy.GetComponent<GuardAI>() != null && enemy.GetComponent<GuardAI>().roomIndex == pc.roomIndex)
+                                {
+                                    enemiesList.Add(enemy);
+                                }
+                            }
                         }
+                        
                     }
                     if (enemiesList.Count > 0)
                     {

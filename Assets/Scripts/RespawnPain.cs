@@ -20,7 +20,7 @@ public class RespawnPain : MonoBehaviour
     {
         if (counting)
         {
-            if (time > 4)
+            if (time > 1)
             {
                 NetworkManager.singleton.StartClient();
                 Debug.Log(NetworkManager.singleton.networkAddress + "gummies3");

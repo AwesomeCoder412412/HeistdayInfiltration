@@ -12,11 +12,19 @@ public class GenerateRooms : NetworkBehaviour
     public GameObject treasureRoom;
     public int minRooms = 5;
     public int maxRooms = 10;
+    public static GenerateRooms instance;
+    public GameObject storage;
 
     public float roomWidth;
-    
 
-    public void SpawnRoomAndPuzzle(int i, int roomPrefabIndex, int puzzlePrefabIndex)
+    [ClientRpc]
+    public void RpcTest()
+    {
+        Debug.Log("testrpc works");
+    }
+
+    [ClientRpc]
+    public void RpcSpawnRoomAndPuzzle(int i, int roomPrefabIndex, int puzzlePrefabIndex)
     {
         Debug.Log("spawn room " + i);
         GameObject room = Instantiate(puzzleRooms[roomPrefabIndex], Vector3.forward * roomWidth * i, puzzleRooms[roomPrefabIndex].transform.rotation);
@@ -40,19 +48,28 @@ public class GenerateRooms : NetworkBehaviour
 
     private void Start()
     {
+        instance = this;
         if (!isServer)
         {
             return;
         }
+
         Debug.Log("Calling Start");
         minRooms = PlayerPrefs.GetInt(minRoom);
         maxRooms = PlayerPrefs.GetInt(maxRoom);
         int randomRooms = Random.Range(minRooms, maxRooms);
         int i = 0;
         Debug.Log(randomRooms + " random rooms");
+        RpcTest();
+        if (!storage.activeInHierarchy)
+        {
+            Debug.Log("inactive");
+            storage.SetActive(true);
+        }
         for (i = 0; i < randomRooms; i++)
         {
-            SpawnRoomAndPuzzle(i, Random.Range(0, puzzleRooms.Length), Random.Range(0, puzzles.Length));
+            Debug.Log("I'm in the loop " + i);
+            MirrorVariables.instance.GenerateRoomsLazy(i, Random.Range(0, puzzleRooms.Length), Random.Range(0, puzzles.Length));
         }
         RpcTreasureRoom(i);
     }

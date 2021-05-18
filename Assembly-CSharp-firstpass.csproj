@@ -835,6 +835,10 @@
       <Project>{3C6E7AFF-9153-3A5B-C8A9-A3C96A28159D}</Project>
       <Name>Mirror.Examples.Cloud.Pong</Name>
     </ProjectReference>
+    <ProjectReference Include="Tayx.Graphy.Editor.csproj">
+      <Project>{BE6DA2B6-DF21-2B8F-BCC3-5C62F0325CA4}</Project>
+      <Name>Tayx.Graphy.Editor</Name>
+    </ProjectReference>
     <ProjectReference Include="Mirror.csproj">
       <Project>{17A9C62A-4E73-C513-1DD7-FE3CF8906365}</Project>
       <Name>Mirror</Name>
@@ -850,6 +854,10 @@
     <ProjectReference Include="Mirror.Examples.Cloud.GUI.csproj">
       <Project>{491CE233-2BBD-F629-0D43-79AEB5AA5079}</Project>
       <Name>Mirror.Examples.Cloud.GUI</Name>
+    </ProjectReference>
+    <ProjectReference Include="Tayx.Graphy.csproj">
+      <Project>{827C37BB-0780-44B7-FC1A-FC4A89F8FFD7}</Project>
+      <Name>Tayx.Graphy</Name>
     </ProjectReference>
     <ProjectReference Include="SimpleWebTransport.csproj">
       <Project>{6CC3C9F4-1703-A00B-C4EA-C72DA480E682}</Project>

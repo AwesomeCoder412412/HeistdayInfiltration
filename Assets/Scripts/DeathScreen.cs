@@ -10,10 +10,13 @@ public class DeathScreen : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (PlayerController.instance.isPaused == false)
+        foreach (PlayerController pc in GameObject.FindObjectsOfType<PlayerController>())
         {
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
+            if (pc.isLocalPlayer && !pc.isPaused)
+            {
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+            }
         }
     }
     public void MainMenu()
@@ -46,8 +49,14 @@ public class DeathScreen : NetworkBehaviour
     }
     public void Resume()
     {
+        foreach (PlayerController pc in GameObject.FindObjectsOfType<PlayerController>())
+        {
+            if (pc.isLocalPlayer)
+            {
+                pc.isPaused = false;
+            }
+        }
         Time.timeScale = 1.0f;
-        PlayerController.instance.isPaused = false;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
