@@ -672,7 +672,7 @@ ScriptsOnlyBuild:
     className: TMP_Dropdown
   - hash:
       serializedVersion: 2
-      Hash: 4af9485e5375be12c6edfe934f59fb8d
+      Hash: 1c15447ca890615ed3b92195e1fc705f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: MirrorVariables
@@ -2424,7 +2424,7 @@ ScriptsOnlyBuild:
     className: NetworkTransform
   - hash:
       serializedVersion: 2
-      Hash: b5319e5b4880bf14971d7ad6cfc45a6c
+      Hash: 657bd076422344af251f7f047c333685
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: OpenPuzzle

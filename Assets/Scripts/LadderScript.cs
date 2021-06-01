@@ -18,6 +18,7 @@ public class LadderScript : MonoBehaviour
         {
             Debug.LogError("Already a instance of the LadderScript script");
         }
+        MirrorVariables.instance.c = true;
     }
 
     // Update is called once per frame

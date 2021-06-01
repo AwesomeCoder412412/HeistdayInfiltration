@@ -72,6 +72,7 @@ public class GenerateRooms : NetworkBehaviour
             MirrorVariables.instance.GenerateRoomsLazy(i, Random.Range(0, puzzleRooms.Length), Random.Range(0, puzzles.Length));
         }
         RpcTreasureRoom(i);
+        //MirrorVariables.instance.c = false;
     }
 
 

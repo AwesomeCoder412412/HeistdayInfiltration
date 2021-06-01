@@ -6,9 +6,10 @@ using FPSControllerLPFP;
 
 public class OpenPuzzle : NetworkBehaviour
 {
-    [SyncVar]
+    //[SyncVar]
     public bool didPuzzle = false;
-    public GameObject meMyselfAndI; 
+    public GameObject meMyselfAndI;
+    public int savior = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,12 +22,14 @@ public class OpenPuzzle : NetworkBehaviour
             Debug.Log(gameObject.name + " puzzle name");
             Cursor.visible = true;
             ScoreManager.score += 50;
-            //boxCollider.enabled = false;
+            boxCollider.enabled = false;
             puzzleCanvas.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
             MirrorVariables.instance.buttonsGalore = meMyselfAndI;
             MirrorVariables.instance.puzzleDoor = boxCollider;
             MirrorVariables.instance.UnlockDoor();
+            didPuzzle = true;
+            savior++;
             //CmdPuzzleSync();
             //PlayerController.instance.roomIndex++;
             //didPuzzle = true;
@@ -34,6 +37,8 @@ public class OpenPuzzle : NetworkBehaviour
         if ((other.gameObject.CompareTag("Player") && !didPuzzle && !other.gameObject.GetComponent<FpsControllerLPFP>().isLocalPlayer) || other.gameObject.CompareTag("Tank") && !didPuzzle)
         {
             Debug.Log("apples");
+            didPuzzle = true;
+            boxCollider.enabled = false;
             MirrorVariables.instance.buttonsGalore = meMyselfAndI;
             MirrorVariables.instance.puzzleDoor = boxCollider;
         }
@@ -41,7 +46,10 @@ public class OpenPuzzle : NetworkBehaviour
         // Update is called once per frame
         void Update()
     {
-        
+        if(savior >= 2)
+        {
+            puzzleCanvas.SetActive(false);
+        }
     }
     [Command(ignoreAuthority = true)]
     public void CmdPuzzleSync()

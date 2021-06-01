@@ -1,8 +1,8 @@
 ﻿<Properties StartupConfiguration="{D0DA94B4-F05B-33A0-D399-CC84D949F134}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Low Poly FPS Pack - Free (Sample)/Components/Scripts/FPSController/FpsControllerLPFP.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/MirrorVariables.cs">
     <Files>
       <File FileName="Assets/Scripts/PausedMenu.cs" Line="13" Column="11" IsPinned="True" />
-      <File FileName="Assets/Low Poly FPS Pack - Free (Sample)/Components/Scripts/FPSController/FpsControllerLPFP.cs" Line="182" Column="1" IsPinned="True" />
+      <File FileName="Assets/Low Poly FPS Pack - Free (Sample)/Components/Scripts/FPSController/FpsControllerLPFP.cs" IsPinned="True" />
       <File FileName="Assets/Scripts/Treasure.cs" />
       <File FileName="Assets/Scripts/SimonSaysRipoff.cs" />
       <File FileName="Assets/Scripts/HealthManager.cs" />
@@ -26,7 +26,7 @@
       <File FileName="Assets/Scripts/RoomTrigger.cs" />
       <File FileName="Assets/Scripts/Resolution.cs" />
       <File FileName="Assets/Scripts/CubeMovement.cs" />
-      <File FileName="Assets/Scripts/OpenPuzzle.cs" />
+      <File FileName="Assets/Scripts/OpenPuzzle.cs" Line="51" Column="43" />
       <File FileName="Assets/Mirror/Runtime/NetworkManagerHUD.cs" />
       <File FileName="Assets/Mirror/Examples/MultipleMatches/Scripts/CanvasController.cs" />
       <File FileName="Assets/Mirror/Runtime/NetworkClient.cs" />
@@ -39,7 +39,7 @@
       <File FileName="Assets/Mirror/Runtime/ClientScene.cs" />
       <File FileName="Assets/Mirror/Examples/MultipleMatches/Scripts/MatchNetworkManager.cs" />
       <File FileName="Assets/Scripts/SetAudio.cs" />
-      <File FileName="Assets/Scripts/MirrorVariables.cs" />
+      <File FileName="Assets/Scripts/MirrorVariables.cs" Line="180" Column="11" />
       <File FileName="Assets/Scripts/SwitchToStartScreen.cs" />
       <File FileName="Assets/Scripts/NetworkedRigidbody.cs" />
       <File FileName="Assets/Mirror/Examples/Tanks/Scripts/Tank.cs" />
@@ -59,7 +59,7 @@
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="Heistday - Infiltration" expanded="True">
-            <Node name="Assets" expanded="True" selected="True">
+            <Node name="Assets" expanded="True">
               <Node name="Low Poly FPS Pack - Free (Sample)" expanded="True">
                 <Node name="Components" expanded="True">
                   <Node name="Scripts" expanded="True">
@@ -73,7 +73,9 @@
                   <Node name="Transport" expanded="True" />
                 </Node>
               </Node>
-              <Node name="Scripts" expanded="True" />
+              <Node name="Scripts" expanded="True">
+                <Node name="LadderScript.cs" selected="True" />
+              </Node>
             </Node>
           </Node>
         </State>
@@ -82,7 +84,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="df4bccbb-0bb9-4dce-995f-72d236ac3f65" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="e6f01f75-f90d-41f2-a226-9d1f2e957d22" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint file="/Users/jacksegil/Heistday - Infiltration/Assets/Scripts/GenerateRooms.cs" relfile="Assets/Scripts/GenerateRooms.cs" line="50" column="1" />

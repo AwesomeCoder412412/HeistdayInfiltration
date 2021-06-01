@@ -24,6 +24,7 @@ TagManager:
   - EnemyGun
   - Tank
   - PauseMenu
+  - Treasure
   layers:
   - Default
   - TransparentFX

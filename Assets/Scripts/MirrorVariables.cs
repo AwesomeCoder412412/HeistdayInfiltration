@@ -12,11 +12,14 @@ public class MirrorVariables : NetworkBehaviour
     public int maxRooms = 10;
     public bool spawnNewPlayer = false;
     public int playersPain;
+    public bool shouldOpen = false;
     public BoxCollider puzzleDoor;
     public GameObject buttonsGalore;
     public int n;
+    public bool c = false;
+    public GameObject treasureRoom;
     [SyncVar]
-    public bool rpcNoWork = false;
+    public bool rpcNoWork = true;
     private string minRoom = "minRoom";
     private string maxRoom = "maxRoom";
     // Start is called before the first frame update
@@ -29,8 +32,13 @@ public class MirrorVariables : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Networking") && n < 2)
+        treasureRoom = GameObject.FindGameObjectWithTag("Treasure");
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Networking") && !c)
         {
+            if  (n < 4)
+            {
+                n++;
+            }
             minRooms = PlayerPrefs.GetInt(minRoom);
             maxRooms = PlayerPrefs.GetInt(maxRoom);
             int randomRooms = Random.Range(minRooms, maxRooms);
@@ -42,7 +50,9 @@ public class MirrorVariables : NetworkBehaviour
                 GenerateRoomsLazy(i, Random.Range(0, GenerateRooms.instance.puzzleRooms.Length), Random.Range(0, GenerateRooms.instance.puzzles.Length));
             }
             TreasureAhoy(i);
-            n++;
+            //n++;
+            //c = true;
+
         }
         Debug.Log(GenerateRooms.instance.roomWidth + " pog");
        /*/ if (gameObject.scene.buildIndex != -1)
@@ -176,17 +186,19 @@ public class MirrorVariables : NetworkBehaviour
     public void CmdUnlockDoor()
     {
         Debug.Log("functioncmd");
-        buttonsGalore.GetComponent<OpenPuzzle>().didPuzzle = true;
+        //buttonsGalore.GetComponent<OpenPuzzle>().didPuzzle = true;
         foreach (PlayerController pc in GameObject.FindObjectsOfType<PlayerController>())
         {
             pc.roomIndex++;
         }
-        RpcUnlockDoor();
+        //RpcUnlockDoor();
     }
     [ClientRpc]
     public void RpcUnlockDoor()
     {
+
         Debug.Log("beforeunlock");
+        shouldOpen = true;
         puzzleDoor.enabled = false;
         Debug.Log("after unlock");
     }
