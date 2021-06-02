@@ -1625,6 +1625,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 102458954e6f84c09ba7df2bc2d3f5f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   ladderTouched: 0
   ladderSpeed: 0.7
   roomIndex: 0
@@ -2527,7 +2529,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5472890, guid: 59320ed1ba3b61241bc6d7c0bb56b63e, type: 3}
       propertyPath: m_Constraints
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5472890, guid: 59320ed1ba3b61241bc6d7c0bb56b63e, type: 3}
       propertyPath: m_IsKinematic
@@ -2834,7 +2836,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1824681423
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3031,8 +3033,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  minRooms: 5
+  maxRooms: 10
   spawnNewPlayer: 0
   playersPain: 0
+  shouldOpen: 0
+  puzzleDoor: {fileID: 0}
+  buttonsGalore: {fileID: 0}
+  n: 0
+  c: 0
+  treasureRoom: {fileID: 0}
   rpcNoWork: 0
 --- !u!4 &1843429674
 Transform:
