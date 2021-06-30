@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class HealthManager : MonoBehaviour
 {
+    public GameObject teleportGoal;
+    public GameObject death;
     public static HealthManager instance;
     public List<GameObject> hearts;
     // Start is called before the first frame update
@@ -36,8 +38,18 @@ public class HealthManager : MonoBehaviour
 
             if (hearts.Count == 0)
             {
-                Cursor.lockState = CursorLockMode.None;
-                SceneManager.LoadScene("DeathScreen");
+                death.SetActive(true);
+                foreach (PlayerController pc in GameObject.FindObjectsOfType<PlayerController>())
+                {
+                    if (pc.isLocalPlayer)
+                    {
+                        pc.CmdTeleport(teleportGoal.transform.position);
+                    }
+                }
+                //Cursor.lockState = CursorLockMode.None;
+                //Cursor.visible = true;
+                //death.SetActive(true);
+                //SceneManager.LoadScene("DeathScreen");
             }
         }
 

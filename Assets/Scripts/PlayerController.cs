@@ -6,6 +6,8 @@ using Mirror;
 
 public class PlayerController : NetworkBehaviour
 {
+    [SyncVar]
+    public bool isDead;
     public bool ladderTouched = false;
     public float ladderSpeed = 0.7f;
     [SyncVar]
@@ -17,8 +19,10 @@ public class PlayerController : NetworkBehaviour
     public string retry1 = "retry1";
     //public GameObject pauseMenu;
     public bool isPaused;
+    public bool hasStarted = false;
     private void Start()
     {
+        Time.timeScale = 1.0f;
         inputManager = GameObject.FindObjectOfType<InputManager>();
         //Physics.IgnoreCollision(GetComponent<Collider>(), knife.GetComponent<Collider>());
         Physics.IgnoreCollision(GetComponent<Collider>(), bullet.GetComponent<Collider>());
@@ -30,13 +34,33 @@ public class PlayerController : NetworkBehaviour
     InputManager inputManager;
     private void OnTriggerEnter(Collider other)
     {
+        if (!isLocalPlayer)
+        {
+            return;
+        }
         if (other.gameObject.CompareTag("Laser"))
         {
             HealthManager.instance.RemoveHeart();
+            if (isServer)
+            {
+                RpcDebug("host hit by laser");
+            }
+            else
+            {
+                Debug.Log("client hit by laser");
+            }
         }
         if (other.gameObject.CompareTag("Bullet"))
         {
             HealthManager.instance.RemoveHeart();
+            if (isServer)
+            {
+                RpcDebug("host hit by bullet");
+            }
+            else
+            {
+                Debug.Log("client hit by bullet");
+            }
         }
         if (other.gameObject.CompareTag("Ladder"))
         {
@@ -61,15 +85,28 @@ public class PlayerController : NetworkBehaviour
                 }
                 ScoreManager.score += 200;
                 Cursor.lockState = CursorLockMode.None;
-                SceneManager.LoadScene("VictoryScreen");
+                MirrorVariables.instance.CmdVictory();
+                //SceneManager.LoadScene("VictoryScreen");
             }
         }
     }
     private void OnCollisionEnter(Collision collision)
     {
+        if (!isLocalPlayer)
+        {
+            return;
+        }
         if (collision.gameObject.CompareTag("Bullet"))
         {
             HealthManager.instance.RemoveHeart();
+            if (isServer)
+            {
+                RpcDebug("host hit by bullet");
+            }
+            else
+            {
+                Debug.Log("client hit by bullet");
+            }
         }
     }
 
@@ -84,8 +121,13 @@ public class PlayerController : NetworkBehaviour
         if (other.gameObject.CompareTag("Ladder"))
         {
             ladderTouched = false;
+            transform.position += new Vector3(0f, ladderSpeed, 0f);
             LadderScript.instance.roof.GetComponent<BoxCollider>().enabled = true;
         }
+    }
+    public IEnumerator HoldUp()
+    {
+        yield return new WaitForSeconds(2);
     }
     public void Update()
     {
@@ -101,7 +143,27 @@ public class PlayerController : NetworkBehaviour
         {
             transform.position += new Vector3(0f, ladderSpeed, 0f);
         }
-        
+
+        if (inputManager.GetButtonDown("Start") && isServer && !hasStarted && isLocalPlayer)
+        {
+            RpcDebug("call waitasecond " + gameObject.name);
+            MirrorVariables.instance.RoomsGo();
+           /* StartCoroutine(HoldUp());
+            foreach (GuardCreator gc in GameObject.FindObjectsOfType<GuardCreator>())
+            {
+                Debug.Log("being called");
+                StartCoroutine(gc.WaitASecond());
+
+            }*/
+            foreach (PlayerController pc in GameObject.FindObjectsOfType<PlayerController>())
+            {
+                pc.gameObject.transform.position = GameObject.FindGameObjectWithTag("Start").transform.position;
+            }
+            
+
+            hasStarted = true;
+        }
+
         if (inputManager.GetButtonDown("Pause"))
         {
             if (NetworkManager.singleton.numPlayers < 2)
@@ -112,6 +174,17 @@ public class PlayerController : NetworkBehaviour
             isPaused = true;
             MirrorVariables.instance.SyncVarTest();
         }
+
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            foreach (GuardCreator gc in GameObject.FindObjectsOfType<GuardCreator>())
+            {
+                Debug.Log("being called");
+                StartCoroutine(gc.WaitASecond());
+
+            }
+        }
+
         if (isPaused)
         {
             if (Input.GetKeyDown(KeyCode.R))
@@ -150,5 +223,15 @@ public class PlayerController : NetworkBehaviour
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
         }*/
+    }
+    [ClientRpc]
+    public void RpcDebug(string str)
+    {
+        Debug.Log(str);
+    }
+    [Command]
+    public void CmdTeleport(Vector3 vector3)
+    {
+        transform.position = vector3;
     }
 }

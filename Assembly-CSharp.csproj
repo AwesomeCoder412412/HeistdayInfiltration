@@ -81,6 +81,8 @@
     <Compile Include="Assets\Easy Weapons\Scripts\TimedObjectDestroyer.cs" />
     <Compile Include="Assets\Easy Weapons\Scripts\Weapon.cs" />
     <Compile Include="Assets\Easy Weapons\Scripts\WeaponSystem.cs" />
+    <Compile Include="Assets\FreeFlyCamera\Demo\Scripts\ToggleGameObjectEnable.cs" />
+    <Compile Include="Assets\FreeFlyCamera\Scripts\FreeFlyCamera.cs" />
     <Compile Include="Assets\InputManager.cs" />
     <Compile Include="Assets\KeybindDialogBox.cs" />
     <Compile Include="Assets\Low Poly FPS Pack - Free (Sample)\Components\Demo_Scene_Components\Scripts\DebrisScript.cs" />
@@ -131,6 +133,7 @@
     <Compile Include="Assets\Scripts\ScoreManager.cs" />
     <Compile Include="Assets\Scripts\SetAudio.cs" />
     <Compile Include="Assets\Scripts\SimonSaysRipoff.cs" />
+    <Compile Include="Assets\Scripts\StartHost.cs" />
     <Compile Include="Assets\Scripts\SwitchToStartScreen.cs" />
     <Compile Include="Assets\Scripts\TAAAAAAANK.cs" />
     <Compile Include="Assets\Scripts\TeamateSpawner.cs" />
@@ -152,6 +155,7 @@
     <Compile Include="Assets\Tank - Mark V drivable\Scripts\RayCastShoot.cs" />
     <Compile Include="Assets\Tank - Mark V drivable\Scripts\TankPlayerController.cs" />
     <Compile Include="Assets\Tank - Mark V drivable\Scripts\TracksControler.cs" />
+    <Compile Include="Assets\Teleportation Pad\CustomTeleporter.cs" />
     <None Include="Assets\Free Low Poly Desert Pack\Materials\Shaders\Vertex_Color_Unlit.shader" />
     <None Include="Assets\ScriptTemplates\51-Mirror__Network Authenticator-NewNetworkAuthenticator.cs.txt" />
     <None Include="Assets\Graphy - Ultimate Stats Monitor\Changelog.txt" />
@@ -168,6 +172,8 @@
     <None Include="Assets\Mirror\Readme.txt" />
     <None Include="Assets\Rebindable Input\How To Use.txt" />
     <None Include="Assets\Graphy - Ultimate Stats Monitor\Font\Northwest-Bold\ERIC-TIRADO-NORTHWEST-LICENSE.txt" />
+    <None Include="Assets\Parkgarage\parkinggarage_readMe.txt" />
+    <None Include="Assets\FreeFlyCamera\readme.txt" />
     <None Include="Assets\ScriptTemplates\52-Mirror__Network Behaviour-NewNetworkBehaviour.cs.txt" />
     <None Include="Assets\Tank - Mark V drivable\Read me.txt" />
     <None Include="Assets\Mirror\Notice.txt" />
@@ -178,6 +184,7 @@
     <None Include="Assets\ScriptTemplates\55-Mirror__Network Room Player-NewNetworkRoomPlayer.cs.txt" />
     <None Include="Assets\Graphy - Ultimate Stats Monitor\Shaders\GraphStandard.shader" />
     <None Include="Assets\Low Poly Helicopters Pack Free\Shaders\UnlitShadow.shader" />
+    <None Include="Assets\Teleportation Pad\README.txt" />
     <None Include="Assets\ScriptTemplates\50-Mirror__Network Manager-NewNetworkManager.cs.txt" />
     <None Include="Assets\ScriptTemplates\54-Mirror__Network Room Manager-NewNetworkRoomManager.cs.txt" />
     <Reference Include="UnityEngine">

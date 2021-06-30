@@ -6,6 +6,8 @@ using Mirror;
 
 public class DeathScreen : NetworkBehaviour
 {
+    public GameObject freecam;
+    public GameObject self;
 
     // Start is called before the first frame update
     void Start()
@@ -27,9 +29,28 @@ public class DeathScreen : NetworkBehaviour
     }
     public void Retry()
     {
-       /* MirrorVariables.instance.spawnNewPlayer = true;
-        SceneManager.LoadScene("Networking");
-        Time.timeScale = 1.0f; */
+        if (isServer)
+        {
+            MirrorVariables.instance.Respawn();
+            //gameObject.SetActive(false);
+        }
+        /*else
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            foreach (PlayerController pc in GameObject.FindObjectsOfType<PlayerController>())
+            {
+                if (pc.isLocalPlayer)
+                {
+                    pc.gameObject.SetActive(false);
+                    freecam.SetActive(true);
+                }
+            }
+            self.SetActive(false);
+        } */
+        /* MirrorVariables.instance.spawnNewPlayer = true;
+         SceneManager.LoadScene("Networking");
+         Time.timeScale = 1.0f; */
     }
     public IEnumerator RetryCoroutine()
     {

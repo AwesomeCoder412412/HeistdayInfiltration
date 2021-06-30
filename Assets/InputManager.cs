@@ -21,6 +21,7 @@ public class InputManager : MonoBehaviour {
         buttonKeys["Holster"] = KeyCode.E;
         buttonKeys["Pause"] = KeyCode.P;
         buttonKeys["Exit Vehicle"] = KeyCode.Z;
+        buttonKeys["Start"] = KeyCode.K;
     }
 
 	// Use this for initialization

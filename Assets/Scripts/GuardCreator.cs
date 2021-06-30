@@ -1,17 +1,46 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
+using FPSControllerLPFP;
 
-public class GuardCreator : MonoBehaviour
+public class GuardCreator : NetworkBehaviour
 {
+    public GameObject guardPrefab;
+    public GuardData[] guardData;
     public int guards;
     private string guard = "guards";
     public GameObject[] guardArray;
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("isrunning ok");
+
+        StartCoroutine(WaitASecond());
+    }
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+    public IEnumerator WaitASecond()
+    {
+        yield return new WaitForSeconds(2);
+        Debug.Log("ok then");
+        if (!FindObjectOfType<FpsControllerLPFP>().isServer)
+        {
+            yield break;
+        }
+        Debug.Log("passed check");
         guards = PlayerPrefs.GetInt(guard);
-        if (guards > guardArray.Length)
+        for (int i = 0; i < guards; i++)
+        {
+            GameObject guardInstant = Instantiate(guardPrefab, guardData[i].spawnPosition.position, Quaternion.identity);
+            RpcDebug("spawned guard " + guardInstant.name);
+            guardInstant.GetComponent<GuardAI>().forwardPos = guardData[i].forwardPosition;
+            NetworkServer.Spawn(guardInstant);
+        }
+        /*if (guards > guardArray.Length)
         {
             guards = guardArray.Length;
         }
@@ -21,13 +50,20 @@ public class GuardCreator : MonoBehaviour
             if (guardsLeft > 0)
             {
                 guardArray[i].SetActive(true);
+                NetworkServer.Spawn(guardArray[i]);
             }
             guardsLeft--;
-        }
+        }*/
     }
-    // Update is called once per frame
-    void Update()
+    [ClientRpc]
+    public void RpcDebug(string str)
     {
-        
+        Debug.Log(str);
     }
+}
+[System.Serializable]
+public class GuardData
+{
+    public Transform spawnPosition, forwardPosition;
+    
 }

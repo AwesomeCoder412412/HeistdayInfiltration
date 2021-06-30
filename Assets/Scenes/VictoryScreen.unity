@@ -780,7 +780,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Try Again
+  m_Text: (Host)New Game
 --- !u!222 &1379239168
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1094,6 +1094,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  freecam: {fileID: 0}
+  self: {fileID: 0}
 --- !u!114 &1812213441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1256,6 +1258,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  freecam: {fileID: 0}
+  self: {fileID: 0}
 --- !u!114 &2071859192
 MonoBehaviour:
   m_ObjectHideFlags: 0

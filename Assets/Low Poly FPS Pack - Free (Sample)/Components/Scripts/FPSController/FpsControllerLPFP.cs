@@ -54,6 +54,8 @@ namespace FPSControllerLPFP
          SerializeField]
         private float maxVerticalAngle = 90f;
 
+        public Animator anim;
+
         [Tooltip("The names of the axes and buttons for Unity's Input Manager."), SerializeField]
         private FpsInput input;
 #pragma warning restore 649
@@ -339,6 +341,7 @@ namespace FPSControllerLPFP
             }
             //Debug.Log("SmoothZBear " + smoothZ);
         }
+
         private bool CheckCollisionsWithWalls(Vector3 velocity)
         {
             if (_isGrounded) return false;
@@ -375,6 +378,21 @@ namespace FPSControllerLPFP
             //Debug.Log("JumpForce " + jumpForce);
             //Debug.Log("Vector3.up " + Vector3.up);
             //Debug.Log("rigidbodyvelocity " + _rigidbody.velocity);
+        }
+        [Command]
+        public void CmdSetBool(string name, bool tf)
+        {
+            anim.SetBool(name, tf);
+        }
+        [Command]
+        public void CmdSetTrigger(string name)
+        {
+            anim.SetTrigger(name);
+        }
+        [Command]
+        public void CmdPlay(string name, int i, float f)
+        {
+            anim.Play(name, i, f);
         }
 
         private void PlayFootstepSounds(bool callingFromClient, ClientInput clientInput)

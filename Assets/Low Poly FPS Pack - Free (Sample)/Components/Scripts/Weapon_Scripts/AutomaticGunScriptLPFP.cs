@@ -2,9 +2,12 @@
 using System.Collections;
 using UnityEngine.UI;
 using Mirror;
+using FPSControllerLPFP;
 
 // ----- Low Poly FPS Pack Free Version -----
 public class AutomaticGunScriptLPFP : MonoBehaviour {
+
+	public FpsControllerLPFP fps;
 
 	//Animator component attached to weapon
 	Animator anim;
@@ -213,6 +216,10 @@ public class AutomaticGunScriptLPFP : MonoBehaviour {
 	
 	private void Update () {
 
+		if (!fps.isLocalPlayer)
+        {
+			return;
+        }
 		//Aiming
 		//Toggle camera FOV when right click is held down
 		if(Input.GetButton("Fire2") && !isReloading && !isRunning && !isInspecting) 

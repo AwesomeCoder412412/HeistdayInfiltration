@@ -9,6 +9,7 @@ public class MirrorVariables : NetworkBehaviour
     public static MirrorVariables instance;
     public NetworkConnection conn;
     public int minRooms = 5;
+    public GameObject victoryScreen;
     public int maxRooms = 10;
     public bool spawnNewPlayer = false;
     public int playersPain;
@@ -33,7 +34,7 @@ public class MirrorVariables : NetworkBehaviour
     void Update()
     {
         treasureRoom = GameObject.FindGameObjectWithTag("Treasure");
-        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Networking") && !c)
+        /*if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Networking") && !c )
         {
             if  (n < 4)
             {
@@ -53,7 +54,7 @@ public class MirrorVariables : NetworkBehaviour
             //n++;
             //c = true;
 
-        }
+        }*/
         Debug.Log(GenerateRooms.instance.roomWidth + " pog");
        /*/ if (gameObject.scene.buildIndex != -1)
         {
@@ -104,7 +105,7 @@ public class MirrorVariables : NetworkBehaviour
         {
             RespawnPain.instance.RespawnClient();
         }
-
+        victoryScreen.SetActive(false);
     }
     public IEnumerator RespawnHost()
     {
@@ -114,6 +115,13 @@ public class MirrorVariables : NetworkBehaviour
         Debug.Log("not stopped");
         NetworkManager.singleton.StopHost();
         Debug.Log("stopped");
+        AsyncOperation async = SceneManager.LoadSceneAsync("Inbetween");
+        while (!async.isDone)
+        {
+            yield return 0;
+        }
+        Debug.Log("not done yet");
+        //SceneManager.LoadScene("Networking");
         NetworkManager.singleton.StartHost();
         Debug.Log("host has been started");
         //rpcNoWork = false;
@@ -157,6 +165,18 @@ public class MirrorVariables : NetworkBehaviour
         GameObject treasureRoomInstance = Instantiate(GenerateRooms.instance.treasureRoom, Vector3.forward * GenerateRooms.instance.roomWidth * i, GenerateRooms.instance.treasureRoom.transform.rotation);
     }
 
+    
+
+    [Command(ignoreAuthority = true)]
+    public void CmdVictory()
+    {
+        RpcVictory();
+    }
+    [ClientRpc]
+    public void RpcVictory()
+    {
+        victoryScreen.SetActive(true);
+    }
     public void Respawn()
     {
         Debug.Log("I'm being called yay");
@@ -202,7 +222,27 @@ public class MirrorVariables : NetworkBehaviour
         puzzleDoor.enabled = false;
         Debug.Log("after unlock");
     }
-    
+    public void RoomsGo()
+    {
+        if (n < 4)
+        {
+            n++;
+        }
+        minRooms = PlayerPrefs.GetInt(minRoom);
+        maxRooms = PlayerPrefs.GetInt(maxRoom);
+        int randomRooms = Random.Range(minRooms, maxRooms);
+        int i = 0;
+        Debug.Log(randomRooms + " random rooms");
+        for (i = 0; i < randomRooms; i++)
+        {
+            Debug.Log("I'm in the loop " + i);
+            GenerateRoomsLazy(i, Random.Range(0, GenerateRooms.instance.puzzleRooms.Length), Random.Range(0, GenerateRooms.instance.puzzles.Length));
+        }
+        TreasureAhoy(i);
+        //n++;
+        //c = true;
+    }
+
     /*public void SpawnPlayer()
     {
         if (spawnNewPlayer && isServer)

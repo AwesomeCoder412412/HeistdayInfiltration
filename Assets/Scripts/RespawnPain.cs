@@ -8,6 +8,7 @@ public class RespawnPain : MonoBehaviour
     public static RespawnPain instance;
     public bool counting = false;
     private float time = 0;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +19,7 @@ public class RespawnPain : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (counting)
         {
             if (time > 1)

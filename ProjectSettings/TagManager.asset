@@ -25,6 +25,7 @@ TagManager:
   - Tank
   - PauseMenu
   - Treasure
+  - Start
   layers:
   - Default
   - TransparentFX

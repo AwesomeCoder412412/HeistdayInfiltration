@@ -909,6 +909,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd38df9a0796d9842adfbe580ed6042e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fps: {fileID: 5266125002863861333}
   knifeTime: 2
   isKnifing: 0
   cooldown: 10
@@ -12344,6 +12345,7 @@ MonoBehaviour:
   rotationSmoothness: 0.05
   minVerticalAngle: -90
   maxVerticalAngle: 90
+  anim: {fileID: 5323072802801646499}
   input:
     rotateX: Mouse X
     rotateY: Mouse Y
@@ -12365,6 +12367,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 102458954e6f84c09ba7df2bc2d3f5f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  isDead: 0
   ladderTouched: 0
   ladderSpeed: 0.7
   roomIndex: -1
@@ -12373,6 +12378,7 @@ MonoBehaviour:
   retry: 0
   retry1: retry1
   isPaused: 0
+  hasStarted: 0
 --- !u!114 &-3976522001048359312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12421,7 +12427,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  clientAuthority: 0
+  clientAuthority: 1
   animator: {fileID: 5323072802801646499}
 --- !u!114 &6070302318269495386
 MonoBehaviour:
