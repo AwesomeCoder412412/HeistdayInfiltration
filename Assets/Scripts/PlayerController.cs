@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Mirror;
+using FPSControllerLPFP;
 
 public class PlayerController : NetworkBehaviour
 {
@@ -20,6 +21,7 @@ public class PlayerController : NetworkBehaviour
     //public GameObject pauseMenu;
     public bool isPaused;
     public bool hasStarted = false;
+    //public GameObject teleportGoal;
     private void Start()
     {
         Time.timeScale = 1.0f;
@@ -159,7 +161,23 @@ public class PlayerController : NetworkBehaviour
             {
                 pc.gameObject.transform.position = GameObject.FindGameObjectWithTag("Start").transform.position;
             }
-            
+            int max = 0;
+            foreach (FpsControllerLPFP fPS in FindObjectsOfType<FpsControllerLPFP>())
+            {
+                if (fPS.playerId > max)
+                {
+                    max = fPS.playerId;
+                }
+            }
+            Debug.Log(max + " playeridmax");
+            for (int i = 1; i <= max; i++)
+            {
+                TeamateSpawner.instance.SpawnTeamates(i);
+                Debug.Log("spawnedteammates " + i);
+            }
+            //FindObjectOfType<TankPlayerController>().GetComponent<NetworkIdentity>().AssignClientAuthority(connectionToClient);
+            Debug.Log("spawnteammates");
+            //TeamateSpawner.instance.SpawnTeamates(playerId);
 
             hasStarted = true;
         }
@@ -196,6 +214,10 @@ public class PlayerController : NetworkBehaviour
             if (Input.GetKeyDown(KeyCode.T))
             {
                 MirrorVariables.instance.Respawn();
+                Time.timeScale = 1.0f;
+                PausedMenu.instance.pauseMenu.SetActive(false);
+                isPaused = false;
+                //hasStarted = false;
                 //MirrorVariables.instance.spawnNewPlayer = true;
                 //MirrorVariables.instance.playersPain = NetworkManager.singleton.numPlayers;
                 //SceneManager.LoadScene("Networking");
@@ -208,7 +230,21 @@ public class PlayerController : NetworkBehaviour
             }
             if (Input.GetKeyDown(KeyCode.M))
             {
+                FindObjectOfType<TelepathyTransport>().Shutdown();
+                if (NetworkClient.isConnected)
+                {
+                    NetworkManager.singleton.StopClient();
+                    print("OnApplicationQuit: stopped client");
+                }
+
+                // stop server after stopping client (for proper host mode stopping)
+                if (NetworkServer.active)
+                {
+                    NetworkManager.singleton.StopServer();
+                    print("OnApplicationQuit: stopped server");
+                }
                 SceneManager.LoadScene("StartScreen");
+
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
             }

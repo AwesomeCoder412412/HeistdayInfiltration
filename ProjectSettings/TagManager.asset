@@ -26,6 +26,8 @@ TagManager:
   - PauseMenu
   - Treasure
   - Start
+  - Destroy
+  - Spawn
   layers:
   - Default
   - TransparentFX

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 using UnityEngine.SceneManagement;
+using FPSControllerLPFP;
 
 public class MirrorVariables : NetworkBehaviour
 {
@@ -23,6 +24,9 @@ public class MirrorVariables : NetworkBehaviour
     public bool rpcNoWork = true;
     private string minRoom = "minRoom";
     private string maxRoom = "maxRoom";
+    public GameObject tank;
+    public GameObject teleportGoal;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +37,7 @@ public class MirrorVariables : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
+        teleportGoal = GameObject.FindGameObjectWithTag("Spawn");
         treasureRoom = GameObject.FindGameObjectWithTag("Treasure");
         /*if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Networking") && !c )
         {
@@ -81,6 +86,28 @@ public class MirrorVariables : NetworkBehaviour
     [Command (ignoreAuthority = true)]
     public void CmdRespawn()
     {
+        foreach (PlayerController pc in GameObject.FindObjectsOfType<PlayerController>())
+        {
+            pc.gameObject.transform.position = GameObject.FindGameObjectWithTag("Spawn").transform.position;
+        }
+
+        foreach (GameObject guard in GameObject.FindGameObjectsWithTag("Enemy"))
+        {
+            NetworkServer.Destroy(guard);
+        }
+        foreach (GameObject teammate in GameObject.FindGameObjectsWithTag("Teammate"))
+        {
+            NetworkServer.Destroy(teammate);
+        }
+        if (GameObject.FindGameObjectWithTag("Tank") == null)
+        {
+            Debug.Log("tank is ded");
+        }
+        tank.transform.position = new Vector3(123.73f, 350, -208.94f);
+        foreach (PlayerController pc in GameObject.FindObjectsOfType<PlayerController>())
+        {
+            pc.hasStarted = false;
+        }
         RpcRespawn();
     }
     [Command(ignoreAuthority = true)]
@@ -97,14 +124,20 @@ public class MirrorVariables : NetworkBehaviour
     public void RpcRespawn()
     {
         Debug.Log("I'm getting this RPC");
-        if (isServer)
+        foreach (GameObject room in GameObject.FindGameObjectsWithTag("Destroy"))
+        {
+            Destroy(room);
+        }
+        Destroy(GameObject.FindGameObjectWithTag("Treasure"));
+
+      /*  if (isServer)
         {
             StartCoroutine(RespawnHost());
         }
         else
         {
             RespawnPain.instance.RespawnClient();
-        }
+        }*/
         victoryScreen.SetActive(false);
     }
     public IEnumerator RespawnHost()

@@ -3252,7 +3252,7 @@ GameObject:
   - component: {fileID: 1362762870}
   m_Layer: 0
   m_Name: SpawnCube
-  m_TagString: Untagged
+  m_TagString: Spawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5302,6 +5302,7 @@ MonoBehaviour:
   c: 0
   treasureRoom: {fileID: 0}
   rpcNoWork: 0
+  tank: {fileID: 1705450472}
 --- !u!4 &1843429674
 Transform:
   m_ObjectHideFlags: 0

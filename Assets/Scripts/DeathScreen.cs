@@ -32,6 +32,10 @@ public class DeathScreen : NetworkBehaviour
         if (isServer)
         {
             MirrorVariables.instance.Respawn();
+            //foreach (PlayerController pc in GameObject.FindObjectsOfType<PlayerController>())
+            //{
+            //    pc.hasStarted = false;
+            //}
             //gameObject.SetActive(false);
         }
         /*else

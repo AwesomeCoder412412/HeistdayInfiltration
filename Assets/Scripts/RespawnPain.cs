@@ -19,21 +19,31 @@ public class RespawnPain : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if (counting)
+        Debug.Log("client connected " + NetworkManager.singleton.isNetworkActive);
+       /* if (counting)
         {
             if (time > 1)
             {
                 NetworkManager.singleton.StartClient();
                 Debug.Log(NetworkManager.singleton.networkAddress + "gummies3");
+                counting = false;
             }
             else
             {
                 time += Time.unscaledDeltaTime;
             }
         }
-        Debug.Log("RespawnPain is still here");
+        Debug.Log("RespawnPain is still here");*/
     }
+    public IEnumerator PleaseWork()
+    {
+        Debug.Log("Inside coroutine");
+        yield return new WaitForSeconds(5);
+        Debug.Log("Waited for 2 seconds");
+        NetworkManager.singleton.StartClient();
+        Debug.Log("End of coroutine");
+    }
+
     public void RespawnClient()
     {
         Debug.Log("staying alive");
@@ -43,6 +53,8 @@ public class RespawnPain : MonoBehaviour
         NetworkManager.singleton.networkAddress = ip;
         Debug.Log(NetworkManager.singleton.networkAddress + "gummies2");
         Debug.Log("gummmies2.5");
-        counting = true;
+        StartCoroutine(PleaseWork());
+        Debug.Log("After coroutine");
+        //counting = true;
     }
 }
