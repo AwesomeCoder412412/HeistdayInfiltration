@@ -910,6 +910,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fps: {fileID: 5266125002863861333}
+  netAnim: {fileID: 4529592424016551119}
   knifeTime: 2
   isKnifing: 0
   cooldown: 10
@@ -12353,6 +12354,7 @@ MonoBehaviour:
     strafe: Vertical
     run: Fire3
     jump: Jump
+  auto: {fileID: 5267044623124538819}
   camera: {fileID: 2142600685239967937}
   playerId: 0
 --- !u!114 &5227988468431344106

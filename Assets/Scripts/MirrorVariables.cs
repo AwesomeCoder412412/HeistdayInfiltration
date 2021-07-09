@@ -26,6 +26,8 @@ public class MirrorVariables : NetworkBehaviour
     private string maxRoom = "maxRoom";
     public GameObject tank;
     public GameObject teleportGoal;
+    [SyncVar]
+    public bool toTankOrNotToTank;
 
     // Start is called before the first frame update
     void Start()

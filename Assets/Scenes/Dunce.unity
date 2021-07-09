@@ -785,6 +785,11 @@ MonoBehaviour:
   spawnPrefabs:
   - {fileID: 3668790011915657183, guid: 3ad32bf2f2cf440618cb00ffe3907de9, type: 3}
   - {fileID: 3668790011915657183, guid: 598d35402af944257ac5d0f1c77e1e87, type: 3}
+  - {fileID: 1948591290861370, guid: 7b04fe350ed10a741a1e245447860d9e, type: 3}
+  - {fileID: 1086664671600574, guid: 5953171a59c27394e9ad5cbb564affa8, type: 3}
+  - {fileID: 1309345429585892, guid: 7be59128a5ee3424faf33d7a408c0b2e, type: 3}
+  - {fileID: 1492315059354262, guid: b1995a53a949fac4db5722fc1df9efe4, type: 3}
+  - {fileID: 100010, guid: 031d08f52af1daa4f929b85221519426, type: 3}
 --- !u!4 &2131846832
 Transform:
   m_ObjectHideFlags: 0

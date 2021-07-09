@@ -60,6 +60,7 @@ namespace FPSControllerLPFP
         private FpsInput input;
 #pragma warning restore 649
 
+        public AutomaticGunScriptLPFP auto;
         private Rigidbody _rigidbody;
         private CapsuleCollider _collider;
         private AudioSource _audioSource;
@@ -458,7 +459,18 @@ namespace FPSControllerLPFP
                 set { _current = value; }
             }
         }
-			
+
+        [Command(ignoreAuthority = true)]
+        public void CmdShootBullet()
+        {
+            auto.ShootBulletOnServer();
+        }
+        [Command(ignoreAuthority = true)]
+        public void CmdThrowGrenade()
+        {
+            auto.SpawnGrenadeOnServer();
+        }
+
         /// Input mappings
         [Serializable]
         public class FpsInput

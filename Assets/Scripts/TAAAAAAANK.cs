@@ -13,7 +13,11 @@ public class TAAAAAAANK : MonoBehaviour
     void Start()
     {
      GameObject tank = GameObject.FindGameObjectWithTag("Tank");
-     if (tankOrNoTank)
+        if (MirrorVariables.instance.isServer)
+        {
+            MirrorVariables.instance.toTankOrNotToTank = tankOrNoTank;
+        }
+        if (MirrorVariables.instance.toTankOrNotToTank)
         {
             tankBarrier.SetActive(false);
             

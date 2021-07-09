@@ -200,6 +200,10 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11526}
     - Class: 114
+      Script: {instanceID: 11556}
+    - Class: 114
+      Script: {instanceID: 11604}
+    - Class: 114
       Script: {instanceID: 11710}
     - Class: 114
       Script: {instanceID: 11750}
@@ -710,7 +714,7 @@ ScriptsOnlyBuild:
     className: TMP_Dropdown
   - hash:
       serializedVersion: 2
-      Hash: 3a92615c6d2354221b81819c252cf5dd
+      Hash: 54d8c424a9145fb30edd07e171ff9f70
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: MirrorVariables
@@ -1856,7 +1860,7 @@ ScriptsOnlyBuild:
     className: FreeLookCam
   - hash:
       serializedVersion: 2
-      Hash: 88926cb8c8dd148886f5f2ad7023c941
+      Hash: 95c6b15514d278b03410bd9203a50f5f
     assemblyName: Assembly-CSharp.dll
     namespaceName: FPSControllerLPFP
     className: FpsControllerLPFP
@@ -1952,7 +1956,7 @@ ScriptsOnlyBuild:
     className: SketchfabImporterWindow
   - hash:
       serializedVersion: 2
-      Hash: fbee787b2a724e4f101ac53b087cad6c
+      Hash: 0cdd4edce6d70217ac45b2e9f3b0c7d8
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: RayCastShoot
@@ -2108,7 +2112,7 @@ ScriptsOnlyBuild:
     className: TimeoutAuthenticator
   - hash:
       serializedVersion: 2
-      Hash: 978e1786200395acd3d9ea74176a529a
+      Hash: 6e61d2909527a30b428ac556285e2009
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: AutomaticGunScriptLPFP

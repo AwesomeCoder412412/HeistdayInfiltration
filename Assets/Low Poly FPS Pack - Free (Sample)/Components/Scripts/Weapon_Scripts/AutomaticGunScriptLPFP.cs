@@ -10,6 +10,7 @@ public class AutomaticGunScriptLPFP : MonoBehaviour {
 	public FpsControllerLPFP fps;
 
 	//Animator component attached to weapon
+	public NetworkAnimator netAnim;
 	Animator anim;
 	public float knifeTime = 2f;
 	public bool isKnifing = false;
@@ -420,28 +421,16 @@ public class AutomaticGunScriptLPFP : MonoBehaviour {
 					}
 				}
 
-				//Spawn bullet from bullet spawnpoint
-				var bullet = (Transform)Instantiate (
-					Prefabs.bulletPrefab,
-					Spawnpoints.bulletSpawnPoint.transform.position,
-					Spawnpoints.bulletSpawnPoint.transform.rotation);
-
-				//Add velocity to the bullet
-				bullet.GetComponent<Rigidbody>().velocity = 
-					bullet.transform.forward * bulletForce;
-				
-				//Spawn casing prefab at spawnpoint
-				Instantiate (Prefabs.casingPrefab, 
-					Spawnpoints.casingSpawnPoint.transform.position, 
-					Spawnpoints.casingSpawnPoint.transform.rotation);
+				fps.CmdShootBullet();
 			}
 		}
+
 
 		//Inspect weapon when T key is pressed
 		if (inputManager.GetButtonDown("Inspect")) 
 		{
 			Debug.Log("ok then");
-			anim.SetTrigger ("Inspect");
+			netAnim.SetTrigger ("Inspect");
 		}
 
 		//Toggle weapon holster when E key is pressed
@@ -510,6 +499,30 @@ public class AutomaticGunScriptLPFP : MonoBehaviour {
 		}
 		cooldownTimer -= Time.deltaTime;
 	}
+
+	public void ShootBulletOnServer()
+    {
+		//Spawn bullet from bullet spawnpoint
+		var bullet = (Transform)Instantiate(
+			Prefabs.bulletPrefab,
+			Spawnpoints.bulletSpawnPoint.transform.position,
+			Spawnpoints.bulletSpawnPoint.transform.rotation);
+		NetworkServer.Spawn(bullet.gameObject);
+		
+
+
+		//Add velocity to the bullet
+		bullet.GetComponent<Rigidbody>().velocity =
+			bullet.transform.forward * bulletForce;
+
+		//Spawn casing prefab at spawnpoint
+		Transform casing = Instantiate(Prefabs.casingPrefab,
+			Spawnpoints.casingSpawnPoint.transform.position,
+			Spawnpoints.casingSpawnPoint.transform.rotation);
+		NetworkServer.Spawn(casing.gameObject);
+	}
+
+
 	private IEnumerator SetIsKnifing()
     {
 		isKnifing = true;
@@ -520,12 +533,17 @@ public class AutomaticGunScriptLPFP : MonoBehaviour {
 		
 		//Wait for set amount of time before spawning grenade
 		yield return new WaitForSeconds (grenadeSpawnDelay);
-		//Spawn grenade prefab at spawnpoint
-		Instantiate(Prefabs.grenadePrefab, 
-			Spawnpoints.grenadeSpawnPoint.transform.position, 
-			Spawnpoints.grenadeSpawnPoint.transform.rotation);
+		fps.CmdThrowGrenade();
+		
 	}
-
+	public void SpawnGrenadeOnServer()
+    {
+		//Spawn grenade prefab at spawnpoint
+		Transform grenade = Instantiate(Prefabs.grenadePrefab,
+			Spawnpoints.grenadeSpawnPoint.transform.position,
+			Spawnpoints.grenadeSpawnPoint.transform.rotation);
+		NetworkServer.Spawn(grenade.gameObject);
+	}
 	private IEnumerator AutoReload () {
 		//Wait set amount of time
 		yield return new WaitForSeconds (autoReloadDelay);

@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Mirror;
 
-public class RayCastShoot : MonoBehaviour {
+public class RayCastShoot : NetworkBehaviour {
 
     public float weaponRange = 32000f;
     public Transform gunEnd;
@@ -18,12 +19,20 @@ public class RayCastShoot : MonoBehaviour {
         lightEff.intensity=0f;
         
 	}
-    
-    private void Explosion(Vector3 hitPos)
+
+    [Command(ignoreAuthority = true)]
+    private void CmdExplosion(Vector3 hitPos)
     {
         
         GameObject expl = Instantiate(explosion, hitPos, Quaternion.identity) as GameObject;
-        Destroy(expl, 3); // delete the explosion after 3 seconds
+        NetworkServer.Spawn(expl);
+        StartCoroutine(ExplosionTime(expl));
+    }
+
+    public IEnumerator ExplosionTime(GameObject expl)
+    {
+        yield return new WaitForSeconds(3);
+        NetworkServer.Destroy(expl); // delete the explosion after 3 seconds
     }
 
     IEnumerator FireReload()
@@ -54,7 +63,7 @@ public class RayCastShoot : MonoBehaviour {
                     Debug.Log(hit.collider.gameObject.name);
                     if (fire)
                     {
-                        Explosion(hit.point);
+                        CmdExplosion(hit.point);
                         StartCoroutine(FireReload());
                         time = 2f;
                         firingAudio.Play();
