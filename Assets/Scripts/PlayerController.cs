@@ -243,6 +243,7 @@ public class PlayerController : NetworkBehaviour
                     NetworkManager.singleton.StopServer();
                     print("OnApplicationQuit: stopped server");
                 }
+                NetworkManager.singleton.StopHost();
                 SceneManager.LoadScene("StartScreen");
 
                 Cursor.visible = true;

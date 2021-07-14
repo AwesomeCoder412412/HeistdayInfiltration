@@ -28,6 +28,7 @@ TagManager:
   - Start
   - Destroy
   - Spawn
+  - ServerButton
   layers:
   - Default
   - TransparentFX

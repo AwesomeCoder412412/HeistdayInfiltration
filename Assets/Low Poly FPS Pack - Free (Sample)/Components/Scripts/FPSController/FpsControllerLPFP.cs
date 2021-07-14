@@ -2,6 +2,7 @@
 using System.Linq;
 using UnityEngine;
 using Mirror;
+using SimpleFirebaseUnity;
 
 namespace FPSControllerLPFP
 {
@@ -91,6 +92,13 @@ namespace FPSControllerLPFP
             /*FindObjectOfType<TankPlayerController>().GetComponent<NetworkIdentity>().AssignClientAuthority(connectionToClient);
             Debug.Log("spawnteammates");
             TeamateSpawner.instance.SpawnTeamates(playerId);*/
+        }
+        public override void OnStopServer()
+        {
+            base.OnStopServer();
+            Debug.Log("server stoppped");
+            Firebase firebase = Firebase.CreateNew("https://heistday-9d49b-default-rtdb.firebaseio.com/");
+            firebase.Child("mailbox").Child(RespawnPain.instance.docID).Delete();
         }
         /// Initializes the FpsController on start.
         public void Start()
