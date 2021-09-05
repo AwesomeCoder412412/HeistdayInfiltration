@@ -1,0 +1,47 @@
+Unity Package Manager Diagnostics (v0.1.8)
+============
+Ran 7 checks
+============
+6 succeeded
+1 failed
+============
+✅ UPM registry reachable (PASS)
+Make an HTTP request to the UPM package registry
+>> HTTP/1.1 200 OK
+>> X-Powered-By: Express
+>> Provider: Genesis
+>> Date: Fri, 20 Aug 2021 23:06:50 GMT
+>> Connection: close
+
+✅ Ping UPM registry (PASS)
+Measure the latency of the UPM package registry API
+>> 11 pings made in 5.072 seconds
+>> Average latency: 72.39 ms
+>> Minimum latency: 69.19 ms
+>> Maximum latency: 75.89 ms
+>> Standard deviation: 2.26
+
+✅ Ping UPM download (PASS)
+Measure the latency of the UPM package download endpoint
+>> 9 pings made in 5.322 seconds
+>> Average latency: 15.88 ms
+>> Minimum latency: 12.80 ms
+>> Maximum latency: 17.98 ms
+>> Standard deviation: 1.83
+
+✅ UPM registry download speed (PASS)
+Test the Internet connection using the UPM package registry
+>> Measured speed to the UPM registry: 277.45 Megabits per second
+
+✅ Speedtest.net (PASS)
+Test the Internet connection using Speedtest.net
+>> Measured speed to the Speedtest.net server: 198.98 Megabits per second
+
+✅ HTTP proxy environment variables (PASS)
+Detect whether proxy-related environment variables are set (HTTP_PROXY, HTTPS_PROXY, ALL_PROXY, NO_PROXY, UNITY_PROXYSERVER, UNITY_NOPROXY)
+>> No proxy support has been configured through environment variables.
+
+❌ UPM health check (FAIL)
+Start the UPM process and call its health endpoint
+>> Server started but did not respond to health requests:
+>> Error: connect EADDRNOTAVAIL 127.0.0.1:52077 - Local (192.168.7.65:52078)

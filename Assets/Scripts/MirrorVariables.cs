@@ -7,6 +7,7 @@ using FPSControllerLPFP;
 
 public class MirrorVariables : NetworkBehaviour
 {
+    public bool doingPuzzle = false;
     public static MirrorVariables instance;
     public NetworkConnection conn;
     public int minRooms = 5;

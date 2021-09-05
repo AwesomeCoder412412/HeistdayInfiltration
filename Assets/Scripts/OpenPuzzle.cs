@@ -19,6 +19,7 @@ public class OpenPuzzle : NetworkBehaviour
     {
         if ((other.gameObject.CompareTag("Player") && !didPuzzle && other.gameObject.GetComponent<FpsControllerLPFP>().isLocalPlayer) || other.gameObject.CompareTag("Tank") && !didPuzzle)
         {
+            MirrorVariables.instance.doingPuzzle = true;
             Debug.Log(gameObject.name + " puzzle name");
             Cursor.visible = true;
             ScoreManager.score += 50;

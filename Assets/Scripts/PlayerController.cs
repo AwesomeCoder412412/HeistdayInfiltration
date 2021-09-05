@@ -94,6 +94,7 @@ public class PlayerController : NetworkBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
+        Debug.Log("colliding with " + collision.gameObject.name);
         if (!isLocalPlayer)
         {
             return;

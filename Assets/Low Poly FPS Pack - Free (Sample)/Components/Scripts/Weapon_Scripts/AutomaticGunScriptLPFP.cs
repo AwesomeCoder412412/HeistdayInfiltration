@@ -348,7 +348,7 @@ public class AutomaticGunScriptLPFP : MonoBehaviour {
 			
 		//AUtomatic fire
 		//Left click hold 
-		if (Input.GetMouseButton (0) && !outOfAmmo && !isReloading && !isInspecting && !isRunning) 
+		if (Input.GetMouseButton (0) && !outOfAmmo && !isReloading && !isInspecting && !isRunning && !MirrorVariables.instance.doingPuzzle) 
 		{
 			//Shoot automatic
 			if (Time.time - lastFired > 1 / fireRate) 
