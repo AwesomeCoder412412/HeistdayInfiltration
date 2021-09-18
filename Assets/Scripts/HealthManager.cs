@@ -9,6 +9,7 @@ public class HealthManager : MonoBehaviour
     public GameObject death;
     public static HealthManager instance;
     public List<GameObject> hearts;
+    public int heartCount;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +21,7 @@ public class HealthManager : MonoBehaviour
         {
             Debug.LogError("Already a instance of the HealthManager script");
         }
+        heartCount = hearts.Count;
     }
 
     // Update is called once per frame
@@ -27,18 +29,46 @@ public class HealthManager : MonoBehaviour
     {
 
     }
+    public void RestoreHearts(int i, bool restoreAll)
+    {
+        int staticHeartCount = heartCount;
+        if (restoreAll)
+        {
+            for (int k = 0; k < hearts.Count - staticHeartCount; k++)
+            {
+                GameObject currentHeart = hearts[hearts.Count - k - 1];
+                currentHeart.SetActive(true);
+                heartCount++;
+            }
+        }
+        else
+        {
+            for (int k = 0; k < i; k++)
+            {
+                GameObject currentHeart = hearts[hearts.Count - heartCount + k + 1];
+                currentHeart.SetActive(true);
+                heartCount++;
+            }
+        }
+
+    }
+
+
     public void RemoveHeart()
     {
-        if (hearts.Count > 0)
+        if (heartCount > 0)
         {
-            GameObject lastHeart = hearts[hearts.Count - 1];
-            Destroy(lastHeart);
-            hearts.Remove(lastHeart);
+            GameObject lastHeart = hearts[heartCount - 1];
+            lastHeart.SetActive(false);
+            heartCount--;
             ScoreManager.score += 50;
 
-            if (hearts.Count == 0)
+            if (heartCount == 0)
             {
                 death.SetActive(true);
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+
                 foreach (PlayerController pc in GameObject.FindObjectsOfType<PlayerController>())
                 {
                     if (pc.isLocalPlayer)

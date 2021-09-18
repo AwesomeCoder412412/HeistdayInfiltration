@@ -20,7 +20,7 @@ public class RayCastShoot : NetworkBehaviour {
         
 	}
 
-    [Command(ignoreAuthority = true)]
+    [Command(requiresAuthority = false)]
     private void CmdExplosion(Vector3 hitPos)
     {
         

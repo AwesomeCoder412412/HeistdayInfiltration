@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class TAAAAAAANK : MonoBehaviour
 {
@@ -31,7 +32,13 @@ public class TAAAAAAANK : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        tankOrNoTank = tankToggle.isOn;
+        //GimmeeTank();
+        if (SceneManager.GetActiveScene().name == "StartScreen")
+        {
+            GimmeeTank();
+
+        }
     }
     public void GimmeeTank()
     {

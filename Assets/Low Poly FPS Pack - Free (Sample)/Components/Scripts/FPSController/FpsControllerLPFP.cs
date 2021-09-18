@@ -468,12 +468,12 @@ namespace FPSControllerLPFP
             }
         }
 
-        [Command(ignoreAuthority = true)]
+        [Command(requiresAuthority = false)]
         public void CmdShootBullet()
         {
             auto.ShootBulletOnServer();
         }
-        [Command(ignoreAuthority = true)]
+        [Command(requiresAuthority = false)]
         public void CmdThrowGrenade()
         {
             auto.SpawnGrenadeOnServer();

@@ -113,7 +113,7 @@ public class PlayerController : NetworkBehaviour
         }
     }
 
-    [Command(ignoreAuthority = true)]
+    [Command(requiresAuthority = false)]
     public void CmdIncrementRoomIndex()
     {
         roomIndex++;
@@ -151,6 +151,7 @@ public class PlayerController : NetworkBehaviour
         {
             RpcDebug("call waitasecond " + gameObject.name);
             MirrorVariables.instance.RoomsGo();
+            HealthManager.instance.RestoreHearts(0, true);
            /* StartCoroutine(HoldUp());
             foreach (GuardCreator gc in GameObject.FindObjectsOfType<GuardCreator>())
             {

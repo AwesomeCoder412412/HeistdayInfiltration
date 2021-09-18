@@ -23,7 +23,7 @@ public class GenerateRooms : NetworkBehaviour
         Debug.Log("testrpc works");
     }
 
-    [ClientRpc]
+    /*[ClientRpc]
     public void RpcSpawnRoomAndPuzzle(int i, int roomPrefabIndex, int puzzlePrefabIndex)
     {
         Debug.Log("spawn room " + i);
@@ -44,7 +44,7 @@ public class GenerateRooms : NetworkBehaviour
     public void RpcTreasureRoom(int i)
     {
         GameObject treasureRoomInstance = Instantiate(treasureRoom, Vector3.forward * roomWidth * i, treasureRoom.transform.rotation);
-    }
+    }*/
 
     private void Start()
     {
@@ -69,9 +69,9 @@ public class GenerateRooms : NetworkBehaviour
         for (i = 0; i < randomRooms; i++)
         {
             Debug.Log("I'm in the loop " + i);
-            MirrorVariables.instance.GenerateRoomsLazy(i, Random.Range(0, puzzleRooms.Length), Random.Range(0, puzzles.Length));
+            //MirrorVariables.instance.GenerateRoomsLazy(i, Random.Range(0, puzzleRooms.Length), Random.Range(0, puzzles.Length));
         }
-        RpcTreasureRoom(i);
+        //RpcTreasureRoom(i);
         //MirrorVariables.instance.c = false;
     }
 

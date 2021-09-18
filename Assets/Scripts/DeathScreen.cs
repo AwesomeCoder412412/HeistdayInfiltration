@@ -12,6 +12,7 @@ public class DeathScreen : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameObject.SetActive(false);
         foreach (PlayerController pc in GameObject.FindObjectsOfType<PlayerController>())
         {
             if (pc.isLocalPlayer && !pc.isPaused)

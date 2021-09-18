@@ -52,7 +52,7 @@ public class OpenPuzzle : NetworkBehaviour
             puzzleCanvas.SetActive(false);
         }
     }
-    [Command(ignoreAuthority = true)]
+    [Command(requiresAuthority = false)]
     public void CmdPuzzleSync()
     {
         Debug.Log("banana");

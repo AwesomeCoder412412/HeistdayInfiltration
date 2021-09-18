@@ -7,6 +7,7 @@ using FPSControllerLPFP;
 
 public class MirrorVariables : NetworkBehaviour
 {
+    public bool treasureSpawned;
     public bool doingPuzzle = false;
     public static MirrorVariables instance;
     public NetworkConnection conn;
@@ -86,7 +87,7 @@ public class MirrorVariables : NetworkBehaviour
         }*/
     }
 
-    [Command (ignoreAuthority = true)]
+    [Command (requiresAuthority = false)]
     public void CmdRespawn()
     {
         foreach (PlayerController pc in GameObject.FindObjectsOfType<PlayerController>())
@@ -113,12 +114,12 @@ public class MirrorVariables : NetworkBehaviour
         }
         RpcRespawn();
     }
-    [Command(ignoreAuthority = true)]
+    [Command(requiresAuthority = false)]
     public void CmdGenerateRooms(int i, int roomPrefabIndex, int puzzlePrefabIndex)
     {
         RpcGenerateRoomsLazy(i, roomPrefabIndex, puzzlePrefabIndex);
     }
-    [Command(ignoreAuthority = true)]
+    [Command(requiresAuthority = false)]
     public void CmdGenerateTreasure(int i)
     {
         RpcTreasureRoomLazy(i);
@@ -203,7 +204,7 @@ public class MirrorVariables : NetworkBehaviour
 
     
 
-    [Command(ignoreAuthority = true)]
+    [Command(requiresAuthority = false)]
     public void CmdVictory()
     {
         RpcVictory();
@@ -238,7 +239,7 @@ public class MirrorVariables : NetworkBehaviour
         Debug.Log("functionfruit");
         CmdUnlockDoor();
     }
-    [Command(ignoreAuthority = true)]
+    [Command(requiresAuthority = false)]
     public void CmdUnlockDoor()
     {
         Debug.Log("functioncmd");

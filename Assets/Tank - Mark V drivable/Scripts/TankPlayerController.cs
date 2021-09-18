@@ -64,10 +64,14 @@ public class TankPlayerController : NetworkBehaviour {
     }
     public void FixedUpdate()
     {
+/*       if(!connectionToClient.isReady)
+        {
+            return;
+        } */
         CmdFixedUpdateTheSecond(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), inputManager.GetButtonDown("Exit Vehicle"), playerId);
     }
     InputManager inputManager;
-    [Command(ignoreAuthority = true)]
+    [Command(requiresAuthority = false)]
     public void CmdFixedUpdateTheSecond(float horizontalInput, float verticalInput, bool exitVehicle, int playerId1)
     {
         Debug.Log("playerId1 " + playerId1);

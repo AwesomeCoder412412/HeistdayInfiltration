@@ -581,6 +581,71 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 37
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 90}
+--- !u!1 &194550659
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 194550660}
+  - component: {fileID: 194550662}
+  - component: {fileID: 194550661}
+  m_Layer: 0
+  m_Name: TankSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &194550660
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 194550659}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 42
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &194550661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 194550659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35cde47f6581f47dc85ecb2e6f82bb5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  tankExists: 0
+  tank: {fileID: 1705450472}
+--- !u!114 &194550662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 194550659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 1165551622
+  serverOnly: 0
+  visible: 0
+  m_AssetId: 
+  hasSpawned: 0
 --- !u!1001 &239027759
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -863,8 +928,6 @@ GameObject:
   - component: {fileID: 364437985}
   - component: {fileID: 364437984}
   - component: {fileID: 364437983}
-  - component: {fileID: 364437982}
-  - component: {fileID: 364437986}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -892,22 +955,6 @@ RectTransform:
   m_AnchoredPosition: {x: 3.2, y: -106}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &364437982
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 364437980}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db6289608c1324cf2831be7cd3576ffa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  freecam: {fileID: 526291746}
-  self: {fileID: 909938189}
 --- !u!114 &364437983
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1002,22 +1049,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 364437980}
   m_CullTransparentMesh: 0
---- !u!114 &364437986
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 364437980}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneId: 1045506731
-  serverOnly: 0
-  m_AssetId: 
-  hasSpawned: 0
 --- !u!1 &391020289
 GameObject:
   m_ObjectHideFlags: 0
@@ -1106,6 +1137,8 @@ GameObject:
   - component: {fileID: 398087900}
   - component: {fileID: 398087899}
   - component: {fileID: 398087898}
+  - component: {fileID: 398087904}
+  - component: {fileID: 398087903}
   m_Layer: 5
   m_Name: Victory
   m_TagString: Untagged
@@ -1213,6 +1246,39 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &398087903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 398087897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db6289608c1324cf2831be7cd3576ffa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  freecam: {fileID: 0}
+  self: {fileID: 0}
+--- !u!114 &398087904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 398087897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 69679746
+  serverOnly: 0
+  visible: 0
+  m_AssetId: 
+  hasSpawned: 0
 --- !u!1 &400702663
 GameObject:
   m_ObjectHideFlags: 0
@@ -1819,6 +1885,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneId: 1289397772
   serverOnly: 0
+  visible: 0
   m_AssetId: 
   hasSpawned: 0
 --- !u!1001 &678968558
@@ -2163,6 +2230,8 @@ GameObject:
   - component: {fileID: 909938192}
   - component: {fileID: 909938191}
   - component: {fileID: 909938190}
+  - component: {fileID: 909938196}
+  - component: {fileID: 909938195}
   m_Layer: 5
   m_Name: DeathCanvas
   m_TagString: Untagged
@@ -2271,6 +2340,39 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &909938195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 909938189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db6289608c1324cf2831be7cd3576ffa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  freecam: {fileID: 526291746}
+  self: {fileID: 909938189}
+--- !u!114 &909938196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 909938189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 333853025
+  serverOnly: 0
+  visible: 0
+  m_AssetId: 
+  hasSpawned: 0
 --- !u!1 &921298058
 GameObject:
   m_ObjectHideFlags: 0
@@ -2891,9 +2993,20 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   clientAuthority: 0
-  localPositionSensitivity: 0.01
-  localRotationSensitivity: 0.01
-  localScaleSensitivity: 0.01
+  sendInterval: 0.05
+  syncPosition: 1
+  syncRotation: 1
+  syncScale: 0
+  interpolatePosition: 1
+  interpolateRotation: 1
+  interpolateScale: 1
+  bufferTimeMultiplier: 3
+  bufferSizeLimit: 64
+  catchupThreshold: 6
+  catchupMultiplier: 0.1
+  showGizmos: 0
+  showOverlay: 0
+  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
 --- !u!114 &1239470023
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2908,6 +3021,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneId: 3576428443
   serverOnly: 0
+  visible: 0
   m_AssetId: 5e9e851c0e142814dac026a256ba2ac0
   hasSpawned: 0
 --- !u!136 &1239470024
@@ -3180,8 +3294,6 @@ GameObject:
   - component: {fileID: 1290695179}
   - component: {fileID: 1290695178}
   - component: {fileID: 1290695177}
-  - component: {fileID: 1290695176}
-  - component: {fileID: 1290695175}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -3209,38 +3321,6 @@ RectTransform:
   m_AnchoredPosition: {x: -171, y: -106}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1290695175
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1290695173}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneId: 837951799
-  serverOnly: 0
-  m_AssetId: 
-  hasSpawned: 0
---- !u!114 &1290695176
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1290695173}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db6289608c1324cf2831be7cd3576ffa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  freecam: {fileID: 0}
-  self: {fileID: 0}
 --- !u!114 &1290695177
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3285,8 +3365,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1290695176}
-        m_TargetAssemblyTypeName: 
+      - m_Target: {fileID: 398087903}
+        m_TargetAssemblyTypeName: DeathScreen, Assembly-CSharp
         m_MethodName: Retry
         m_Mode: 1
         m_Arguments:
@@ -3871,6 +3951,7 @@ MonoBehaviour:
   - {fileID: 86415172}
   - {fileID: 1832703141}
   - {fileID: 391020289}
+  heartCount: 0
 --- !u!1 &1471883913
 GameObject:
   m_ObjectHideFlags: 0
@@ -4159,8 +4240,6 @@ GameObject:
   - component: {fileID: 1607413861}
   - component: {fileID: 1607413860}
   - component: {fileID: 1607413859}
-  - component: {fileID: 1607413858}
-  - component: {fileID: 1607413862}
   m_Layer: 5
   m_Name: Button (1)
   m_TagString: Untagged
@@ -4188,22 +4267,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -106}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1607413858
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1607413856}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db6289608c1324cf2831be7cd3576ffa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  freecam: {fileID: 0}
-  self: {fileID: 0}
 --- !u!114 &1607413859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4260,8 +4323,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1607413858}
-        m_TargetAssemblyTypeName: 
+      - m_Target: {fileID: 2040077122}
+        m_TargetAssemblyTypeName: DeathScreen, Assembly-CSharp
         m_MethodName: Resume
         m_Mode: 1
         m_Arguments:
@@ -4310,22 +4373,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1607413856}
   m_CullTransparentMesh: 0
---- !u!114 &1607413862
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1607413856}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneId: 1897316816
-  serverOnly: 0
-  m_AssetId: 
-  hasSpawned: 0
 --- !u!1 &1705450472 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 162780, guid: 59320ed1ba3b61241bc6d7c0bb56b63e,
@@ -4369,9 +4416,20 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   clientAuthority: 0
-  localPositionSensitivity: 0.01
-  localRotationSensitivity: 0.01
-  localScaleSensitivity: 0.01
+  sendInterval: 0.05
+  syncPosition: 1
+  syncRotation: 1
+  syncScale: 0
+  interpolatePosition: 1
+  interpolateRotation: 1
+  interpolateScale: 1
+  bufferTimeMultiplier: 3
+  bufferSizeLimit: 64
+  catchupThreshold: 6
+  catchupMultiplier: 0.1
+  showGizmos: 0
+  showOverlay: 0
+  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
 --- !u!114 &1705450475
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4386,22 +4444,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneId: 707847308
   serverOnly: 0
+  visible: 0
   m_AssetId: 59320ed1ba3b61241bc6d7c0bb56b63e
   hasSpawned: 0
---- !u!114 &1705450476
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1705450472}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00a1e8b95f64f415fa939bcb611dc4f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tankToggle: {fileID: 0}
-  tankBarrier: {fileID: 1824681422}
 --- !u!54 &1705450480 stripped
 Rigidbody:
   m_CorrespondingSourceObject: {fileID: 5472890, guid: 59320ed1ba3b61241bc6d7c0bb56b63e,
@@ -4420,8 +4465,6 @@ GameObject:
   - component: {fileID: 1721753345}
   - component: {fileID: 1721753344}
   - component: {fileID: 1721753343}
-  - component: {fileID: 1721753342}
-  - component: {fileID: 1721753341}
   m_Layer: 5
   m_Name: Button (2)
   m_TagString: Untagged
@@ -4449,38 +4492,6 @@ RectTransform:
   m_AnchoredPosition: {x: 171, y: -106}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1721753341
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1721753339}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneId: 4021580586
-  serverOnly: 0
-  m_AssetId: 
-  hasSpawned: 0
---- !u!114 &1721753342
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1721753339}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db6289608c1324cf2831be7cd3576ffa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  freecam: {fileID: 0}
-  self: {fileID: 0}
 --- !u!114 &1721753343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4525,8 +4536,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1721753342}
-        m_TargetAssemblyTypeName: 
+      - m_Target: {fileID: 398087903}
+        m_TargetAssemblyTypeName: DeathScreen, Assembly-CSharp
         m_MethodName: MainMenu
         m_Mode: 1
         m_Arguments:
@@ -4677,7 +4688,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 162780, guid: 59320ed1ba3b61241bc6d7c0bb56b63e, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 162780, guid: 59320ed1ba3b61241bc6d7c0bb56b63e, type: 3}
       propertyPath: m_TagString
@@ -4852,8 +4863,6 @@ GameObject:
   - component: {fileID: 1781584226}
   - component: {fileID: 1781584225}
   - component: {fileID: 1781584224}
-  - component: {fileID: 1781584223}
-  - component: {fileID: 1781584227}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -4881,22 +4890,6 @@ RectTransform:
   m_AnchoredPosition: {x: -171, y: -106}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1781584223
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1781584221}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db6289608c1324cf2831be7cd3576ffa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  freecam: {fileID: 0}
-  self: {fileID: 0}
 --- !u!114 &1781584224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4941,8 +4934,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1781584223}
-        m_TargetAssemblyTypeName: 
+      - m_Target: {fileID: 2040077122}
+        m_TargetAssemblyTypeName: DeathScreen, Assembly-CSharp
         m_MethodName: Retry
         m_Mode: 1
         m_Arguments:
@@ -4991,22 +4984,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1781584221}
   m_CullTransparentMesh: 0
---- !u!114 &1781584227
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1781584221}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneId: 2751249668
-  serverOnly: 0
-  m_AssetId: 
-  hasSpawned: 0
 --- !u!1 &1823789947
 GameObject:
   m_ObjectHideFlags: 0
@@ -5268,8 +5245,6 @@ GameObject:
   - component: {fileID: 1841209883}
   - component: {fileID: 1841209882}
   - component: {fileID: 1841209881}
-  - component: {fileID: 1841209880}
-  - component: {fileID: 1841209884}
   m_Layer: 5
   m_Name: Button (2)
   m_TagString: Untagged
@@ -5297,22 +5272,6 @@ RectTransform:
   m_AnchoredPosition: {x: 223.3, y: -106}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1841209880
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1841209878}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db6289608c1324cf2831be7cd3576ffa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  freecam: {fileID: 526291746}
-  self: {fileID: 909938189}
 --- !u!114 &1841209881
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5357,8 +5316,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1841209880}
-        m_TargetAssemblyTypeName: 
+      - m_Target: {fileID: 909938195}
+        m_TargetAssemblyTypeName: DeathScreen, Assembly-CSharp
         m_MethodName: MainMenu
         m_Mode: 1
         m_Arguments:
@@ -5407,22 +5366,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1841209878}
   m_CullTransparentMesh: 0
---- !u!114 &1841209884
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1841209878}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneId: 2374837174
-  serverOnly: 0
-  m_AssetId: 
-  hasSpawned: 0
 --- !u!1 &1843429671
 GameObject:
   m_ObjectHideFlags: 0
@@ -5455,6 +5398,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneId: 1059226394
   serverOnly: 0
+  visible: 0
   m_AssetId: 
   hasSpawned: 0
 --- !u!114 &1843429673
@@ -5471,6 +5415,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  treasureSpawned: 0
+  doingPuzzle: 0
   minRooms: 5
   victoryScreen: {fileID: 398087897}
   maxRooms: 10
@@ -5875,8 +5821,6 @@ GameObject:
   - component: {fileID: 1963865513}
   - component: {fileID: 1963865512}
   - component: {fileID: 1963865511}
-  - component: {fileID: 1963865510}
-  - component: {fileID: 1963865514}
   m_Layer: 5
   m_Name: Button (2)
   m_TagString: Untagged
@@ -5904,22 +5848,6 @@ RectTransform:
   m_AnchoredPosition: {x: 171, y: -106}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1963865510
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1963865508}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db6289608c1324cf2831be7cd3576ffa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  freecam: {fileID: 0}
-  self: {fileID: 0}
 --- !u!114 &1963865511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5964,8 +5892,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1963865510}
-        m_TargetAssemblyTypeName: 
+      - m_Target: {fileID: 2040077122}
+        m_TargetAssemblyTypeName: DeathScreen, Assembly-CSharp
         m_MethodName: MainMenu
         m_Mode: 1
         m_Arguments:
@@ -6014,22 +5942,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1963865508}
   m_CullTransparentMesh: 0
---- !u!114 &1963865514
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1963865508}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneId: 3451831504
-  serverOnly: 0
-  m_AssetId: 
-  hasSpawned: 0
 --- !u!1 &2008065026
 GameObject:
   m_ObjectHideFlags: 0
@@ -6124,6 +6036,8 @@ GameObject:
   - component: {fileID: 2040077119}
   - component: {fileID: 2040077118}
   - component: {fileID: 2040077117}
+  - component: {fileID: 2040077123}
+  - component: {fileID: 2040077122}
   m_Layer: 5
   m_Name: Canvas (1)
   m_TagString: PauseMenu
@@ -6230,6 +6144,39 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &2040077122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2040077116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db6289608c1324cf2831be7cd3576ffa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  freecam: {fileID: 0}
+  self: {fileID: 0}
+--- !u!114 &2040077123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2040077116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 4148113232
+  serverOnly: 0
+  visible: 0
+  m_AssetId: 
+  hasSpawned: 0
 --- !u!1 &2040575266
 GameObject:
   m_ObjectHideFlags: 0
@@ -6242,8 +6189,6 @@ GameObject:
   - component: {fileID: 2040575271}
   - component: {fileID: 2040575270}
   - component: {fileID: 2040575269}
-  - component: {fileID: 2040575268}
-  - component: {fileID: 2040575272}
   m_Layer: 5
   m_Name: Button (1)
   m_TagString: Untagged
@@ -6271,22 +6216,6 @@ RectTransform:
   m_AnchoredPosition: {x: -230, y: -106}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2040575268
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2040575266}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db6289608c1324cf2831be7cd3576ffa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  freecam: {fileID: 526291746}
-  self: {fileID: 909938189}
 --- !u!114 &2040575269
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6331,10 +6260,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 909938189}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 909938195}
+        m_TargetAssemblyTypeName: DeathScreen, Assembly-CSharp
+        m_MethodName: Retry
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -6381,22 +6310,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2040575266}
   m_CullTransparentMesh: 0
---- !u!114 &2040575272
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2040575266}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneId: 1688181680
-  serverOnly: 0
-  m_AssetId: 
-  hasSpawned: 0
 --- !u!1001 &2076986852
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6486,6 +6399,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneId: 163680010
   serverOnly: 0
+  visible: 0
   m_AssetId: 
   hasSpawned: 0
 --- !u!114 &2077791900
