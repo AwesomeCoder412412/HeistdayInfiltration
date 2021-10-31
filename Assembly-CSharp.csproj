@@ -65,10 +65,12 @@
     <Compile Include="Assets/Tank - Mark V drivable/Scripts/CameraController.cs" />
     <Compile Include="Assets/SimpleFirebaseUnity/Scripts/FirebaseObserver.cs" />
     <Compile Include="Assets/TotalJSON/Scripts/Attributes/IncludeToJSONSerializeAttribute.cs" />
+    <Compile Include="Assets/Scripts/Redundancy.cs" />
     <Compile Include="Assets/Low Poly FPS Pack - Free (Sample)/Components/Scripts/Casings_&amp;_Projectiles/GrenadeScript.cs" />
     <Compile Include="Assets/TotalJSON/Examples/ExampleSerializeObjects/ExamplePlayerItemObject.cs" />
     <Compile Include="Assets/SimpleFirebaseUnity/Scripts/FirebaseManager.cs" />
     <Compile Include="Assets/TotalJSON/Examples/SaveAndLoadFile.cs" />
+    <Compile Include="Assets/Scripts/RoomEvents.cs" />
     <Compile Include="Assets/SampleScenes/Scripts/SlowMoButton.cs" />
     <Compile Include="Assets/SampleScenes/Menu/Scripts/SceneAndURLLoader.cs" />
     <Compile Include="Assets/Low Poly FPS Pack - Free (Sample)/Components/Demo_Scene_Components/Scripts/ExplosiveBarrelScript.cs" />
@@ -81,6 +83,7 @@
     <Compile Include="Assets/Easy Weapons/Scripts/TimedObjectDestroyer.cs" />
     <Compile Include="Assets/SimpleFirebaseUnity/Sample/AutoRotate.cs" />
     <Compile Include="Assets/Tank - Mark V drivable/Scripts/RayCastShoot.cs" />
+    <Compile Include="Assets/SMC Pack 1/Demo/DemoAssets/V_Text.cs" />
     <Compile Include="Assets/Easy Weapons/Scripts/Sample/MouseRotator.cs" />
     <Compile Include="Assets/Easy Weapons/Scripts/Spawner.cs" />
     <Compile Include="Assets/TotalJSON/Scripts/JBoolean.cs" />
@@ -154,18 +157,22 @@
     <Compile Include="Assets/InputManager.cs" />
     <Compile Include="Assets/Easy Weapons/Scripts/WeaponSystem.cs" />
     <Compile Include="Assets/SimpleFirebaseUnity/Scripts/FirebaseRoot.cs" />
+    <Compile Include="Assets/Scripts/BoingBoing.cs" />
     <Compile Include="Assets/KeybindDialogBox.cs" />
     <Compile Include="Assets/SimpleFirebaseUnity/Scripts/FirebaseQueue.cs" />
     <Compile Include="Assets/Scripts/RoomTrigger.cs" />
     <Compile Include="Assets/Scripts/GuardAI.cs" />
     <Compile Include="Assets/Low Poly FPS Pack - Free (Sample)/Components/Scripts/Misc/LookAtCamera.cs" />
     <Compile Include="Assets/TotalJSON/Internal/CreateStringRunner.cs" />
+    <Compile Include="Assets/SMC Pack 1/Demo/DemoAssets/V_SMC_Handler.cs" />
     <Compile Include="Assets/TotalJSON/Internal/StringPointer.cs" />
     <Compile Include="Assets/Low Poly FPS Pack - Free (Sample)/Components/Scripts/Weapon_Scripts/HandgunScriptLPFP.cs" />
     <Compile Include="Assets/TotalJSON/Scripts/Exceptions/JValueNullException.cs" />
     <Compile Include="Assets/Scripts/FirebaseVariables.cs" />
+    <Compile Include="Assets/Scripts/SpawnTank.cs" />
     <Compile Include="Assets/Scripts/Treasure.cs" />
     <Compile Include="Assets/SimpleCharacter.cs" />
+    <Compile Include="Assets/SMC Pack 1/Demo/DemoAssets/V_SMC_Camera.cs" />
     <Compile Include="Assets/TotalJSON/Scripts/Settings/SerializeSettings.cs" />
     <Compile Include="Assets/TotalJSON/Scripts/Exceptions/JArgumentNullException.cs" />
     <Compile Include="Assets/Scripts/JoinServer.cs" />
@@ -186,8 +193,7 @@
     <Compile Include="Assets/Easy Weapons/Scripts/BulletHole.cs" />
     <Compile Include="Assets/TotalJSON/Scripts/Exceptions/UnknownObjectTypeException.cs" />
     <Compile Include="Assets/Scripts/GenerateRooms.cs" />
-    <Compile Include="Assets/Scripts/SpawnTank.cs" />
-    <Compile Include="Assets/Scripts/Redundancy.cs" />
+    <Compile Include="Assets/Scripts/GuardAssignment.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/Free Low Poly Desert Pack/Materials/Shaders/Vertex_Color_Unlit.shader" />

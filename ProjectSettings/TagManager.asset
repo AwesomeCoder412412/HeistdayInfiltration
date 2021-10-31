@@ -29,6 +29,7 @@ TagManager:
   - Destroy
   - Spawn
   - ServerButton
+  - Floor
   layers:
   - Default
   - TransparentFX
@@ -43,7 +44,7 @@ TagManager:
   - Tank1
   - 
   - 
-  - 
+  - Wall
   - 
   - 
   - 

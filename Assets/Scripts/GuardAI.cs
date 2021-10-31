@@ -66,6 +66,16 @@ public class GuardAI : NetworkBehaviour
         }
     }
 
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Floor")
+        {
+            Debug.Log("yes2");
+
+            roomIndex = other.gameObject.GetComponent<GuardAssignment>().room.GetComponent<RoomEvents>().roomIndex;
+        }
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (!isServer)
@@ -90,6 +100,11 @@ public class GuardAI : NetworkBehaviour
             {
                 Destroy(gameObject);
                 ScoreManager.score++;
+            }
+            if (collision.gameObject.tag == "Floor")
+            {
+                roomIndex = collision.gameObject.GetComponent<GuardAssignment>().room.GetComponent<RoomEvents>().roomIndex;
+                Debug.Log("yes2");
             }
 
         }

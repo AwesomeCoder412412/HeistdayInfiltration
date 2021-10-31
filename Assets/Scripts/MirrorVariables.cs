@@ -128,6 +128,7 @@ public class MirrorVariables : NetworkBehaviour
     public void RpcRespawn()
     {
         Debug.Log("I'm getting this RPC");
+        Treasure.instance.DestroyTreasure();
         foreach (GameObject room in GameObject.FindGameObjectsWithTag("Destroy"))
         {
             Destroy(room);
@@ -187,6 +188,7 @@ public class MirrorVariables : NetworkBehaviour
         room.GetComponentInChildren<OpenPuzzle>().puzzleCanvas = puzzle;
         if (isServer)
         {
+            room.GetComponent<RoomEvents>().roomIndex = i;
             GuardAI[] enemies = room.GetComponentsInChildren<GuardAI>();
             foreach (GuardAI ai in enemies)
             {

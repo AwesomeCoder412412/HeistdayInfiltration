@@ -284,7 +284,7 @@ public class AutomaticGunScriptLPFP : MonoBehaviour {
 		//Change timescale to 10% when 4 key is pressed
 		if (Input.GetKeyDown (KeyCode.Alpha4)) 
 		{
-			Time.timeScale = 0.1f;
+			Time.timeScale = 0.01f;
 			timescaleText.text = "0.1";
 		}
 		//Pause game when 5 key is pressed
