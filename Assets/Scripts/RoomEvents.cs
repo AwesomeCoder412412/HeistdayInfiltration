@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class RoomEvents : MonoBehaviour
 {
+    public GameObject start;
     public GameObject leftWall;
     public GameObject rightWall;
     public GameObject topWall;
@@ -14,7 +15,8 @@ public class RoomEvents : MonoBehaviour
     public float sideWallSpeed;
     public float topWallSpeed;
     public int roomIndex;
-    private bool hasImploded = false;
+    public bool hasImploded = false;
+    public bool doneImploding = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -42,7 +44,19 @@ public class RoomEvents : MonoBehaviour
             topWall.transform.position += Vector3.down * sideWallSpeed * Time.deltaTime;
             frontDoor.transform.position += Vector3.forward * sideWallSpeed * Time.deltaTime;
             backDoor.transform.position += Vector3.back * sideWallSpeed * Time.deltaTime;
-            
+
+        }
+        else if (hasImploded && timeSoFar >= timeLeft)
+        {
+            doneImploding = true;
+            foreach (PlayerController pc in GameObject.FindObjectsOfType<PlayerController>())
+            {
+                Debug.Log("yes3");
+                if (pc.roomIndex == roomIndex)
+                {
+                    pc.RemoveHearts(3);
+                }
+            }
         }
         else if(!enemiesExist && timeSoFar - timeLeft > 5 && !hasImploded)
         {
@@ -52,6 +66,9 @@ public class RoomEvents : MonoBehaviour
     }
     public void ImplodeRoom()
     {
+        frontDoor.GetComponent<Collider>().enabled = true;
+        backDoor.GetComponent<Collider>().enabled = true;
+        GetComponentInChildren<BallCreator>().spawnBalls();
         timeSoFar = 0;
     }
 }

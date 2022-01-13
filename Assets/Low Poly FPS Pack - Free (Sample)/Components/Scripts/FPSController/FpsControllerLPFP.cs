@@ -17,6 +17,8 @@ namespace FPSControllerLPFP
         [Tooltip("The transform component that holds the gun camera."), SerializeField]
         private Transform arms;
 
+        public LayerMask playerLayerMask;
+
         [Tooltip("The position of the arms and gun camera relative to the fps controller GameObject."), SerializeField]
         private Vector3 armPosition;
 
@@ -164,17 +166,25 @@ namespace FPSControllerLPFP
             var bounds = _collider.bounds;
             var extents = bounds.extents;
             var radius = extents.x - 0.01f;
-            Physics.SphereCastNonAlloc(bounds.center, radius, Vector3.down,
-                _groundCastResults, extents.y - radius * 0.5f, ~0, QueryTriggerInteraction.Ignore);
-            if (!_groundCastResults.Any(hit => hit.collider != null && hit.collider != _collider)) return;
-            for (var i = 0; i < _groundCastResults.Length; i++)
-            {
-                _groundCastResults[i] = new RaycastHit();
-            }
+            //Physics.SphereCastNonAlloc(bounds.center, radius, Vector3.down,
+            //    _groundCastResults, extents.y - radius * 0.5f, ~0, QueryTriggerInteraction.Ignore);
+            //if (!_groundCastResults.Any(hit => hit.collider != null && hit.collider != _collider)) return;
+            //for (var i = 0; i < _groundCastResults.Length; i++)
+            //{
+            //    _groundCastResults[i] = new RaycastHit();
+            //}
 
-            _isGrounded = true;
+            //_isGrounded = true;
+
+            //Gizmos.DrawSphere(bounds.center, radius);
+            RaycastHit hit;
+            if (Physics.Raycast(bounds.center, Vector3.down, out hit, (extents.y / 2) + 1f, playerLayerMask))
+            {
+                Debug.Log(hit.collider + " hit");
+                _isGrounded = hit.collider != null;
+            }
         }
-			
+
         /// Processes the character movement and the camera rotation every fixed framerate frame.
         private void FixedUpdate()
         {
@@ -245,13 +255,15 @@ namespace FPSControllerLPFP
             float rotYCurrent = _rotationY._current;
             var rotationX = _rotationX.Update(clientInput.rotateX * mouseSensitivity, rotationSmoothness);
             var rotationY = _rotationY.Update(clientInput.rotateY * mouseSensitivity, rotationSmoothness);
-            var clampedY = RestrictVerticalRotation(rotationY);
+            //var clampedY = RestrictVerticalRotation(rotationY);
+            var clampedY = rotationY;
             _rotationY.Current = clampedY;
 			var worldUp = arms.InverseTransformDirection(Vector3.up);
-			var rotation = arms.rotation *
-                           Quaternion.AngleAxis(rotationX, worldUp) *
-                           Quaternion.AngleAxis(clampedY, Vector3.left);
-            transform.eulerAngles = new Vector3(0f, rotation.eulerAngles.y, 0f);
+            /*	var rotation = arms.rotation *
+                               Quaternion.AngleAxis(rotationX, worldUp) *
+                               Quaternion.AngleAxis(clampedY, Vector3.left);*/
+            var rotation = Quaternion.Euler(_rotationX._current, _rotationY._current, 0);
+            //transform.eulerAngles = new Vector3(0f, rotation.eulerAngles.y, 0f);
 			arms.rotation = rotation;
             if (callingFromClient)
             {

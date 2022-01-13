@@ -30,6 +30,8 @@ TagManager:
   - Spawn
   - ServerButton
   - Floor
+  - Fridge
+  - Ball
   layers:
   - Default
   - TransparentFX

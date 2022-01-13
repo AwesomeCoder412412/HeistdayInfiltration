@@ -1,12 +1,12 @@
 ﻿<Properties StartupConfiguration="{D0DA94B4-F05B-33A0-D399-CC84D949F134}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/RoomEvents.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Low Poly FPS Pack - Free (Sample)/Components/Scripts/Weapon_Scripts/AutomaticGunScriptLPFP.cs">
     <Files>
       <File FileName="Assets/Scripts/PausedMenu.cs" Line="13" Column="11" IsPinned="True" />
-      <File FileName="Assets/Low Poly FPS Pack - Free (Sample)/Components/Scripts/FPSController/FpsControllerLPFP.cs" IsPinned="True" />
+      <File FileName="Assets/Low Poly FPS Pack - Free (Sample)/Components/Scripts/FPSController/FpsControllerLPFP.cs" Line="196" Column="62" IsPinned="True" />
       <File FileName="Assets/Scripts/Treasure.cs" />
       <File FileName="Assets/Scripts/SimonSaysRipoff.cs" />
       <File FileName="Assets/Scripts/HealthManager.cs" />
-      <File FileName="Assets/Scripts/PlayerController.cs" />
+      <File FileName="Assets/Scripts/PlayerController.cs" Line="168" Column="29" />
       <File FileName="Assets/Scripts/LadderScript.cs" />
       <File FileName="Assets/Standard Assets/Characters/FirstPersonCharacter/Scripts/FirstPersonController.cs" />
       <File FileName="Assets/InputManager.cs" />
@@ -17,7 +17,7 @@
       <File FileName="Assets/Tank - Mark V drivable/Scripts/TankPlayerController.cs" />
       <File FileName="Assets/Mirror/Runtime/Transport/MiddlewareTransport.cs" />
       <File FileName="Assets/Scripts/JoinServer.cs" />
-      <File FileName="Assets/Scripts/PlayButton.cs" />
+      <File FileName="Assets/Scripts/PlayButton.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Retry.cs" />
       <File FileName="Assets/Scripts/GuardCreator.cs" />
       <File FileName="Assets/Scripts/TeamateSpawner.cs" />
@@ -46,10 +46,10 @@
       <File FileName="Assets/Mirror/Examples/MultipleMatches/Scripts/MatchController.cs" />
       <File FileName="Assets/Mirror/Components/NetworkAnimator.cs" />
       <File FileName="Assets/Mirror/Examples/MultipleAdditiveScenes/Scripts/PlayerScore.cs" />
-      <File FileName="Assets/Low Poly FPS Pack - Free (Sample)/Components/Scripts/Weapon_Scripts/AutomaticGunScriptLPFP.cs" />
+      <File FileName="Assets/Low Poly FPS Pack - Free (Sample)/Components/Scripts/Weapon_Scripts/AutomaticGunScriptLPFP.cs" Line="145" Column="39" />
       <File FileName="Assets/Low Poly FPS Pack - Free (Sample)/Components/Scripts/Weapon_Scripts/HandgunScriptLPFP.cs" />
       <File FileName="Assets/Scripts/RespawnPain.cs" />
-      <File FileName="Assets/Scripts/GenerateRooms.cs" />
+      <File FileName="Assets/Scripts/GenerateRooms.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/DeathScreen.cs" />
       <File FileName="Assets/Mirror/Runtime/NetworkConnection.cs" />
       <File FileName="Assets/Teleportation Pad/CustomTeleporter.cs" />
@@ -78,14 +78,19 @@
       <File FileName="Assets/Low Poly FPS Pack - Free (Sample)/Components/Scripts/Explosions_&amp;_Impacts/ImpactScript.cs" />
       <File FileName="Assets/Low Poly FPS Pack - Free (Sample)/Components/Demo_Scene_Components/Scripts/TargetScript.cs" />
       <File FileName="Assets/Scripts/BoingBoing.cs" />
-      <File FileName="Assets/Scripts/RoomEvents.cs" Line="32" Column="14" />
+      <File FileName="Assets/Scripts/RoomEvents.cs" />
       <File FileName="Assets/Scripts/GuardAssignment.cs" />
+      <File FileName="Assets/Scripts/BallCreator.cs" />
+      <File FileName="Assets/Scripts/RoomProcGen.cs" />
+      <File FileName="Assets/Scripts/PropProp.cs" />
+      <File FileName="Assets/Scripts/GravityPlatform.cs" Line="29" Column="10" />
+      <File FileName="Assets/Mirror/Runtime/Transport/Telepathy/Telepathy/Client.cs" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="Heistday - Infiltration" expanded="True">
-            <Node name="Assets" expanded="True" selected="True">
+            <Node name="Assets" expanded="True">
               <Node name="Low Poly FPS Pack - Free (Sample)" expanded="True">
                 <Node name="Components" expanded="True">
                   <Node name="Demo_Scene_Components" expanded="True">
@@ -97,11 +102,25 @@
                     <Node name="Explosions_&amp;_Impacts" expanded="True" />
                     <Node name="FPSController" expanded="True" />
                     <Node name="Misc" expanded="True" />
-                    <Node name="Weapon_Scripts" expanded="True" />
+                    <Node name="Weapon_Scripts" expanded="True">
+                      <Node name="AutomaticGunScriptLPFP.cs" selected="True" />
+                    </Node>
+                  </Node>
+                </Node>
+              </Node>
+              <Node name="Mirror" expanded="True">
+                <Node name="Runtime" expanded="True">
+                  <Node name="Transport" expanded="True">
+                    <Node name="Telepathy" expanded="True">
+                      <Node name="Telepathy" expanded="True" />
+                    </Node>
                   </Node>
                 </Node>
               </Node>
               <Node name="Scripts" expanded="True" />
+              <Node name="SimpleFirebaseUnity" expanded="True">
+                <Node name="Scripts" expanded="True" />
+              </Node>
               <Node name="SMC Pack 1" expanded="True">
                 <Node name="Demo" expanded="True">
                   <Node name="DemoAssets" expanded="True" />
@@ -118,11 +137,10 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="eff3c1ef-295f-41a9-bcde-25ff531c02b9" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="6e3a1d33-7a68-4587-9dbc-c7602de70029" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint file="/Users/jacksegil/Heistday - Infiltration/Assets/Scripts/GenerateRooms.cs" relfile="Assets/Scripts/GenerateRooms.cs" line="50" column="1" />
-      <Breakpoint file="/Users/jacksegil/Heistday - Infiltration/Assets/Scripts/PlayerController.cs" relfile="Assets/Scripts/PlayerController.cs" line="43" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />

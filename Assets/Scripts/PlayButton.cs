@@ -47,15 +47,16 @@ public class PlayButton : MonoBehaviour
 
     public static string GetLocalIPAddress()
     {
-        var host = Dns.GetHostEntry(Dns.GetHostName());
-        foreach (var ip in host.AddressList)
-        {
-            if (ip.AddressFamily == AddressFamily.InterNetwork)
-            {
-                return ip.ToString();
-            }
-        }
-        throw new Exception("No network adapters with an IPv4 address in the system!");
+        //var host = Dns.GetHostEntry(Dns.GetHostName());
+        //foreach (var ip in host.AddressList)
+        //{
+        //    if (ip.AddressFamily == AddressFamily.InterNetwork)
+        //    {
+        //        return ip.ToString();
+        //    }
+        //}
+        //throw new Exception("No network adapters with an IPv4 address in the system!");
+        return "123";
     }
 
     public void Play()
@@ -67,7 +68,7 @@ public class PlayButton : MonoBehaviour
         PlayerPrefs.SetInt(players1, int.Parse(players.text));
         NetworkManager.singleton.maxConnections = int.Parse(players.text);
         NetworkManager.singleton.StopHost();
-        string myIp = GetLocalIPAddress();
+       string myIp = GetLocalIPAddress();
         //Firebase firebase = Firebase.CreateNew("https://heistday-9d49b-default-rtdb.firebaseio.com/");
         firebase.OnPushSuccess += PushHandler;
         firebase.OnPushFailed += PushFailedHandler;

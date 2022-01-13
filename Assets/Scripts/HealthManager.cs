@@ -63,7 +63,7 @@ public class HealthManager : MonoBehaviour
             heartCount--;
             ScoreManager.score += 50;
 
-            if (heartCount == 0)
+            if (heartCount <= 0)
             {
                 death.SetActive(true);
                 Cursor.lockState = CursorLockMode.None;

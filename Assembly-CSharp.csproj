@@ -60,6 +60,7 @@
     <Compile Include="Assets/TotalJSON/Examples/ParseAndHandleJSON.cs" />
     <Compile Include="Assets/TotalJSON/Scripts/Exceptions/JArrayIndexOutOfRangeException.cs" />
     <Compile Include="Assets/Nokobot/ModernGuns_Handgun/Demo Assets/SimpleShoot.cs" />
+    <Compile Include="Assets/Scripts/GuardAssignment.cs" />
     <Compile Include="Assets/SimpleFirebaseUnity/Scripts/FirebaseParam.cs" />
     <Compile Include="Assets/Scripts/LookAtPlayer.cs" />
     <Compile Include="Assets/Tank - Mark V drivable/Scripts/CameraController.cs" />
@@ -101,10 +102,13 @@
     <Compile Include="Assets/SimpleFirebaseUnity/Scripts/Firebase.cs" />
     <Compile Include="Assets/Scripts/TeamateSpawner.cs" />
     <Compile Include="Assets/Tank - Mark V drivable/Scripts/TracksControler.cs" />
+    <Compile Include="Assets/Scripts/RoomProcGen.cs" />
     <Compile Include="Assets/TotalJSON/Scripts/JString.cs" />
     <Compile Include="Assets/TotalJSON/Scripts/Settings/CreateStringSettings.cs" />
     <Compile Include="Assets/Low Poly FPS Pack - Free (Sample)/Components/Scripts/Explosions_&amp;_Impacts/ImpactScript.cs" />
+    <Compile Include="Assets/Scripts/PropProp.cs" />
     <Compile Include="Assets/Scripts/GuardCreator.cs" />
+    <Compile Include="Assets/Scripts/BallCreator.cs" />
     <Compile Include="Assets/Easy Weapons/Scripts/Projectile.cs" />
     <Compile Include="Assets/Scripts/AchievementImage.cs" />
     <Compile Include="Assets/TotalJSON/Scripts/JNull.cs" />
@@ -193,7 +197,7 @@
     <Compile Include="Assets/Easy Weapons/Scripts/BulletHole.cs" />
     <Compile Include="Assets/TotalJSON/Scripts/Exceptions/UnknownObjectTypeException.cs" />
     <Compile Include="Assets/Scripts/GenerateRooms.cs" />
-    <Compile Include="Assets/Scripts/GuardAssignment.cs" />
+    <Compile Include="Assets/Scripts/GravityPlatform.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/Free Low Poly Desert Pack/Materials/Shaders/Vertex_Color_Unlit.shader" />

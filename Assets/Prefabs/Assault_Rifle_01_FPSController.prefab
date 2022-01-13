@@ -12422,7 +12422,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 96
   m_CollisionDetection: 0
 --- !u!136 &5291283570757446937
 CapsuleCollider:
@@ -12549,6 +12549,9 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   arms: {fileID: 5224763040321681491}
+  playerLayerMask:
+    serializedVersion: 2
+    m_Bits: 4292879927
   armPosition: {x: 0, y: 0, z: 0}
   walkingSound: {fileID: 8300000, guid: 6597a368cd74a924eaedb0171d5b28d3, type: 3}
   runningSound: {fileID: 8300000, guid: 0c58744c3b6fdd844b8348066c3f703e, type: 3}
@@ -12556,10 +12559,10 @@ MonoBehaviour:
   runningSpeed: 9
   movementSmoothness: 0.125
   jumpForce: 35
-  mouseSensitivity: 7
+  mouseSensitivity: 0
   rotationSmoothness: 0.05
-  minVerticalAngle: -90
-  maxVerticalAngle: 90
+  minVerticalAngle: -180
+  maxVerticalAngle: 180
   anim: {fileID: 5323072802801646499}
   input:
     rotateX: Mouse X

@@ -99,6 +99,21 @@ public class PlayerController : NetworkBehaviour
         {
             return;
         }
+        if (collision.gameObject.CompareTag("Fridge"))
+        {
+            foreach (RoomEvents re in GameObject.FindObjectsOfType<RoomEvents>())
+            {
+                if (re.roomIndex == roomIndex + 1)
+                {
+                    gameObject.transform.position = re.start.transform.position;
+                }
+            }
+        }
+        if (collision.gameObject.CompareTag("Ball"))
+        {
+            Vector3 velocity = collision.gameObject.GetComponent<Rigidbody>().velocity;
+            transform.position += (velocity.normalized * velocity.magnitude) / 100;
+        }
         if (collision.gameObject.CompareTag("Bullet"))
         {
             HealthManager.instance.RemoveHeart();
@@ -110,6 +125,12 @@ public class PlayerController : NetworkBehaviour
             {
                 Debug.Log("client hit by bullet");
             }
+        }
+    }
+    public void RemoveHearts(int hearts)
+    {
+        for (int i = 0; i < hearts; i++) {
+            HealthManager.instance.RemoveHeart();
         }
     }
 
@@ -134,6 +155,24 @@ public class PlayerController : NetworkBehaviour
     }
     public void Update()
     {
+        Vector3 curRot = gameObject.transform.rotation.eulerAngles;
+        Vector3 targetRot = Vector3.zero;
+        if (Physics.gravity.x != 0)
+        {
+            targetRot.x = 180;
+            targetRot.y = (Physics.gravity.x > 0 ? -90 : 90);
+            
+        }
+        else if (Physics.gravity.y != 0)
+        {
+            targetRot.z = 0;
+        }
+        else
+        {
+            targetRot.z = (Physics.gravity.z > 0 ? 180 : 0);
+        }
+        //transform.rotation = Quaternion.Euler(targetRot);
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(targetRot), 0.5f);
         //DontDestroyOnLoad(gameObject);
         if (transform.position.y < 70)
         {
@@ -273,4 +312,6 @@ public class PlayerController : NetworkBehaviour
     {
         transform.position = vector3;
     }
+
+    
 }
