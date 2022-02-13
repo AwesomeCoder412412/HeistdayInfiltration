@@ -178,7 +178,7 @@ namespace FPSControllerLPFP
 
             //Gizmos.DrawSphere(bounds.center, radius);
             RaycastHit hit;
-            if (Physics.Raycast(bounds.center, Vector3.down, out hit, (extents.y / 2) + 1f, playerLayerMask))
+            if (Physics.Raycast(bounds.center, Physics.gravity.normalized, out hit, (extents.y / 2) + 1f, playerLayerMask))
             {
                 Debug.Log(hit.collider + " hit");
                 _isGrounded = hit.collider != null;
@@ -255,7 +255,7 @@ namespace FPSControllerLPFP
             float rotYCurrent = _rotationY._current;
             var rotationX = _rotationX.Update(clientInput.rotateX * mouseSensitivity, rotationSmoothness);
             var rotationY = _rotationY.Update(clientInput.rotateY * mouseSensitivity, rotationSmoothness);
-            //var clampedY = RestrictVerticalRotation(rotationY);
+            //var clampedY = RestrictVerticalRotation(rotationY);arms.localEulerAngles.x - mouseY
             var clampedY = rotationY;
             _rotationY.Current = clampedY;
 			var worldUp = arms.InverseTransformDirection(Vector3.up);
@@ -264,7 +264,21 @@ namespace FPSControllerLPFP
                                Quaternion.AngleAxis(clampedY, Vector3.left);*/
             var rotation = Quaternion.Euler(_rotationX._current, _rotationY._current, 0);
             //transform.eulerAngles = new Vector3(0f, rotation.eulerAngles.y, 0f);
-			arms.rotation = rotation;
+            //arms.rotation = rotation;
+            float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
+            float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
+
+            float yRotation = arms.localEulerAngles.y + mouseX;
+            float xRot = arms.localEulerAngles.x - mouseY;
+            if (xRot > 180)
+            {
+                xRot = -1 * (360 - xRot);
+            }
+            float xRotation = Mathf.Clamp(xRot, -90, 90);
+            Debug.Log(arms.localEulerAngles.x + "armsX  " + mouseY + " mouseY " + "xrot " + xRot);
+            //xRotation = Mathf.Clamp(xRotation, -90, 90);
+            arms.localEulerAngles = new Vector3(xRotation, yRotation, 0.0f);
+            //arms.localRotation = Quaternion.identity;
             if (callingFromClient)
             {
                 Debug.Log("rotXCurrent " + rotXCurrent);
@@ -325,8 +339,27 @@ namespace FPSControllerLPFP
 
         private void MoveCharacter(bool callingFromClient, ClientInput clientInput)
         {
+            Vector3 rot = arms.transform.localEulerAngles;
+            //if (Physics.gravity.x != 0)
+            //{
+            //    rot.x += arms.eulerAngles.x;
+            //    Debug.Log("x use");
+            //}
+            //else if (Physics.gravity.y != 0)
+            //{s
+            //    rot.y += arms.eulerAngles.y;
+            //    Debug.Log("y use");
+            //}
+            //else
+            //{
+            //    rot.z += arms.eulerAngles.z;
+            //    Debug.Log("z use");
+            //}
             var direction = new Vector3(clientInput.move, 0f, clientInput.strafe).normalized;
-            var worldDirection = transform.TransformDirection(direction);
+            //var worldDirection = arms.TransformDirection(direction);
+            var worldDirection = Quaternion.Euler(rot) * direction;
+            //Debug.DrawRay(transform.position, worldDirection.normalized * 2, Color.red);
+            Debug.DrawRay(transform.position, Vector3.Project(Vector3.right, rot), Color.red);
             var velocity = worldDirection * (clientInput.run ? runningSpeed : walkingSpeed);
             //Checks for collisions so that the character does not stuck when jumping against walls.
             var intersectsWall = CheckCollisionsWithWalls(velocity);
@@ -344,7 +377,27 @@ namespace FPSControllerLPFP
             //var force = new Vector3(smoothX - rigidbodyVelocity.x, 0f, smoothZ - rigidbodyVelocity.z);
             //var force = new Vector3(velocity.x - rigidbodyVelocity.x, 0f, velocity.z - rigidbodyVelocity.z);
             //_rigidbody.AddForce(force, ForceMode.VelocityChange);
-            _rigidbody.velocity = new Vector3(velocity.x, _rigidbody.velocity.y, velocity.z);
+            //_rigidbody.velocity = new Vector3(velocity.x, _rigidbody.velocity.y, velocity.z);
+            if (Physics.gravity.x != 0)
+            {
+                velocity.x = _rigidbody.velocity.x;
+            }
+            else if(Physics.gravity.y != 0)
+            {
+                velocity.y = _rigidbody.velocity.y;
+            }
+            else
+            {
+                velocity.z = _rigidbody.velocity.z;
+            }
+            _rigidbody.velocity = velocity;
+
+            Debug.Log("rot " + Quaternion.Euler(rot) + " direction " + direction + " worlddirection " + worldDirection);
+            Debug.Log("rot " + rot);
+            //Debug.Log("rigidbodyvelocity " + rigidbodyVelocity);
+            //Debug.Log("direction " + direction);
+            //Debug.Log("worlddirection " + worldDirection);
+            //Debug.Log("Velocity" + velocity);
             if (callingFromClient)
             {
                 //Debug.Log("force " + force);
@@ -389,7 +442,7 @@ namespace FPSControllerLPFP
         {
             if (!_isGrounded || !clientInput.jump) return;
             _isGrounded = false;
-            _rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            _rigidbody.AddForce(-1 * Physics.gravity.normalized * jumpForce, ForceMode.Impulse);
             if (callingFromClient)
             {
                 Debug.Log("JumpForce " + jumpForce);

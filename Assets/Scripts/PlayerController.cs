@@ -159,20 +159,20 @@ public class PlayerController : NetworkBehaviour
         Vector3 targetRot = Vector3.zero;
         if (Physics.gravity.x != 0)
         {
-            targetRot.x = 180;
-            targetRot.y = (Physics.gravity.x > 0 ? -90 : 90);
+            targetRot.z = (Physics.gravity.x > 0 ? 90 : -90);
+            //targetRot.y = (Physics.gravity.x > 0 ? -90 : 90);
             
         }
         else if (Physics.gravity.y != 0)
         {
-            targetRot.z = 0;
+            targetRot.z = (Physics.gravity.y > 0 ? 180 : 0);
         }
         else
         {
-            targetRot.z = (Physics.gravity.z > 0 ? 180 : 0);
+            targetRot.x = (Physics.gravity.z > 0 ? -90 : 90);
         }
         //transform.rotation = Quaternion.Euler(targetRot);
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(targetRot), 0.5f);
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(targetRot), .5f);
         //DontDestroyOnLoad(gameObject);
         if (transform.position.y < 70)
         {
