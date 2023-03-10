@@ -17,6 +17,8 @@ public class RoomEvents : MonoBehaviour
     public int roomIndex;
     public bool hasImploded = false;
     public bool doneImploding = false;
+    public bool isTreasure = false;
+    public bool isBallEnding = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +27,19 @@ public class RoomEvents : MonoBehaviour
 
     // Update is called once per frame
     void Update()
+    {
+        if (isTreasure)
+        {
+            return;
+        }
+        if (isBallEnding)
+        {
+            BallImplosion();
+        }
+        
+    }
+
+    public void BallImplosion()
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         bool enemiesExist = false;
@@ -58,12 +73,13 @@ public class RoomEvents : MonoBehaviour
                 }
             }
         }
-        else if(!enemiesExist && timeSoFar - timeLeft > 5 && !hasImploded)
+        else if (!enemiesExist && timeSoFar - timeLeft > 5 && !hasImploded)
         {
             ImplodeRoom();
             hasImploded = true;
         }
     }
+
     public void ImplodeRoom()
     {
         frontDoor.GetComponent<Collider>().enabled = true;

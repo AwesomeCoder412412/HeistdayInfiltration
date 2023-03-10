@@ -71,7 +71,7 @@ public class DeathScreen : NetworkBehaviour
         Debug.Log("playerd " + (player != null));
         Debug.Log("networkplayer " + (NetworkManager.singleton.playerPrefab != null));
         Debug.Log("server1 " + (MirrorVariables.instance.conn != null));
-        NetworkServer.AddPlayerForConnection(MirrorVariables.instance.conn, player);
+        NetworkServer.AddPlayerForConnection((NetworkConnectionToClient)MirrorVariables.instance.conn, player);
     }
     public void Resume()
     {

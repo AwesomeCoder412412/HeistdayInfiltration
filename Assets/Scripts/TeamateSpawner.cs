@@ -17,7 +17,7 @@ public class TeamateSpawner : MonoBehaviour
         Debug.Log(teammates);
         for (int i = 0; i < teammates; i++)
         {
-            Debug.Log("teammate45");
+            //Debug.Log("teammate45");
             GameObject teammateInstance = Instantiate(teammatePrefab, spawnLocation.position, spawnLocation.rotation);
             NetworkServer.Spawn(teammateInstance);
             teammateInstance.GetComponent<GuardAI>().SetPlayerId(playerId);

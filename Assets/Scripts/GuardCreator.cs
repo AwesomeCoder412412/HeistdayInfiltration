@@ -14,8 +14,6 @@ public class GuardCreator : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("isrunning ok");
-
         StartCoroutine(WaitASecond());
     }
     // Update is called once per frame
@@ -40,20 +38,6 @@ public class GuardCreator : NetworkBehaviour
             guardInstant.GetComponent<GuardAI>().forwardPos = guardData[i].forwardPosition;
             NetworkServer.Spawn(guardInstant);
         }
-        /*if (guards > guardArray.Length)
-        {
-            guards = guardArray.Length;
-        }
-        int guardsLeft = guards;
-        for (int i = 0; i < guardArray.Length; i++)
-        {
-            if (guardsLeft > 0)
-            {
-                guardArray[i].SetActive(true);
-                NetworkServer.Spawn(guardArray[i]);
-            }
-            guardsLeft--;
-        }*/
     }
     [ClientRpc]
     public void RpcDebug(string str)

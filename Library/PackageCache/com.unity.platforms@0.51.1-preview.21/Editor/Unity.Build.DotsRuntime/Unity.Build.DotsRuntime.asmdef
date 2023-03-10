@@ -1,0 +1,22 @@
+{
+    "name": "Unity.Build.DotsRuntime",
+    "references": [
+        "Unity.Build",
+        "Unity.Build.Editor",
+        "Unity.Build.Internals",
+        "Unity.Serialization",
+        "Unity.Serialization.Properties",
+        "Unity.Properties"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

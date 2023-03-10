@@ -225,6 +225,7 @@ QualitySettings:
   m_PerPlatformDefaultQuality:
     Android: 0
     Lumin: 0
+    Server: 0
     Standalone: 0
     Web: 0
     WebGL: 0

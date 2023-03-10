@@ -32,6 +32,9 @@ TagManager:
   - Floor
   - Fridge
   - Ball
+  - Wall
+  - Loading
+  - Teletext
   layers:
   - Default
   - TransparentFX

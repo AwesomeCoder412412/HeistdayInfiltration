@@ -1,0 +1,24 @@
+{
+  "name": "com.unity.properties",
+  "displayName": "Properties",
+  "version": "1.7.0-preview",
+  "unity": "2020.1",
+  "unityRelease": "0f1",
+  "description": "Interfaces and utilities to describe and visit data containers.",
+  "keywords": [
+    "properties",
+    "unity"
+  ],
+  "dependencies": {
+    "com.unity.nuget.mono-cecil": "0.1.6-preview.2",
+    "com.unity.test-framework.performance": "2.3.1-preview"
+  },
+  "upmCi": {
+    "footprint": "0792c2824e0eef42d304739b27265656681db73f"
+  },
+  "repository": {
+    "url": "https://github.cds.internal.unity3d.com/unity/com.unity.properties.git",
+    "type": "git",
+    "revision": "dc20ffe8506dc7e48fccb10df8ea214ea81d354c"
+  }
+}

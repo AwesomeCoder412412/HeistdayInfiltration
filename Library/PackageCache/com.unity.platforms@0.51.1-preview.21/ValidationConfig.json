@@ -1,0 +1,25 @@
+{
+    "FileContentKeywordValidation":
+    {
+        "Keywords":
+        [
+            {
+                "Targets": "+Switch,+XboxOne",
+                "Files":
+                [
+                    "Editor/Unity.Build/Platform.cs",
+                    "Editor/Unity.Build/KnownPlatforms.cs",
+                    "Editor/Unity.Build/Extensions/BuildTargetExtensions.cs",
+                    "Editor/Unity.Build.Classic/Components/BeePlatformDeprecated.cs"
+                ],
+                "Patterns":
+                [
+                    "Switch\\.PlatformInfo",
+                    "XboxOne\\.PlatformInfo",
+                    "KnownPlatforms\\.Switch",
+                    "KnownPlatforms\\.XboxOne"
+                ]
+            }
+        ]
+    }
+}

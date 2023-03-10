@@ -2,6 +2,7 @@
 using System.Linq;
 using UnityEngine;
 using Mirror;
+using System.Collections.Generic;
 using SimpleFirebaseUnity;
 
 namespace FPSControllerLPFP
@@ -13,7 +14,7 @@ namespace FPSControllerLPFP
     public class FpsControllerLPFP : NetworkBehaviour
     {
 #pragma warning disable 649
-		[Header("Arms")]
+        [Header("Arms")]
         [Tooltip("The transform component that holds the gun camera."), SerializeField]
         private Transform arms;
 
@@ -22,14 +23,14 @@ namespace FPSControllerLPFP
         [Tooltip("The position of the arms and gun camera relative to the fps controller GameObject."), SerializeField]
         private Vector3 armPosition;
 
-		[Header("Audio Clips")]
+        [Header("Audio Clips")]
         [Tooltip("The audio clip that is played while walking."), SerializeField]
         private AudioClip walkingSound;
 
         [Tooltip("The audio clip that is played while running."), SerializeField]
         private AudioClip runningSound;
 
-		[Header("Movement Settings")]
+        [Header("Movement Settings")]
         [Tooltip("How fast the player moves while walking and strafing."), SerializeField]
         private float walkingSpeed = 5f;
 
@@ -42,7 +43,7 @@ namespace FPSControllerLPFP
         [Tooltip("Amount of force applied to the player when jumping."), SerializeField]
         private float jumpForce = 35f;
 
-		[Header("Look Settings")]
+        [Header("Look Settings")]
         [Tooltip("Rotation speed of the fps controller."), SerializeField]
         private float mouseSensitivity = 7f;
 
@@ -73,6 +74,8 @@ namespace FPSControllerLPFP
         private SmoothVelocity _velocityZ;
         private bool _isGrounded;
         public Camera camera;
+        public PlayerController player;
+        private ClientInputWithArrays clInput;
         [SyncVar]
         public int playerId;
 
@@ -85,7 +88,7 @@ namespace FPSControllerLPFP
             int max = 0;
             foreach (FpsControllerLPFP fPS in FindObjectsOfType<FpsControllerLPFP>())
             {
-                if(fPS.playerId > max)
+                if (fPS.playerId > max)
                 {
                     max = fPS.playerId;
                 }
@@ -98,13 +101,16 @@ namespace FPSControllerLPFP
         public override void OnStopServer()
         {
             base.OnStopServer();
-            Debug.Log("server stoppped");
-            Firebase firebase = Firebase.CreateNew("https://heistday-9d49b-default-rtdb.firebaseio.com/");
-            firebase.Child("mailbox").Child(RespawnPain.instance.docID).Delete();
+            // Debug.Log("server stoppped");
+            //fiebase code that was working but i want to get rid of firebase and implement an actual solution here
+            //Firebase firebase = Firebase.CreateNew("https://heistday-9d49b-default-rtdb.firebaseio.com/");
+            //firebase.Child("mailbox").Child(RespawnPain.instance.docID).Delete();
         }
         /// Initializes the FpsController on start.
         public void Start()
         {
+            player = gameObject.GetComponent<PlayerController>();
+            clInput = new ClientInputWithArrays();
             _rotationX = new SmoothRotation(RotationXRaw);
             _rotationY = new SmoothRotation(RotationYRaw);
             _velocityX = new SmoothVelocity();
@@ -117,9 +123,9 @@ namespace FPSControllerLPFP
             {
                 return;
             }
-            
-           
-			arms = AssignCharactersCamera();
+
+
+            arms = AssignCharactersCamera();
             _audioSource.clip = walkingSound;
             _audioSource.loop = true;
             Cursor.lockState = CursorLockMode.Locked;
@@ -131,14 +137,14 @@ namespace FPSControllerLPFP
             }
             MirrorVariables.instance.conn = connectionToServer;
         }
-			
+
         private Transform AssignCharactersCamera()
         {
             var t = transform;
-			arms.SetPositionAndRotation(t.position, t.rotation);
-			return arms;
+            arms.SetPositionAndRotation(t.position, t.rotation);
+            return arms;
         }
-        
+
         /// Clamps <see cref="minVerticalAngle"/> and <see cref="maxVerticalAngle"/> to valid values and
         /// ensures that <see cref="minVerticalAngle"/> is less than <see cref="maxVerticalAngle"/>.
         private void ValidateRotationRestriction()
@@ -159,7 +165,7 @@ namespace FPSControllerLPFP
             Debug.LogWarning(message);
             return Mathf.Clamp(rotationRestriction, min, max);
         }
-			
+
         /// Checks if the character is on the ground.
         private void OnCollisionStay()
         {
@@ -178,9 +184,9 @@ namespace FPSControllerLPFP
 
             //Gizmos.DrawSphere(bounds.center, radius);
             RaycastHit hit;
-            if (Physics.Raycast(bounds.center, Physics.gravity.normalized, out hit, (extents.y / 2) + 1f, playerLayerMask))
+            if (Physics.Raycast(bounds.center, player.playerGrav, out hit, (extents.y / 2) + 1f, playerLayerMask))
             {
-                Debug.Log(hit.collider + " hit");
+                // Debug.Log(hit.collider + " hit");
                 _isGrounded = hit.collider != null;
             }
         }
@@ -192,49 +198,75 @@ namespace FPSControllerLPFP
             {
                 return;
             }
-            ClientInput clientInput = new ClientInput(input);
+            aggregateInputs();
+            Debug.Log("move: " + clInput.move + ", strafe: ," + clInput.strafe);
             // FixedUpdate is used instead of Update because this code is dealing with physics and smoothing.
             if (isServer)
             {
-                FixedUpdateFunction(false, clientInput);
+                FixedUpdateFunction(false, clInput.GetClientInput());
             }
             else
             {
-                CmdFixedUpdate(clientInput);
+                CmdFixedUpdate(clInput.GetClientInput());
             }
+            clInput = new ClientInputWithArrays();
         }
         [Command]
         private void CmdFixedUpdate(ClientInput clientInput)
         {
             FixedUpdateFunction(true, clientInput);
         }
-		private void FixedUpdateFunction(bool callingFromClient, ClientInput clientInput)
+        private void FixedUpdateFunction(bool callingFromClient, ClientInput clientInput)
         {
             MoveCharacter(callingFromClient, clientInput);
             _isGrounded = false;
             RotateCameraAndCharacter(callingFromClient, clientInput);
-            
+
+        }
+        private void aggregateInputs()
+        {
+            if (input.Jump)
+            {
+                clInput.jump = true;
+            }
+            if (input.Move != 0)
+            {
+                clInput.move = input.Move;
+            }
+            if (input.RotateX != 0)
+            {
+                clInput.rotateX = input.RotateX;
+            }
+            if (input.RotateY != 0)
+            {
+                clInput.rotateY = input.RotateY;
+            }
+            clInput.rotateXArray.Add(input.RotateX);
+            clInput.rotateYArray.Add(input.RotateY);
+            if (input.Run)
+            {
+                clInput.run = true;
+            }
+            if (input.Strafe != 0)
+            {
+                clInput.strafe = input.Strafe;
+            }
         }
         /// Moves the camera to the character, processes jumping and plays sounds every frame.
         private void Update()
         {
-            /*if (!isLocalPlayer)
-            {
-                gameObject.GetComponent<Camera>().enabled = false;
-                gameObject.GetComponent<AudioListener>().enabled = false;
-            }*/
             if (!isLocalPlayer)
             {
                 return;
             }
-            ClientInput clientInput = new ClientInput(input);
+            aggregateInputs();
             if (isServer)
             {
-                UpdateFunction(false, clientInput);
+                UpdateFunction(false, new ClientInput(input));
             }
             else
             {
-                CmdUpdate(clientInput);
+                CmdUpdate(new ClientInput(input));
             }
         }
         [Command]
@@ -258,15 +290,15 @@ namespace FPSControllerLPFP
             //var clampedY = RestrictVerticalRotation(rotationY);arms.localEulerAngles.x - mouseY
             var clampedY = rotationY;
             _rotationY.Current = clampedY;
-			var worldUp = arms.InverseTransformDirection(Vector3.up);
+            var worldUp = arms.InverseTransformDirection(Vector3.up);
             /*	var rotation = arms.rotation *
                                Quaternion.AngleAxis(rotationX, worldUp) *
                                Quaternion.AngleAxis(clampedY, Vector3.left);*/
             var rotation = Quaternion.Euler(_rotationX._current, _rotationY._current, 0);
             //transform.eulerAngles = new Vector3(0f, rotation.eulerAngles.y, 0f);
             //arms.rotation = rotation;
-            float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
-            float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
+            float mouseX = clientInput.rotateX * mouseSensitivity;
+            float mouseY = clientInput.rotateY * mouseSensitivity;
 
             float yRotation = arms.localEulerAngles.y + mouseX;
             float xRot = arms.localEulerAngles.x - mouseY;
@@ -274,51 +306,51 @@ namespace FPSControllerLPFP
             {
                 xRot = -1 * (360 - xRot);
             }
-            float xRotation = Mathf.Clamp(xRot, -90, 90);
-            Debug.Log(arms.localEulerAngles.x + "armsX  " + mouseY + " mouseY " + "xrot " + xRot);
+            float xRotation = Mathf.Clamp(xRot, -89, 89);
+            // Debug.Log(arms.localEulerAngles.x + "armsX  " + mouseY + " mouseY " + "xrot " + xRot);
             //xRotation = Mathf.Clamp(xRotation, -90, 90);
             arms.localEulerAngles = new Vector3(xRotation, yRotation, 0.0f);
             //arms.localRotation = Quaternion.identity;
             if (callingFromClient)
             {
-                Debug.Log("rotXCurrent " + rotXCurrent);
-                Debug.Log("rotYCurrent " + rotYCurrent);
-                Debug.Log("rotXTarget " + clientInput.rotateX * mouseSensitivity);
-                Debug.Log("rotYTarget " + clientInput.rotateY * mouseSensitivity);
-                Debug.Log("rotationX " + rotationX);
-                Debug.Log("rotationY " + rotationY);
-                Debug.Log("clampedY " + clampedY);
-                Debug.Log("worldUp " + worldUp);
-                Debug.Log("rotation.eulerAngles " + rotation.eulerAngles);
-                Debug.Log("armRot " + arms.rotation.eulerAngles);
-                Debug.Log("Rot1 " + arms.rotation * Quaternion.AngleAxis(rotationX, worldUp));
-                Debug.Log("Rot2 " + new Vector3(0f, rotation.eulerAngles.y, 0f));
-                Debug.Log("Transform.Eulerangles " + transform.eulerAngles);
+                //Debug.Log("rotXCurrent " + rotXCurrent);
+                //Debug.Log("rotYCurrent " + rotYCurrent);
+                //Debug.Log("rotXTarget " + clientInput.rotateX * mouseSensitivity);
+                //Debug.Log("rotYTarget " + clientInput.rotateY * mouseSensitivity);
+                //Debug.Log("rotationX " + rotationX);
+                //Debug.Log("rotationY " + rotationY);
+                //Debug.Log("clampedY " + clampedY);
+                //Debug.Log("worldUp " + worldUp);
+                //Debug.Log("rotation.eulerAngles " + rotation.eulerAngles);
+                //Debug.Log("armRot " + arms.rotation.eulerAngles);
+                //Debug.Log("Rot1 " + arms.rotation * Quaternion.AngleAxis(rotationX, worldUp));
+                //Debug.Log("Rot2 " + new Vector3(0f, rotation.eulerAngles.y, 0f));
+                //Debug.Log("Transform.Eulerangles " + transform.eulerAngles);
             }
         }
-			
+
         /// Returns the target rotation of the camera around the y axis with no smoothing.
         private float RotationXRaw
         {
             get { return input.RotateX * mouseSensitivity; }
         }
-			
+
         /// Returns the target rotation of the camera around the x axis with no smoothing.
         private float RotationYRaw
         {
             get { return input.RotateY * mouseSensitivity; }
         }
-			
+
         /// Clamps the rotation of the camera around the x axis
         /// between the <see cref="minVerticalAngle"/> and <see cref="maxVerticalAngle"/> values.
         private float RestrictVerticalRotation(float mouseY)
         {
-			var currentAngle = NormalizeAngle(arms.eulerAngles.x);
+            var currentAngle = NormalizeAngle(arms.eulerAngles.x);
             var minY = minVerticalAngle + currentAngle;
             var maxY = maxVerticalAngle + currentAngle;
             return Mathf.Clamp(mouseY, minY + 0.01f, maxY - 0.01f);
         }
-			
+
         /// Normalize an angle between -180 and 180 degrees.
         /// <param name="angleDegrees">angle to normalize</param>
         /// <returns>normalized angle</returns>
@@ -339,28 +371,44 @@ namespace FPSControllerLPFP
 
         private void MoveCharacter(bool callingFromClient, ClientInput clientInput)
         {
-            Vector3 rot = arms.transform.localEulerAngles;
-            //if (Physics.gravity.x != 0)
-            //{
-            //    rot.x += arms.eulerAngles.x;
-            //    Debug.Log("x use");
-            //}
-            //else if (Physics.gravity.y != 0)
-            //{s
-            //    rot.y += arms.eulerAngles.y;
-            //    Debug.Log("y use");
-            //}
-            //else
-            //{
-            //    rot.z += arms.eulerAngles.z;
-            //    Debug.Log("z use");
-            //}
-            var direction = new Vector3(clientInput.move, 0f, clientInput.strafe).normalized;
-            //var worldDirection = arms.TransformDirection(direction);
-            var worldDirection = Quaternion.Euler(rot) * direction;
-            //Debug.DrawRay(transform.position, worldDirection.normalized * 2, Color.red);
-            Debug.DrawRay(transform.position, Vector3.Project(Vector3.right, rot), Color.red);
-            var velocity = worldDirection * (clientInput.run ? runningSpeed : walkingSpeed);
+            Quaternion rot = arms.transform.rotation;
+
+            Vector3 direction = new Vector3(clientInput.move, 0f, clientInput.strafe).normalized;
+            Vector3 worldDirection = rot * direction;
+            Vector3 dir = rot * Vector3.forward;
+            //Debug.DrawRay(transform.position, dir.normalized * 2, Color.red);
+            //Debug.Log("rot " + rot + " direction " + direction + " worlddirection " + worldDirection);
+            if (player.playerGrav.x != 0)
+            {
+                worldDirection = new Vector3(0, worldDirection.y, worldDirection.z).normalized;
+            }
+            else if (player.playerGrav.y != 0)
+            {
+                float y = worldDirection.y;
+                worldDirection = new Vector3(worldDirection.x, 0, worldDirection.z).normalized;
+                // worldDirection += Mathf.Abs(y) * worldDirection;
+            }
+            else
+            {
+                worldDirection = new Vector3(worldDirection.x, worldDirection.y, 0).normalized;
+            }
+            if (player.playerGrav.x != 0)
+            {
+                dir = new Vector3(0, dir.x + dir.y, dir.z);
+            }
+            else if (player.playerGrav.y != 0)
+            {
+                float y = dir.y;
+                dir = new Vector3(dir.x, 0, dir.z).normalized;
+                //Debug.Log(" dirReal " + dir + " y " + Mathf.Abs(y) + " final " + dir.normalized);
+                //dir += Mathf.Abs(y) * dir;
+            }
+            else
+            {
+                dir = new Vector3(dir.x + dir.z, dir.y, 0);
+            }
+            Debug.DrawRay(transform.position, dir.normalized * 2, Color.blue);
+            Vector3 velocity = worldDirection * (clientInput.run ? runningSpeed : walkingSpeed);
             //Checks for collisions so that the character does not stuck when jumping against walls.
             var intersectsWall = CheckCollisionsWithWalls(velocity);
             if (intersectsWall)
@@ -368,7 +416,7 @@ namespace FPSControllerLPFP
                 _velocityX.Current = _velocityZ.Current = 0f;
                 return;
             }
-            var rigidbodyVelocity = _rigidbody.velocity;
+            Vector3 rigidbodyVelocity = _rigidbody.velocity;
             _velocityX.Current = rigidbodyVelocity.x;
             _velocityZ.Current = rigidbodyVelocity.z;
             Vector2 current = new Vector2(_velocityX._current, _velocityZ._current);
@@ -378,11 +426,11 @@ namespace FPSControllerLPFP
             //var force = new Vector3(velocity.x - rigidbodyVelocity.x, 0f, velocity.z - rigidbodyVelocity.z);
             //_rigidbody.AddForce(force, ForceMode.VelocityChange);
             //_rigidbody.velocity = new Vector3(velocity.x, _rigidbody.velocity.y, velocity.z);
-            if (Physics.gravity.x != 0)
+            if (player.playerGrav.x != 0)
             {
                 velocity.x = _rigidbody.velocity.x;
             }
-            else if(Physics.gravity.y != 0)
+            else if (player.playerGrav.y != 0)
             {
                 velocity.y = _rigidbody.velocity.y;
             }
@@ -392,8 +440,8 @@ namespace FPSControllerLPFP
             }
             _rigidbody.velocity = velocity;
 
-            Debug.Log("rot " + Quaternion.Euler(rot) + " direction " + direction + " worlddirection " + worldDirection);
-            Debug.Log("rot " + rot);
+            //Debug.Log("rot " + rot + " direction " + direction + " worlddirection " + worldDirection);
+            //Debug.Log("rot " + rot);
             //Debug.Log("rigidbodyvelocity " + rigidbodyVelocity);
             //Debug.Log("direction " + direction);
             //Debug.Log("worlddirection " + worldDirection);
@@ -401,16 +449,16 @@ namespace FPSControllerLPFP
             if (callingFromClient)
             {
                 //Debug.Log("force " + force);
-                Debug.Log("smoothX " + smoothX);
-                Debug.Log("smoothZ " + smoothZ);
-                Debug.Log("rigidbodyvelocity " + rigidbodyVelocity);
-                Debug.Log("worlddirection " + worldDirection);
-                Debug.Log("input.Run " + clientInput.run);
-                Debug.Log("walkingspeed " + walkingSpeed);
-                Debug.Log("runningspeed " + runningSpeed);
-                Debug.Log("Velocity" + velocity);
-                Debug.Log("Current" + current + " " + new Vector2(smoothX, smoothZ));
-                Debug.Log("MovementSmoothness" + movementSmoothness);
+                //Debug.Log("smoothX " + smoothX);
+                //Debug.Log("smoothZ " + smoothZ);
+                //Debug.Log("rigidbodyvelocity " + rigidbodyVelocity);
+                //Debug.Log("worlddirection " + worldDirection);
+                //Debug.Log("input.Run " + clientInput.run);
+                //Debug.Log("walkingspeed " + walkingSpeed);
+                //Debug.Log("runningspeed " + runningSpeed);
+                //Debug.Log("Velocity" + velocity);
+                //Debug.Log("Current" + current + " " + new Vector2(smoothX, smoothZ));
+                //Debug.Log("MovementSmoothness" + movementSmoothness);
 
             }
             //Debug.Log("SmoothZBear " + smoothZ);
@@ -442,12 +490,12 @@ namespace FPSControllerLPFP
         {
             if (!_isGrounded || !clientInput.jump) return;
             _isGrounded = false;
-            _rigidbody.AddForce(-1 * Physics.gravity.normalized * jumpForce, ForceMode.Impulse);
+            _rigidbody.AddForce(-1 * gameObject.GetComponent<PlayerController>().playerGrav.normalized * jumpForce, ForceMode.Impulse);
             if (callingFromClient)
             {
-                Debug.Log("JumpForce " + jumpForce);
-                Debug.Log("Vector3.up " + Vector3.up);
-                Debug.Log("rigidbodyvelocity " + _rigidbody.velocity);
+                //Debug.Log("JumpForce " + jumpForce);
+                //Debug.Log("Vector3.up " + Vector3.up);
+                //Debug.Log("rigidbodyvelocity " + _rigidbody.velocity);
             }
             //Debug.Log("JumpForce " + jumpForce);
             //Debug.Log("Vector3.up " + Vector3.up);
@@ -491,7 +539,7 @@ namespace FPSControllerLPFP
         {
             return isLocalPlayer;
         }
-			
+
         /// A helper for assistance with smoothing the camera rotation.
         public class SmoothRotation
         {
@@ -502,7 +550,7 @@ namespace FPSControllerLPFP
             {
                 _current = startAngle;
             }
-				
+
             /// Returns the smoothed rotation.
             public float Update(float target, float smoothTime)
             {
@@ -514,7 +562,7 @@ namespace FPSControllerLPFP
                 set { _current = value; }
             }
         }
-			
+
         /// A helper for assistance with smoothing the movement.
         public class SmoothVelocity
         {
@@ -577,31 +625,31 @@ namespace FPSControllerLPFP
             {
                 get { return Input.GetAxisRaw(rotateX); }
             }
-				         
+
             /// Returns the value of the virtual axis mapped to rotate the camera around the x axis.        
             public float RotateY
             {
                 get { return Input.GetAxisRaw(rotateY); }
             }
-				        
+
             /// Returns the value of the virtual axis mapped to move the character back and forth.        
             public float Move
             {
                 get { return Input.GetAxisRaw(move); }
             }
-				       
+
             /// Returns the value of the virtual axis mapped to move the character left and right.         
             public float Strafe
             {
                 get { return Input.GetAxisRaw(strafe); }
             }
-				    
+
             /// Returns true while the virtual button mapped to run is held down.          
             public bool Run
             {
                 get { return Input.GetButton(run); }
             }
-				     
+
             /// Returns true during the frame the user pressed down the virtual button mapped to jump.          
             public bool Jump
             {
@@ -615,10 +663,14 @@ namespace FPSControllerLPFP
 
             public ClientInput()
             {
+                rotateX = 0;
+                rotateY = 0;
+                move = 0;
+                strafe = 0;
+                run = false;
+                jump = false;
 
             }
-
-
             public ClientInput(FpsInput input)
             {
                 rotateX = input.RotateX;
@@ -627,9 +679,28 @@ namespace FPSControllerLPFP
                 strafe = input.Strafe;
                 run = input.Run;
                 jump = input.Jump;
-        
-
-      }
+            }
         }
+        public class ClientInputWithArrays : ClientInput
+            {
+            public List<float> rotateXArray, rotateYArray;
+            public ClientInputWithArrays() : base()
+            {
+                rotateXArray = new List<float>();
+                rotateYArray = new List<float>();
+            }
+            public ClientInput GetClientInput()
+            {
+                //if (rotateXArray.Count > 0) { 
+                // base.rotateX = rotateXArray.Average();
+                //}
+                //if (rotateYArray.Count > 0)
+                //{
+                //    base.rotateY = rotateYArray.Average();
+                //}
+                return (ClientInput)this;
+            }
+
+            }
     }
 }

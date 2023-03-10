@@ -7,6 +7,7 @@ public class Resolution : MonoBehaviour
 {
     public InputField xInput;
     public InputField yInput;
+    public InputField fps;
     public Toggle fullscreen;
     // Start is called before the first frame update
     void Start()
@@ -21,10 +22,13 @@ public class Resolution : MonoBehaviour
     {
         
     }
+    public void onFPSChange()
+    {
+        Application.targetFrameRate = int.Parse(fps.text);
+    }
     public void OnEndEdit()
     {
         Screen.SetResolution(int.Parse(xInput.text), int.Parse(yInput.text), (fullscreen.isOn)?FullScreenMode.FullScreenWindow:FullScreenMode.Windowed);
-        Debug.Log("OnEndEdit");
         
     }
 }

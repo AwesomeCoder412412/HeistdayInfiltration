@@ -55,6 +55,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -79,6 +80,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &1480027675339556
 GameObject:
   m_ObjectHideFlags: 0
@@ -90,12 +92,13 @@ GameObject:
   - component: {fileID: 4822224316094678}
   - component: {fileID: 114402732107420660}
   - component: {fileID: 114265392388239132}
+  - component: {fileID: 8715117357206038899}
+  - component: {fileID: 114892629901890886}
+  - component: {fileID: 115187108610643062}
   - component: {fileID: 143011667059871024}
   - component: {fileID: 4839740653866577337}
   - component: {fileID: 1849877933717427647}
-  - component: {fileID: 114892629901890886}
   - component: {fileID: 6261579163786439309}
-  - component: {fileID: 115187108610643062}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -111,7 +114,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1480027675339556}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 1.08, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3138541494209382947}
@@ -131,9 +134,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneId: 0
+  _assetId: 2230035652
   serverOnly: 0
   visible: 0
-  m_AssetId: 
   hasSpawned: 0
 --- !u!114 &114265392388239132
 MonoBehaviour:
@@ -147,17 +150,83 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f74aedd71d9a4f55b3ce499326d45fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 1
   syncMode: 0
   syncInterval: 0
-  clientAuthority: 1
-  localPositionSensitivity: 0.01
-  localRotationSensitivity: 0.01
-  localScaleSensitivity: 0.01
-  compressRotation: 0
-  interpolateScale: 0
-  interpolateRotation: 1
-  interpolatePosition: 1
+  target: {fileID: 4822224316094678}
+  clientAuthority: 0
+  onlySyncOnChange: 1
+  bufferResetMultiplier: 5
+  positionSensitivity: 0.01
+  rotationSensitivity: 0.01
+  scaleSensitivity: 0.01
+  syncPosition: 1
+  syncRotation: 1
   syncScale: 0
+  showGizmos: 0
+  showOverlay: 0
+  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+--- !u!114 &8715117357206038899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1480027675339556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cac48dc20f866148b44d0f9b5850761, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0.1
+--- !u!114 &114892629901890886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1480027675339556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 479a5196564ede84791870b414a13645, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0.1
+  characterController: {fileID: 143011667059871024}
+  moveSpeed: 8
+  turnSensitivity: 5
+  maxTurnSpeed: 100
+  horizontal: 0
+  vertical: 0
+  turn: 0
+  jumpSpeed: 0
+  isGrounded: 1
+  isFalling: 0
+  velocity: {x: 0, y: 0, z: 0}
+--- !u!114 &115187108610643062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1480027675339556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8be750efa9df50f47b65ae156053d149, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  playerNumber: 0
+  scoreIndex: 0
+  matchIndex: 0
+  score: 0
+  clientMatchIndex: -1
 --- !u!143 &143011667059871024
 CharacterController:
   m_ObjectHideFlags: 0
@@ -206,31 +275,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &114892629901890886
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1480027675339556}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 479a5196564ede84791870b414a13645, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0
-  characterController: {fileID: 143011667059871024}
-  moveSpeed: 8
-  turnSensitivity: 5
-  maxTurnSpeed: 150
-  horizontal: 0
-  vertical: 0
-  turn: 0
-  jumpSpeed: 0
-  isGrounded: 1
-  isFalling: 0
-  velocity: {x: 0, y: 0, z: 0}
 --- !u!114 &6261579163786439309
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,30 +287,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 218520098fbe58b4b8f0963ef41953f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
   syncMode: 0
   syncInterval: 0.1
   color:
     serializedVersion: 2
     rgba: 4278190080
---- !u!114 &115187108610643062
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1480027675339556}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8be750efa9df50f47b65ae156053d149, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0
-  playerNumber: 0
-  scoreIndex: 0
-  matchIndex: 0
-  score: 0
-  clientMatchIndex: -1
 --- !u!1 &4926068573968176962
 GameObject:
   m_ObjectHideFlags: 0
@@ -323,6 +349,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -347,3 +374,4 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}

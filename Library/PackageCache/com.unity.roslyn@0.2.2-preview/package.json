@@ -1,0 +1,24 @@
+{
+  "name": "com.unity.roslyn",
+  "displayName": "Roslyn Compiler for Unity",
+  "version": "0.2.2-preview",
+  "unity": "2020.3",
+  "unityRelease": "0f1",
+  "description": "Version of Microsoft Roslyn compiler distributed as package.\n\nEnables use of Roslyn source generators for code generation.",
+  "keywords": [
+    "codegen",
+    "unity",
+    "roslyn"
+  ],
+  "upm": {
+    "changelog": "- Disable loading ExternalCompiler when package is installed with Unity 2021 and later."
+  },
+  "upmCi": {
+    "footprint": "7e3995dec08e0ec7e0e9a22432ee1d7bc4ad10a2"
+  },
+  "repository": {
+    "url": "https://github.cds.internal.unity3d.com/unity/Unity.Roslyn.git",
+    "type": "git",
+    "revision": "c6ed73b7aa4d677cc5d6d2bd6511faf172b6f380"
+  }
+}

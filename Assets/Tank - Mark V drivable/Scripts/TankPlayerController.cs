@@ -37,10 +37,10 @@ public class TankPlayerController : NetworkBehaviour {
     private IEnumerator WaitToSetPlayerId()
     {
         yield return new WaitForSeconds(1);
-        Debug.Log("Length " + FindObjectsOfType<FpsControllerLPFP>().Length);
+       // Debug.Log("Length " + FindObjectsOfType<FpsControllerLPFP>().Length);
         foreach (FpsControllerLPFP fPS in FindObjectsOfType<FpsControllerLPFP>())
         {
-            Debug.Log("isLocalPlayer " + fPS.IsLocalPlayer());
+           // Debug.Log("isLocalPlayer " + fPS.IsLocalPlayer());
             if (fPS.IsLocalPlayer())
             {
                 playerId = fPS.playerId;
@@ -49,7 +49,7 @@ public class TankPlayerController : NetworkBehaviour {
     }
     private void Awake()
     {
-        Debug.Log("testing");
+        //Debug.Log("testing");
         Physics.IgnoreLayerCollision(9, 10);
         //currentPlayer = player;
     }
@@ -74,12 +74,12 @@ public class TankPlayerController : NetworkBehaviour {
     [Command(requiresAuthority = false)]
     public void CmdFixedUpdateTheSecond(float horizontalInput, float verticalInput, bool exitVehicle, int playerId1)
     {
-        Debug.Log("playerId1 " + playerId1);
-        Debug.Log("playerId2 " + playerId2);
-        Debug.Log("tankMode " + tankMode);
+      //  Debug.Log("playerId1 " + playerId1);
+       // Debug.Log("playerId2 " + playerId2);
+       // Debug.Log("tankMode " + tankMode);
         if (tankMode && playerId2 == playerId1)
         {
-            Debug.Log("works");
+         //   Debug.Log("works");
             float turn = horizontalInput;
             float moveVertical = verticalInput;
             Vector3 movement = new Vector3(0.0f, 0.0f, moveVertical);

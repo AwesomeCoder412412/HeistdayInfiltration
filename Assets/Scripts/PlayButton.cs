@@ -32,16 +32,14 @@ public class PlayButton : MonoBehaviour
     public Firebase firebase;
     // Start is called before the first frame update
     void Start()
-    {
-        Debug.Log(GetLocalIPAddress() + " yes please");
-        firebase = Firebase.CreateNew("https://heistday-9d49b-default-rtdb.firebaseio.com/");
-        Debug.Log(RespawnPain.instance.docID);
+    {   //fiebase code that was working but i want to get rid of firebase and implement an actual solution here
+        //firebase = Firebase.CreateNew("https://heistday-9d49b-default-rtdb.firebaseio.com/");
         if (RespawnPain.instance.docID == "")
         {
             return;
         }
-        Debug.Log("got past nullcheck");
-        firebase.Child("mailbox").Child(RespawnPain.instance.docID).Delete();
+        //fiebase code that was working but i want to get rid of firebase and implement an actual solution here
+       // firebase.Child("mailbox").Child(RespawnPain.instance.docID).Delete();
 
     }
 
@@ -70,10 +68,13 @@ public class PlayButton : MonoBehaviour
         NetworkManager.singleton.StopHost();
        string myIp = GetLocalIPAddress();
         //Firebase firebase = Firebase.CreateNew("https://heistday-9d49b-default-rtdb.firebaseio.com/");
-        firebase.OnPushSuccess += PushHandler;
-        firebase.OnPushFailed += PushFailedHandler;
-        //firebase.Child("mailbox").Push(myIp);
-        StartCoroutine(PushHandlerWait(myIp));
+
+        //fiebase code that was working but i want to get rid of firebase and implement an actual solution here
+        //firebase.OnPushSuccess += PushHandler;
+        //firebase.OnPushFailed += PushFailedHandler;
+       // StartCoroutine(PushHandlerWait(myIp));
+        // end working code
+
         //firebase.OnGetSuccess += GetHandler;
         //firebase.OnGetFailed += GetFailedHandler;
         //firebase.GetValue();
@@ -111,22 +112,22 @@ public class PlayButton : MonoBehaviour
 
     public void PushHandler(Firebase sender, DataSnapshot snapshot)
     {
-        Debug.Log("push success");
-        Debug.Log(snapshot.Keys[0]);
-        Debug.Log(snapshot.RawJson);
-        Debug.Log(snapshot.Keys);
+       // Debug.Log("push success");
+       // Debug.Log(snapshot.Keys[0]);
+      //  Debug.Log(snapshot.RawJson);
+//        Debug.Log(snapshot.Keys);
         RespawnPain.instance.docID = ((Dictionary<string, System.Object>)snapshot.RawValue)[snapshot.Keys[0]].ToString();
     }
     public void PushFailedHandler(Firebase sender, FirebaseError error)
     {
-        Debug.Log("push failed");
+        //Debug.Log("push failed");
         Debug.Log(error.Message);
         
     }
 
     public void GetHandler(Firebase sender, DataSnapshot snapshot)
     {
-        Debug.Log("success!");
+       // Debug.Log("success!");
         ipList = new List<string>();
         foreach (string key in snapshot.Keys)
         {
@@ -150,13 +151,13 @@ public class PlayButton : MonoBehaviour
     public void GetFailedHandler(Firebase sender, FirebaseError error )
     {
 
-        Debug.Log("failed");
+        //Debug.Log("failed");
         Debug.Log(error.Message);
     }
 
     public void PlayExpress()
     {
-        Debug.Log("Lemon");
+       // Debug.Log("Lemon");
         NetworkManager.singleton.StopHost();
         NetworkManager.singleton.StartHost();
     }
@@ -180,7 +181,7 @@ public class PlayButton : MonoBehaviour
         }*/
         if (PlayerPrefs.GetInt(retry1) == 1)
         {
-            Debug.Log("Lemon");
+         //   Debug.Log("Lemon");
             PlayerPrefs.SetInt(retry1, 0);
             NetworkManager.singleton.StopHost();
             NetworkManager.singleton.StartHost();

@@ -20,17 +20,45 @@ namespace Mirror.Weaver
         public const string MirrorAssemblyName = "Mirror";
 
         WeaverTypes weaverTypes;
-        WeaverLists weaverLists;
-        IAssemblyResolver Resolver;
+        SyncVarAccessLists syncVarAccessLists;
         AssemblyDefinition CurrentAssembly;
         Writers writers;
         Readers readers;
+
+        // in case of weaver errors, we don't stop immediately.
+        // we log all errors and then eventually return false if
+        // weaving has failed.
+        // this way the user can fix multiple errors at once, instead of having
+        // to fix -> recompile -> fix -> recompile for one error at a time.
         bool WeavingFailed;
 
         // logger functions can be set from the outside.
         // for example, Debug.Log or ILPostProcessor Diagnostics log for
         // multi threaded logging.
         public Logger Log;
+
+        // remote actions now support overloads,
+        // -> but IL2CPP doesnt like it when two generated methods
+        // -> have the same signature,
+        // -> so, append the signature to the generated method name,
+        // -> to create a unique name
+        // Example:
+        // RpcTeleport(Vector3 position) -> InvokeUserCode_RpcTeleport__Vector3()
+        // RpcTeleport(Vector3 position, Quaternion rotation) -> InvokeUserCode_RpcTeleport__Vector3Quaternion()
+        // fixes https://github.com/vis2k/Mirror/issues/3060
+        public static string GenerateMethodName(string initialPrefix, MethodDefinition md)
+        {
+            initialPrefix += md.Name;
+
+            for (int i = 0; i < md.Parameters.Count; ++i)
+            {
+                // with __ so it's more obvious that this is the parameter suffix.
+                // otherwise RpcTest(int) => RpcTestInt(int) which is not obvious.
+                initialPrefix += $"__{md.Parameters[i].ParameterType.Name}";
+            }
+
+            return initialPrefix;
+        }
 
         public Weaver(Logger Log)
         {
@@ -78,7 +106,7 @@ namespace Mirror.Weaver
             bool modified = false;
             foreach (TypeDefinition behaviour in behaviourClasses)
             {
-                modified |= new NetworkBehaviourProcessor(CurrentAssembly, weaverTypes, weaverLists, writers, readers, Log, behaviour).Process(ref WeavingFailed);
+                modified |= new NetworkBehaviourProcessor(CurrentAssembly, weaverTypes, syncVarAccessLists, writers, readers, Log, behaviour).Process(ref WeavingFailed);
             }
             return modified;
         }
@@ -100,7 +128,7 @@ namespace Mirror.Weaver
             }
 
             watch.Stop();
-            Console.WriteLine("Weave behaviours and messages took " + watch.ElapsedMilliseconds + " milliseconds");
+            Console.WriteLine($"Weave behaviours and messages took {watch.ElapsedMilliseconds} milliseconds");
 
             return modified;
         }
@@ -138,7 +166,6 @@ namespace Mirror.Weaver
             modified = false;
             try
             {
-                Resolver = resolver;
                 CurrentAssembly = assembly;
 
                 // fix "No writer found for ..." error
@@ -159,7 +186,7 @@ namespace Mirror.Weaver
                 CreateGeneratedCodeClass();
 
                 // WeaverList depends on WeaverTypes setup because it uses Import
-                weaverLists = new WeaverLists();
+                syncVarAccessLists = new SyncVarAccessLists();
 
                 // initialize readers & writers with this assembly.
                 // we need to do this in every Process() call.
@@ -187,7 +214,7 @@ namespace Mirror.Weaver
 
                 if (modified)
                 {
-                    PropertySiteProcessor.Process(moduleDefinition, weaverLists);
+                    SyncVarAttributeAccessReplacer.Process(moduleDefinition, syncVarAccessLists);
 
                     // add class that holds read/write functions
                     moduleDefinition.Types.Add(GeneratedCodeClass);
@@ -205,7 +232,7 @@ namespace Mirror.Weaver
             }
             catch (Exception e)
             {
-                Log.Error("Exception :" + e);
+                Log.Error($"Exception :{e}");
                 WeavingFailed = true;
                 return false;
             }

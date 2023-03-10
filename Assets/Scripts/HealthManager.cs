@@ -10,6 +10,7 @@ public class HealthManager : MonoBehaviour
     public static HealthManager instance;
     public List<GameObject> hearts;
     public int heartCount;
+    public bool godMode = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -56,6 +57,10 @@ public class HealthManager : MonoBehaviour
 
     public void RemoveHeart()
     {
+        if (godMode)
+        {
+            return;
+        }
         if (heartCount > 0)
         {
             GameObject lastHeart = hearts[heartCount - 1];

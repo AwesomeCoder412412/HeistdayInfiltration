@@ -1,6 +1,6 @@
 // for Unity 2020+ we use ILPostProcessor.
 // only automatically invoke it for older versions.
-#if !UNITY_2020_1_OR_NEWER
+#if !UNITY_2020_3_OR_NEWER
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -27,7 +27,7 @@ namespace Mirror.Weaver
         // delete for subscription to Weaver error messages
         public static Action<string> OnWeaverError;
 
-        // controls weather Weaver errors are reported direct to the Unity console (tests enable this)
+        // controls whether Weaver errors are reported direct to the Unity console (tests enable this)
         public static bool UnityLogEnabled = true;
 
         [InitializeOnLoadMethod]
@@ -126,7 +126,7 @@ namespace Mirror.Weaver
             {
                 // Set false...will be checked in \Editor\EnterPlayModeSettingsCheck.CheckSuccessfulWeave()
                 SessionState.SetBool("MIRROR_WEAVE_SUCCESS", false);
-                if (UnityLogEnabled) Debug.LogError("Weaving failed for: " + assemblyPath);
+                if (UnityLogEnabled) Debug.LogError($"Weaving failed for {assemblyPath}");
             }
         }
 

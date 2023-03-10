@@ -1,0 +1,23 @@
+{
+    "name": "Unity.Build.Classic",
+    "references": [
+        "Unity.Build",
+        "Unity.Build.Editor",
+        "Unity.Properties",
+        "Unity.Properties.Editor",
+        "Unity.Properties.UI",
+        "Unity.Properties.UI.Editor",
+        "Unity.Serialization",
+        "Unity.InternalAPIEditorBridge.012"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

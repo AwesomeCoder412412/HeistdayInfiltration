@@ -1,0 +1,12 @@
+{
+  "ExternalFunctions": [
+    {
+      "Name": "Unity.Burst.LowLevel.BurstCompilerService::GetOrCreateSharedMemory",
+      "FullName": "Unity.Burst.LowLevel.BurstCompilerService.GetOrCreateSharedMemory(ref UnityEngine.Hash128 key, uint size_of, uint alignment) -> void*_26c322033fbebc35419641da912a0ab4"
+    },
+    {
+      "Name": "burst_abort",
+      "FullName": "unused.burst_abort(System.String errorId, System.String message) -> void"
+    }
+  ]
+}

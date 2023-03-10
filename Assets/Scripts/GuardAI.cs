@@ -45,6 +45,7 @@ public class GuardAI : NetworkBehaviour
         defaultRotation = transform.eulerAngles.y;
         if (isServer)
         {
+            Debug.Log("is server is true on guardAI");
             if (isGuard)
             {
                 anim.SetBool("Walking", true);
@@ -57,11 +58,11 @@ public class GuardAI : NetworkBehaviour
         this.playerId = playerId;
         foreach (FpsControllerLPFP player1 in FindObjectsOfType<FpsControllerLPFP>())
         {
-            Debug.Log("teammate " + player1.playerId + " " + playerId);
+           // Debug.Log("teammate " + player1.playerId + " " + playerId);
             if(player1.playerId == playerId)
             {
                 player = player1.gameObject;
-                Debug.Log("setplayer " + player.gameObject.name);
+//                Debug.Log("setplayer " + player.gameObject.name);
             }
         }
     }
@@ -70,7 +71,7 @@ public class GuardAI : NetworkBehaviour
     {
         if (other.gameObject.tag == "Floor")
         {
-            Debug.Log("yes2");
+           // Debug.Log("yes2");
 
             roomIndex = other.gameObject.GetComponent<GuardAssignment>().room.GetComponent<RoomEvents>().roomIndex;
         }
@@ -88,10 +89,10 @@ public class GuardAI : NetworkBehaviour
             {
                 transform.localScale = new Vector3(transform.localScale.x, 0.01f, transform.localScale.z);
             }
-            Debug.Log(collision.gameObject.name);
+           // Debug.Log(collision.gameObject.name);
             if (collision.transform.tag == "SafeBullet")
             {
-                Debug.Log("Collided");
+              //  Debug.Log("Collided");
                 Destroy(collision.transform.gameObject);
                 Destroy(gameObject);
                 ScoreManager.score++;
@@ -104,7 +105,7 @@ public class GuardAI : NetworkBehaviour
             if (collision.gameObject.tag == "Floor")
             {
                 roomIndex = collision.gameObject.GetComponent<GuardAssignment>().room.GetComponent<RoomEvents>().roomIndex;
-                Debug.Log("yes2");
+                //Debug.Log("yes2");
             }
 
         }
@@ -112,7 +113,7 @@ public class GuardAI : NetworkBehaviour
         {
             if (collision.transform.tag == "Bullet")
             {
-                Debug.Log("Collided");
+               // Debug.Log("Collided");
                 Destroy(collision.transform.gameObject);
                 Destroy(gameObject);
             }
@@ -123,12 +124,12 @@ public class GuardAI : NetworkBehaviour
     {
         if (gameObject.name == "Teammate(Clone)")
         {
-            Debug.Log("isguard " + isGuard);
-            Debug.Log("cc " + (cc == null));
+            //Debug.Log("isguard " + isGuard);
+            //Debug.Log("cc " + (cc == null));
         }
         if (!isServer)
         {
-            Debug.Log("I'm not the server");
+            //Debug.Log("I'm not the server");
             return;
         }
         if (cc.isGrounded)
@@ -160,8 +161,8 @@ public class GuardAI : NetworkBehaviour
         }
         else
         {
-            Debug.Log("player1 " + (player == null));
-            Debug.Log("playerId " + playerId);
+          //  Debug.Log("player1 " + (player == null));
+           // Debug.Log("playerId " + playerId);
             //GameObject currentPlayer = null;
             if (player.activeSelf)
             {
@@ -180,7 +181,6 @@ public class GuardAI : NetworkBehaviour
             float currentRadius = Vector3.Distance(currentPlayer.transform.position + currentPlayer.transform.forward * distanceInFront, transform.position);
             if (currentPlayer != null && ((currentRadius > playerRadius && walking) || (currentRadius > footLoose && !walking)))
             {
-                //Debug.Log("Walking");
                 cc.Move(Vector3.Normalize(currentPlayer.transform.position + currentPlayer.transform.forward * distanceInFront - transform.position) * speed);
                 //transform.LookAt(player.transform);
                 //transform.eulerAngles = new Vector3(0, transform.rotation.eulerAngles.y + walkingOffset, 0);
@@ -192,7 +192,6 @@ public class GuardAI : NetworkBehaviour
             }
             else
             {
-                //Debug.Log("Shooting");
                 anim.SetBool("Walking", false);
                 if (walking)
                 {

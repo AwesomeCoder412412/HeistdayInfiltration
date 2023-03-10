@@ -1,0 +1,64 @@
+{
+  "ExternalFunctions": [
+    {
+      "Name": "UnityEngine.Jobs.TransformAccessArray::GetSortedToUserIndex",
+      "FullName": "UnityEngine.Jobs.TransformAccessArray.GetSortedToUserIndex(System.IntPtr transformArrayIntPtr) -> System.IntPtr_b8582670f79269075d32f191bad67123"
+    },
+    {
+      "Name": "UnityEngine.Jobs.TransformAccessArray::GetSortedTransformAccess",
+      "FullName": "UnityEngine.Jobs.TransformAccessArray.GetSortedTransformAccess(System.IntPtr transformArrayIntPtr) -> System.IntPtr_b8582670f79269075d32f191bad67123"
+    },
+    {
+      "Name": "Unity.Jobs.LowLevel.Unsafe.JobsUtility::GetWorkStealingRange",
+      "FullName": "Unity.Jobs.LowLevel.Unsafe.JobsUtility.GetWorkStealingRange(ref Unity.Jobs.LowLevel.Unsafe.JobRanges ranges, int jobIndex, ref int beginIndex, ref int endIndex) -> bool_b8582670f79269075d32f191bad67123"
+    },
+    {
+      "Name": "Unity.Jobs.LowLevel.Unsafe.JobsUtility::PatchBufferMinMaxRanges",
+      "FullName": "Unity.Jobs.LowLevel.Unsafe.JobsUtility.PatchBufferMinMaxRanges(System.IntPtr bufferRangePatchData, void* jobdata, int startIndex, int rangeSize) -> void_b8582670f79269075d32f191bad67123"
+    },
+    {
+      "Name": "UnityEngine.Jobs.TransformAccess::GetLocalToWorldMatrix",
+      "FullName": "UnityEngine.Jobs.TransformAccess.GetLocalToWorldMatrix(ref UnityEngine.Jobs.TransformAccess access, ref UnityEngine.Matrix4x4 m) -> void_b8582670f79269075d32f191bad67123"
+    },
+    {
+      "Name": "UnityEngine.Jobs.TransformAccess::GetLocalPosition",
+      "FullName": "UnityEngine.Jobs.TransformAccess.GetLocalPosition(ref UnityEngine.Jobs.TransformAccess access, ref UnityEngine.Vector3 p) -> void_b8582670f79269075d32f191bad67123"
+    },
+    {
+      "Name": "UnityEngine.Jobs.TransformAccess::GetLocalRotation",
+      "FullName": "UnityEngine.Jobs.TransformAccess.GetLocalRotation(ref UnityEngine.Jobs.TransformAccess access, ref UnityEngine.Quaternion r) -> void_b8582670f79269075d32f191bad67123"
+    },
+    {
+      "Name": "UnityEngine.Jobs.TransformAccess::GetRotation",
+      "FullName": "UnityEngine.Jobs.TransformAccess.GetRotation(ref UnityEngine.Jobs.TransformAccess access, ref UnityEngine.Quaternion r) -> void_b8582670f79269075d32f191bad67123"
+    },
+    {
+      "Name": "UnityEngine.Jobs.TransformAccess::GetLocalScale",
+      "FullName": "UnityEngine.Jobs.TransformAccess.GetLocalScale(ref UnityEngine.Jobs.TransformAccess access, ref UnityEngine.Vector3 r) -> void_b8582670f79269075d32f191bad67123"
+    },
+    {
+      "Name": "Unity.Collections.LowLevel.Unsafe.AtomicSafetyHandle::CheckReadAndThrowNoEarlyOut_Injected",
+      "FullName": "Unity.Collections.LowLevel.Unsafe.AtomicSafetyHandle.CheckReadAndThrowNoEarlyOut_Injected(ref Unity.Collections.LowLevel.Unsafe.AtomicSafetyHandle handle) -> void_b8582670f79269075d32f191bad67123"
+    },
+    {
+      "Name": "Unity.Collections.LowLevel.Unsafe.AtomicSafetyHandle::CheckWriteAndThrowNoEarlyOut_Injected",
+      "FullName": "Unity.Collections.LowLevel.Unsafe.AtomicSafetyHandle.CheckWriteAndThrowNoEarlyOut_Injected(ref Unity.Collections.LowLevel.Unsafe.AtomicSafetyHandle handle) -> void_b8582670f79269075d32f191bad67123"
+    },
+    {
+      "Name": "Unity.Collections.LowLevel.Unsafe.UnsafeUtility::Malloc",
+      "FullName": "Unity.Collections.LowLevel.Unsafe.UnsafeUtility.Malloc(long size, int alignment, Unity.Collections.Allocator allocator) -> void*_b8582670f79269075d32f191bad67123"
+    },
+    {
+      "Name": "Unity.Collections.LowLevel.Unsafe.UnsafeUtility::Free",
+      "FullName": "Unity.Collections.LowLevel.Unsafe.UnsafeUtility.Free(void* memory, Unity.Collections.Allocator allocator) -> void_b8582670f79269075d32f191bad67123"
+    },
+    {
+      "Name": "Unity.Burst.LowLevel.BurstCompilerService::GetOrCreateSharedMemory",
+      "FullName": "Unity.Burst.LowLevel.BurstCompilerService.GetOrCreateSharedMemory(ref UnityEngine.Hash128 key, uint size_of, uint alignment) -> void*_b8582670f79269075d32f191bad67123"
+    },
+    {
+      "Name": "burst_abort",
+      "FullName": "unused.burst_abort(System.String errorId, System.String message) -> void"
+    }
+  ]
+}

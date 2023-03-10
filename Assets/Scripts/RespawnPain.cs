@@ -20,7 +20,7 @@ public class RespawnPain : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("client connected " + NetworkManager.singleton.isNetworkActive);
+//        Debug.Log("client connected " + NetworkManager.singleton.isNetworkActive);
        /* if (counting)
         {
             if (time > 1)
